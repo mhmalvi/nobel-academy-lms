@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>eLearnQue - @yield('title')</title>
+
+        <!-- Prevent the demo from appearing in search engines -->
+        <meta name="robots" content="noindex">
+
+        @include('layouts.styles')
+    </head>
+
+    <body class="layout-default">
+        <div class="preloader"></div>
+        <!-- Header Layout -->
+        <div class="mdk-header-layout js-mdk-header-layout">
+            <!-- Header -->
+            @include('layouts.header')
+            <!-- // END Header -->
+
+            <!-- Header Layout Content -->
+            <div class="mdk-header-layout__content">
+                <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
+                    <div class="mdk-drawer-layout__content page">
+                        @if (request()->segment(1) !== 'unit')
+                            <div class="container-fluid page__heading-container">
+                                <div class="page__heading d-flex align-items-end">
+                                    <div class="flex">
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb mb-0">
+                                                <li class="breadcrumb-item"><a href="{{route('dashboard')}}"><i class="material-icons icon-20pt">home</i></a></li>
+                                                <li class="breadcrumb-item active" aria-current="page">@yield('nav')</li>
+                                            </ol>
+                                        </nav>
+                                        <h1 class="m-0">@yield('heading')</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @yield('content')
+                    </div>
+                    <!-- // END drawer-layout__content -->
+
+                    @include('layouts.navigation')
+                </div>
+                <!-- // END drawer-layout -->
+            </div>
+            <!-- // END header-layout__content -->
+        </div>
+        <!-- // END header-layout -->
+        @include('layouts.scripts')
+    </body>
+</html>
