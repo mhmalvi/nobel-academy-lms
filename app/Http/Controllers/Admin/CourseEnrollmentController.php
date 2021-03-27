@@ -13,7 +13,6 @@ use App\Support\AppCryption;
 use App\Exceptions\AppExceptions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\EnrollmentRequest;
 use App\Models\UnitProgress;
 
@@ -42,7 +41,7 @@ class CourseEnrollmentController extends Controller
                 'action_user' => Auth::id(),
                 'student_id' => $request->student_id,
                 'teacher_id' => $request->tutor_id,
-                'course_id' => AppCryption::decrypt($request->course_id),
+                'course_id' => $request->course_id,
             ]);
 
             if($enroll->id){

@@ -5,7 +5,7 @@
     <li class="sidebar-menu-item {{(request()->segment(1) === 'course' || request()->segment(1) === 'unit') ? 'active open' : ''}}">
         <a class="sidebar-menu-button" data-toggle="collapse" href="#course_menu">
             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
-            <span class="sidebar-menu-text">{{__($enrollment->course->course_name)}}</span>
+            <span class="sidebar-menu-text">{{__($enrollment->course->course_code)}}</span>
             <span class="ml-auto sidebar-menu-toggle-icon"></span>
         </a>
         

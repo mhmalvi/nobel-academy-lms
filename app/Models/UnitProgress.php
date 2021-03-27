@@ -15,7 +15,8 @@ class UnitProgress extends Model
         'action_user', 
         'student_id', 
         'course_id', 
-        'course_unit_id', 
+        'course_unit_id',
+        'steps', 
         'step_one', 
         'step_two', 
         'step_three', 
@@ -23,7 +24,9 @@ class UnitProgress extends Model
         'step_five'
     ];
 
-
+    protected $cast = [
+        'steps' => 'array'
+    ];
 
     /**
      * 

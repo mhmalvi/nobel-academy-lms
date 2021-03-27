@@ -33,9 +33,6 @@ class CreateEnrollmentsTable extends Migration
                     ->onDelete('cascade');
             $table->text('core_units')->nullable();
             $table->text('elective_units')->nullable();
-            $table->enum('core_pass', ['0', '1'])->default('0');
-            $table->enum('elective_pass', ['0', '1'])->default('0');
-            $table->integer('progress')->default(0);
             $table->enum('is_passed', ['y', 'n'])->default('n');
             $table->enum('is_suspended', ['y', 'n'])->default('n');
             $table->string('status')->nullable();

@@ -71,7 +71,7 @@ class CourseUnitController extends Controller
         try{
             $unit = CourseUnit::create([
                 'action_user' => Auth::id(),
-                'course_id' => AppCryption::decrypt($request->course),
+                'course_id' => $request->course,
                 'unit_type' => $request->unit_type,
                 'unit_code' => ($request->unit_code) ? Str::upper($request->unit_code) : null,
                 'unit_name' => Str::title($request->unit_name),

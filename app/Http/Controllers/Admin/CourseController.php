@@ -78,7 +78,7 @@ class CourseController extends Controller
                     'action_user' => Auth::id(),
                     'course_code' => Str::upper($request->course_code),
                     'course_name' => Str::title($request->course_name),
-                    'course_category_id' => ($request->has('category'))? AppCryption::decrypt($request->category) : null,
+                    'course_category_id' => ($request->has('category'))? $request->category : null,
                     'course_units' => ($request->has('units'))? $request->units : null,
                     'descriptions' => ($request->has('descriptions'))? $request->descriptions : null,
                     'course_thumbnail' => $image
@@ -93,7 +93,7 @@ class CourseController extends Controller
                             CoursesTeacher::create([
                                 'action_user' => Auth::id(),
                                 'teacher_id' => $tutor,
-                                'course_id' => AppCryption::decrypt($course->id)
+                                'course_id' => $course->id
                             ]);
                         }
                     }

@@ -23,6 +23,10 @@ class CreateCourseUnitFilesTable extends Migration
             $table->foreign('unit_id')
                     ->references('id')->on('course_units')
                     ->onDelete('cascade');
+            $table->unsignedBigInteger('step_id')->nullable();
+            $table->foreign('step_id')
+                    ->references('id')->on('steps')
+                    ->onDelete('cascade');
             $table->string('file_name')->nullable();
             $table->text('file_path')->nullable();
             $table->text('file_ext')->nullable();

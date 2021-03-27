@@ -2513,7 +2513,7 @@ __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_
       },
       success: function(data, res){
         if(res.status == 200){
-          $("#image").val(res.data.filename);
+          $("#image").val(res.data.foldername);
         }
       },
     };

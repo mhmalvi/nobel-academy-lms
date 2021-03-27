@@ -104,23 +104,24 @@ class FileController extends Controller
                 $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $ext = $file->getClientOriginalExtension();
                 $filename = "{$id}-{$name}-{$date}.{$ext}";
+                $folder = uniqid().'-'.now()->timestamp;
 
                 /**
                  * Check if derectory exist or not
                  * Create a new directory if not exist
                  */
-                if (!Storage::exists("public/users/temp")) {
-                    Storage::makeDirectory("public/users/temp");
+                if (!Storage::exists("public/users/".$folder)) {
+                    Storage::makeDirectory("public/users/".$folder);
                 }
 
                 /**
                  * Store the file in temporary directory
                  */
-                Storage::putFileAs('public/users/temp', $file, $filename);
+                Storage::putFileAs('public/users/'.$folder, $file, $filename);
 
                 $response = TempUserPhoto::create([
                     'filename' => $filename,
-                    'foldername' => 'temp',
+                    'foldername' => $folder,
                 ]);
 
                 return response()->json([

@@ -136,7 +136,9 @@
                     </div>
                     <div class="col-lg-8 card-form__body card-body">
                         <div class="form-group">
-                            <label>Avatar</label>
+                            <label for="image">Image</label>
+                            <input style="width: 470px;" type="file" class="form-control" name="image" id="image"/>
+                            {{-- <label>Avatar</label>
                             <div class="dz-clickable media align-items-center" 
                             data-toggle="dropzone" 
                             data-dropzone-url="api/upload-profile-picture" 
@@ -152,15 +154,11 @@
                                 <div class="media-body">
                                     <button type="button" class="btn btn-sm btn-primary dz-clickable">Choose photo</button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="form-group">
                             <label for="user">User Name</label>
                             <input style="width: 470px;" id="user" name="user" type="text" class="form-control" placeholder="User name" value="{{Auth::user()->name}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="lname">Email</label>
-                            <input style="width: 470px;" id="email" name="email" type="email" class="form-control" placeholder="Email address" value="{{Auth::user()->email}}"/>
                         </div>
 
                         <button type="submit" class="btn btn-success">Save</button>

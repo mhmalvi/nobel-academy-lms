@@ -6,7 +6,7 @@ use App\Models\Course;
 use App\Models\CourseUnit;
 use App\Models\CourseUnitFiles;
 use App\Models\Enrollment;
-use App\Support\AppCryption;
+use App\Models\Step;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -38,8 +38,8 @@ class CourseController extends Controller
     public function coreUnit($unique_id){
         $unit = CourseUnit::where('id', $unique_id)->first();
         $files = CourseUnitFiles::all();
-
-        return view('unit', compact('unit', 'files'));
+        $steps = Step::all();
+        return view('unit', compact('unit', 'files', 'steps'));
     }
 
 

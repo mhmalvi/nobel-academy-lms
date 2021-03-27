@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\CourseUnit;
 use App\Models\User;
-use App\Support\AppCryption;
 
 class CourseUnitFiles extends Model
 {

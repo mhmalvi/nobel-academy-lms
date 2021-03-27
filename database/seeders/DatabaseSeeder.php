@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Activation;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Activation;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $datas = ['admin', 'teacher', 'student'];
+        $steps = ['step-01', 'step-02', 'step-03', 'step-04', 'step-05'];
+        
+        foreach($datas as $data){
+            DB::table('roles')->insert([
+                'name' => $data
+            ]);
+        }
+        
         DB::table('users')->insert([
             'name' => 'Quadque Tech',
             'role_id' => 1,
@@ -24,6 +33,15 @@ class DatabaseSeeder extends Seeder
             'is_admin' => '1',
             'user_type' => 'staff'
         ]);
+
+
+        foreach($steps as $step){
+            DB::table('steps')->insert([
+                'action_user' => 1,
+                'step_name' => $step
+            ]);
+        }
+
 
         Activation::create([
             'type' => 'maintenance',

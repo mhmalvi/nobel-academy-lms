@@ -36,7 +36,7 @@ class CreateUnitProgressTable extends Migration
             $table->foreign('course_unit_id')
                     ->references('id')->on('course_units')
                     ->onDelete('cascade');
-
+            $table->text('steps')->nullable();
             $table->enum('step_one', ['0', '1'])->default('1');
             $table->enum('step_two', ['0', '1'])->default('0');
             $table->enum('step_three', ['0', '1'])->default('0');

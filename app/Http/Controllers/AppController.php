@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateProfileRequest;
-use App\Exceptions\AppExceptions;
 use App\Models\TempUserPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
-use Exception;
+use League\CommonMark\Inline\Element\Strong;
 
 class AppController extends Controller
 {
@@ -43,9 +38,16 @@ class AppController extends Controller
                 Storage::makeDirectory("public/users");
             }
 
-            //Store the file after saving it to the databse+
-            Storage::move(storage_path('users/temp/'.$request->image), 'users/'.$request->image);
-            TempUserPhoto::where('filename', $request->image)->delete();
+            //Store the file after saving it to the database
+            $tmpFile = TempUserPhoto::where('foldername', $request->image)->first();
+
+            $file = Storage::files('public/users/'.$tmpFile->foldername);
+
+            if (Storage::disk('local')->exists($tmpFile->filename)) {
+                dd($file);
+            }else{
+                echo "n";
+            }
         }
     }
 }
