@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="container page__container">
-        <form action="{{route('edit.profile')}}" method="post">
+        <form action="{{route('edit.profile')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card card-form">
                 <div class="row no-gutters">
@@ -51,12 +51,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="desc">Present Address</label>
-                                <textarea id="desc" name="prAddress" rows="4" class="form-control" placeholder="Present Address ..." style="resize: none;">{{Auth::user()->teacher->address_one}}</textarea>
+                                <label for="addressOne">Present Address</label>
+                                <textarea id="addressOne" name="addressOne" rows="4" class="form-control" placeholder="Present Address ..." style="resize: none;">{{Auth::user()->teacher->address_one}}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="desc">Peramnent Address</label>
-                                <textarea id="desc" name="peAddress" rows="4" class="form-control" placeholder="Permanent Address ..." style="resize: none;">{{Auth::user()->teacher->address_two}}</textarea>
+                                <label for="addressTwo">Peramnent Address</label>
+                                <textarea id="addressTwo" name="addressTwo" rows="4" class="form-control" placeholder="Permanent Address ..." style="resize: none;">{{Auth::user()->teacher->address_two}}</textarea>
                             </div>
                         @endif
 
@@ -71,7 +71,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lname">Last name</label>
-                                        <input id="lname" type="text" class="form-control" placeholder="Last name" value="Demian">
+                                        <input id="lname" name="lname" type="text" class="form-control" placeholder="Last name" value="{{Auth::user()->student->last_name}}">
                                     </div>
                                 </div>
                             </div>
@@ -90,12 +90,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="desc">Present Address</label>
-                                <textarea id="desc" rows="4" class="form-control" placeholder="Present Address ..." style="resize: none;">{{Auth::user()->student->address_one}}</textarea>
+                                <label for="addressOne">Present Address</label>
+                                <textarea id="addressOne" name="addressOne" rows="4" class="form-control" placeholder="Present Address ..." style="resize: none;">{{Auth::user()->student->address_one}}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="desc">Peramnent Address</label>
-                                <textarea id="desc" rows="4" class="form-control" placeholder="Permanent Address ..." style="resize: none;">{{Auth::user()->student->address_two}}</textarea>
+                                <label for="addressTwo">Peramnent Address</label>
+                                <textarea id="addressTwo" name="addressTwo" rows="4" class="form-control" placeholder="Permanent Address ..." style="resize: none;">{{Auth::user()->student->address_two}}</textarea>
                             </div>
                         @endif
                     </div>
@@ -111,16 +111,16 @@
                     <div class="col-lg-8 card-form__body card-body">
                         <div class="form-group">
                             <label for="opass">Old Password</label>
-                            <input style="width: 470px;" id="opass" type="password" class="form-control" placeholder="Old password"/>
+                            <input style="width: 470px;" id="opass" name="opass" type="password" class="form-control" placeholder="Old password"/>
                         </div>
                         <div class="form-group">
                             <label for="npass">New Password</label>
-                            <input style="width: 470px;" id="npass" type="password" class="form-control" placeholder="New password"/>
+                            <input style="width: 470px;" id="npass" name="npass" type="password" class="form-control" placeholder="New password"/>
                             <small class="invalid-feedback">The new password must not be empty.</small>
                         </div>
                         <div class="form-group">
                             <label for="cpass">Confirm Password</label>
-                            <input style="width: 470px;" id="cpass" type="password" class="form-control" placeholder="Confirm password"/>
+                            <input style="width: 470px;" id="cpass" name="cpass" type="password" class="form-control" placeholder="Confirm password"/>
                         </div>
                     </div>
                 </div>
@@ -136,8 +136,12 @@
                     </div>
                     <div class="col-lg-8 card-form__body card-body">
                         <div class="form-group">
-                            <label for="image">Image</label>
-                            <input style="width: 470px;" type="file" class="form-control" name="image" id="image"/>
+                            <label for="user">User Name</label>
+                            <input style="width: 470px;" id="user" name="name" type="text" class="form-control" placeholder="User name" value="{{Auth::user()->name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="avatar">Image</label>
+                            <input style="width: 470px;" type="file" class="form-control" name="avatar" id="avatar"/>
                             {{-- <label>Avatar</label>
                             <div class="dz-clickable media align-items-center" 
                             data-toggle="dropzone" 
@@ -155,10 +159,6 @@
                                     <button type="button" class="btn btn-sm btn-primary dz-clickable">Choose photo</button>
                                 </div>
                             </div> --}}
-                        </div>
-                        <div class="form-group">
-                            <label for="user">User Name</label>
-                            <input style="width: 470px;" id="user" name="user" type="text" class="form-control" placeholder="User name" value="{{Auth::user()->name}}">
                         </div>
 
                         <button type="submit" class="btn btn-success">Save</button>
