@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Exception;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\CourseUnit;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
-use App\Support\AppCryption;
-use App\Exceptions\AppExceptions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\EnrollmentRequest;
 use App\Models\UnitProgress;
 
 class CourseEnrollmentController extends Controller
@@ -29,39 +25,6 @@ class CourseEnrollmentController extends Controller
         $students = Student::all(); 
         $enrollments = Enrollment::orderBy('created_at', 'desc')->get();
         return view('admin.students.course-enroll', compact('courses', 'teachers', 'students', 'enrollments'));
-    }
-
-
-    /**
-     * 
-     */
-    public function store(EnrollmentRequest $request){
-        try{
-            $enroll = Enrollment::create([
-                'action_user' => Auth::id(),
-                'student_id' => $request->student_id,
-                'teacher_id' => $request->tutor_id,
-                'course_id' => $request->course_id,
-            ]);
-
-            if($enroll->id){
-                $notification = [
-                    'message'   =>  "Successfully saved!",
-                    'alert-type'    =>  'success'
-                ];
-        
-                return redirect()->route('admin.assign', $request->student_id)->with($notification);
-            }
-            else{
-                throw new Exception("Something went wrong!");
-            }
-        }
-        catch(\Throwable $th){
-            /**
-             * Return the exception
-             */
-            return redirect()->back()->with(AppExceptions::throwback($th));
-        }
     }
 
 
@@ -82,10 +45,12 @@ class CourseEnrollmentController extends Controller
      */
     public function assignUnit(Request $request, $id){
         (array) $units = [];
+        (array) $steps = [];
 
         $enrollment = Enrollment::where('id', $id)->first();
 
         if($request->unit == 'core'){
+            array_push($steps, "step-01");
             foreach ($request->units as $id) {
                 $unit = CourseUnit::findOrFail($id);
 
@@ -105,11 +70,41 @@ class CourseEnrollmentController extends Controller
                         'action_user' => Auth::id(),
                         'student_id' => $enrollment->student_id,
                         'course_id' => $enrollment->course_id,
-                        'course_unit_id' => $id
+                        'course_unit_id' => $id,
+                        'steps' => $steps
                     ]
                 );
             }
             $enrollment->core_units = $units;
+            $enrollment->save();
+        }
+
+        if($request->unit == 'elective'){
+            foreach ($request->units as $id) {
+                $unit = CourseUnit::findOrFail($id);
+
+                array_push($units, $unit->unit_code);
+
+                /**
+                 * Create or update
+                 * unit process report/data
+                 */
+                UnitProgress::updateOrCreate(
+                    [
+                        'student_id' => $enrollment->student_id,
+                        'course_id' => $enrollment->course_id,
+                        'course_unit_id' => $id
+                    ],
+                    [
+                        'action_user' => Auth::id(),
+                        'student_id' => $enrollment->student_id,
+                        'course_id' => $enrollment->course_id,
+                        'course_unit_id' => $id,
+                        'steps' => $steps
+                    ]
+                );
+            }
+            $enrollment->elective_units = $units;
             $enrollment->save();
         }
 

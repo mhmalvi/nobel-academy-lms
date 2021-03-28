@@ -26,8 +26,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     });
     
     Route::prefix('unit')->group(function () {
-        Route::get('{unique_id}/core-unit', 'CourseController@coreUnit')->name('core');
-        Route::get('{unique_id}/elective-unit', 'CourseController@elctiveUnit')->name('elective');
+        Route::get('{unique_id}/unit', 'CourseController@courseUnit')->name('unit');
+        Route::get('{stepId}/step', 'CourseController@getStep')->name('step');
     });
     
     Route::get('file-upload', 'FileController@index')->name('file');

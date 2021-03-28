@@ -20,7 +20,7 @@
                     @forelse ($enrollment->course->units->where('unit_type', 'core') as $item)
                         @if (in_array($item->unit_code, $enrollment->core_units))
                             <li class="sidebar-menu-item {{(request()->segment(2) == $item->id) ? 'active' : ''}}">
-                                <a class="sidebar-menu-button" href="{{route('core', $item->id)}}">
+                                <a class="sidebar-menu-button" href="{{route('unit', $item->id)}}">
                                     <span class="sidebar-menu-text">{{$item->unit_code}}</span>
                                 </a>
                             </li>
@@ -48,7 +48,7 @@
                     @forelse ($enrollment->course->units->where('unit_type', 'elective') as $item)
                         @if (in_array($item->unit_code, $enrollment->core_units))
                             <li class="sidebar-menu-item">
-                                <a class="sidebar-menu-button" href="{{route('elective-unit', $item->id)}}">
+                                <a class="sidebar-menu-button" href="{{route('unit', $item->id)}}">
                                     <span class="sidebar-menu-text">{{$item->unit_code}}</span>
                                 </a>
                             </li>
@@ -63,9 +63,8 @@
                 </ul>
             </li>
         </ul>
-
     </li>
-@elseif(Auth::user()->user_type == 'teacher')
+{{-- @elseif(Auth::user()->user_type == 'teacher')
     @if (count(auth()->user()->teacher->courses) == '1')
         <li class="sidebar-menu-item {{(request()->segment(1) === 'course') ? 'active' : ''}}">
             @php
@@ -99,5 +98,5 @@
                 @endforelse
             </ul>
         </li>
-    @endif
+    @endif --}}
 @endif

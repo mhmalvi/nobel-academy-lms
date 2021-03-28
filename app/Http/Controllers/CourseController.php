@@ -23,6 +23,7 @@ class CourseController extends Controller
     }
 
 
+
     /**
      * 
      */
@@ -32,24 +33,25 @@ class CourseController extends Controller
     }
 
 
+
     /**
      * 
      */
-    public function coreUnit($unique_id){
-        $unit = CourseUnit::where('id', $unique_id)->first();
-        $files = CourseUnitFiles::all();
+    public function courseUnit($unique_id){
         $steps = Step::all();
+        $files = CourseUnitFiles::all();
+        $unit = CourseUnit::with('progress')->where('id', $unique_id)->first();
+
         return view('unit', compact('unit', 'files', 'steps'));
     }
 
 
+
     /**
-     * 
+     * Unit Steps
      */
-    public function elctiveUnit($unique_id){
-        $unit = CourseUnit::where('id', $unique_id)->first();
-        $files = CourseUnitFiles::all();
-        
-        return view('unit', compact('unit', 'files'));
+    public function getStep($stepId){
+        $step = Step::findOrFail($stepId);
+        return view('step', compact('step'));
     }
 }

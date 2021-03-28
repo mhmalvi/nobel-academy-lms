@@ -71,6 +71,42 @@
                     </div>
                     <div class="ibox">
                         <div class="ibox-title">
+                            <h5>Course Enroll</h5>
+                        </div>
+        
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <label for="course_id">Course</label>
+                                <select name="course_id" class="form-control" id="crs">
+                                    <option value selected disabled>Select a course</option>
+                                    @forelse ($courses as $item)
+                                        <option value = {{$item->id}}>{{$item->course_code}} - {{$item->course_name}}</option>
+                                    @empty
+                                        
+                                    @endforelse
+                                </select>
+                                @error('course_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="tutor_id">Instructor</label>
+                                <select name="tutor_id" class="form-control" id="tch">
+                                    <option value selected disabled>Select an instructor to assign</option>
+                                    @forelse ($teachers as $item)
+                                        <option value = {{$item->id}}>{{$item->first_name}}&nbsp;{{$item->last_name}}</option>
+                                    @empty
+                                        
+                                    @endforelse
+                                </select>
+                                @error('tutor_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox">
+                        <div class="ibox-title">
                             <h5>Student Information</h5>
                         </div>
         

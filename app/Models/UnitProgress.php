@@ -17,11 +17,6 @@ class UnitProgress extends Model
         'course_id', 
         'course_unit_id',
         'steps', 
-        'step_one', 
-        'step_two', 
-        'step_three', 
-        'step_four', 
-        'step_five'
     ];
 
     protected $cast = [

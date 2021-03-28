@@ -29,6 +29,7 @@
                                             @forelse ($core as $item)
                                                 <tr>
                                                     <td width="10%">
+                                                        <input type="hidden" name="steps[]" value="1">
                                                         <input type="checkbox" 
                                                         class="i-checks" 
                                                         name="units[]" 

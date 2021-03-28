@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Exception;
 use App\Models\User;
+use App\Models\Course;
+use App\Models\Teacher;
 use App\Models\Student;
+use App\Models\Enrollment;
 use Illuminate\Support\Str;
 use App\Exceptions\AppExceptions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\EnrollmentRequest;
 use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
@@ -31,7 +34,9 @@ class StudentController extends Controller
      * 
      */
     public function create(){ 
-        return view('admin.students.create');
+        $courses = Course::all();
+        $teachers = Teacher::all();
+        return view('admin.students.create',compact('teachers', 'courses'));
     }
 
     
@@ -39,7 +44,7 @@ class StudentController extends Controller
     /**
      * 
      */
-    public function store(CreateUserRequest $request){
+    public function store(EnrollmentRequest $request){
         try {
             $file = null;
 
@@ -88,6 +93,12 @@ class StudentController extends Controller
                 ]);
 
                 if($student->id){
+                    Enrollment::create([
+                        'action_user' => Auth::id(),
+                        'student_id' => $student->id,
+                        'teacher_id' => $request->tutor_id,
+                        'course_id' => $request->course_id,
+                    ]);
                     /**
                      * retun successfull notification
                      */

@@ -21,6 +21,7 @@ class CreateStepsTable extends Migration
                     ->references('id')->on('users')
                     ->onDelete('set null');
             $table->string('step_name');
+            $table->text('descriptions')->nullable();
             $table->timestamps();
         });
     }

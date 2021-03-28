@@ -15,6 +15,7 @@ class CreateCourseUnitFilesTable extends Migration
     {
         Schema::create('course_unit_files', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique()->nullable();
             $table->unsignedBigInteger('action_user')->nullable();
             $table->foreign('action_user')
                     ->references('id')->on('users')

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EnrollmentRequest extends FormRequest
 {
@@ -24,9 +25,20 @@ class EnrollmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id' => 'required|integer|unique:enrollments',
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:8|max:20',
+            'fName' => 'required',
+            'lName' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
             'course_id' => 'required|string',
             'tutor_id' => 'required|integer',
+            'avatar' => [
+                'image',
+                Rule::dimensions()->maxWidth(300)->maxHeight(300)->ratio(1 / 1),
+                'max:1048'
+            ],
         ];
     }
 }

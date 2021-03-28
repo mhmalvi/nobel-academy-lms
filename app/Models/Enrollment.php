@@ -33,6 +33,7 @@ class Enrollment extends Model
 
     protected $casts = [
         'core_units' => 'array',
+        'elective_units' => 'array',
     ];
 
 

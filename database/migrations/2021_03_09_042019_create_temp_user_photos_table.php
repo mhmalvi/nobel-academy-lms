@@ -15,6 +15,7 @@ class CreateTempUserPhotosTable extends Migration
     {
         Schema::create('temp_user_photos', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique()->nullable();
             $table->string('filename')->nullable();
             $table->string('foldername')->nullable();
             $table->timestamps();
