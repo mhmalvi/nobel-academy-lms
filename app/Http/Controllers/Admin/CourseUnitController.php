@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CourseUnitRequest;
 use App\Http\Requests\FileUploadRequest;
+use App\Models\Step;
 
 class CourseUnitController extends Controller
 {
@@ -155,8 +156,10 @@ class CourseUnitController extends Controller
      * Files
      */
     public function files(){
+        $units = CourseUnit::all();
+        $steps = Step::all();
         $files = CourseUnitFiles::orderBy('created_at', 'asc')->get();
-        return view('admin.units.files', compact('files'));
+        return view('admin.units.files', compact('files', 'units', 'steps'));
     }
 
 
@@ -190,6 +193,7 @@ class CourseUnitController extends Controller
                         $unit_file = CourseUnitFiles::create([
                             'action_user' => Auth::id(),
                             'unit_id' => $request->unit,
+                            'step_id' => $request->step,
                             'file_name' => $filename,
                             'file_path' => storage_path('public/courses/units/'.$filename),
                             'file_ext' => $extension,

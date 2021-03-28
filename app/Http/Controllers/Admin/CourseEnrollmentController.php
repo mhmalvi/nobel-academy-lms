@@ -45,12 +45,10 @@ class CourseEnrollmentController extends Controller
      */
     public function assignUnit(Request $request, $id){
         (array) $units = [];
-        (array) $steps = [];
 
         $enrollment = Enrollment::where('id', $id)->first();
 
         if($request->unit == 'core'){
-            array_push($steps, "step-01");
             foreach ($request->units as $id) {
                 $unit = CourseUnit::findOrFail($id);
 
@@ -71,7 +69,6 @@ class CourseEnrollmentController extends Controller
                         'student_id' => $enrollment->student_id,
                         'course_id' => $enrollment->course_id,
                         'course_unit_id' => $id,
-                        'steps' => $steps
                     ]
                 );
             }
@@ -100,7 +97,6 @@ class CourseEnrollmentController extends Controller
                         'student_id' => $enrollment->student_id,
                         'course_id' => $enrollment->course_id,
                         'course_unit_id' => $id,
-                        'steps' => $steps
                     ]
                 );
             }

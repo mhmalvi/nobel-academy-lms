@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\CourseUnit;
 use App\Models\User;
+use App\Models\Step;
 
 class CourseUnitFiles extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['action_user', 'unit_id', 'file_name', 'file_path', 'file_ext', 'file_meta_data', 'is_approved', 'approved_by'];
+    protected $fillable = ['action_user', 'unit_id', 'step_id', 'file_name', 'file_path', 'file_ext', 'file_meta_data', 'is_approved', 'approved_by'];
 
 
     /**
@@ -19,6 +20,14 @@ class CourseUnitFiles extends Model
      */
     public function actionuser(){
         return $this->belongsTo(User::class, 'action_user');
+    }
+
+
+    /**
+     * 
+     */
+    public function step(){
+        return $this->belongsTo(Step::class);
     }
 
 

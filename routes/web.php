@@ -26,8 +26,9 @@ Route::middleware(['auth', 'user'])->group(function () {
     });
     
     Route::prefix('unit')->group(function () {
-        Route::get('{unique_id}/unit', 'CourseController@courseUnit')->name('unit');
-        Route::get('{stepId}/step', 'CourseController@getStep')->name('step');
+        Route::get('{unique_id}', 'CourseController@courseUnit')->name('unit');
+        Route::get('{unitId}/step/{stepId}', 'CourseController@getStep')->name('step');
+        Route::post('{unitId}/complete-step/{id}', 'CourseController@completeStep')->name('complete.step');
     });
     
     Route::get('file-upload', 'FileController@index')->name('file');

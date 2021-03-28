@@ -26,6 +26,7 @@ class FileUploadRequest extends FormRequest
         return [
             'unit_type' => 'required',
             'unit' => 'required',
+            'step' => 'required',
             'files' => 'required'
         ];
     }

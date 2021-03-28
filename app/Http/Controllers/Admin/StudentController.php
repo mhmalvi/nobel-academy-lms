@@ -107,7 +107,7 @@ class StudentController extends Controller
                         'alert-type'    =>  'success'
                     ];
             
-                    return redirect()->back()->with($notification);
+                    return redirect()->route('admin.assign', $request->student_id)->with($notification);
                 }
                 else{
                 /**

@@ -61,16 +61,16 @@
                         <label for="des">Descriptions</label>
                         <textarea name="descriptions" class="form-control" id="des">{{old('descriptions')}}</textarea>
                         @error('descriptions')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="title">Unit's Files (.pdf/.docx/.ppt)</label>
                         <input type="file" name="files[]" class="form-control" multiple/>
                         @error('files[]')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
                 </form>

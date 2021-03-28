@@ -7,6 +7,7 @@ use App\Models\CourseUnit;
 use App\Models\CourseUnitFiles;
 use App\Models\Enrollment;
 use App\Models\Step;
+use App\Models\UnitProgress;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -37,7 +38,7 @@ class CourseController extends Controller
     /**
      * 
      */
-    public function courseUnit($unique_id){
+    public function courseUnit($unique_id = null, $stepId = null){
         $steps = Step::all();
         $files = CourseUnitFiles::all();
         $unit = CourseUnit::with('progress')->where('id', $unique_id)->first();
@@ -50,8 +51,26 @@ class CourseController extends Controller
     /**
      * Unit Steps
      */
-    public function getStep($stepId){
-        $step = Step::findOrFail($stepId);
-        return view('step', compact('step'));
+    public function getStep($unitId, $stepId){
+        $steps = Step::all();
+        $files = CourseUnitFiles::all();
+        $getStep = Step::with('files')->findOrFail($stepId);
+        $unit = CourseUnit::with('progress')->where('id', $unitId)->first();
+        return view('unit', compact('unit', 'files', 'steps', 'getStep'));
+    }
+
+
+
+    /**
+     * 
+     */
+    public function completeStep($unitId, $id)
+    {
+        $progress = UnitProgress::where('student_id', Auth::user()->student->id)->where('course_unit_id', $unitId)->first();
+        $progress->complete_step = $id;
+        $progress->current_step = $progress->current_step + 1;
+        $progress->save();
+
+        return redirect()->back();
     }
 }

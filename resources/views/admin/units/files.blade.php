@@ -15,7 +15,7 @@
                 <form action="{{route('admin.unit.files')}}" method="post" enctype="multipart/form-data" role="form">
                     @csrf
                     <div class="row form-group">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label for="file">Choose Unit Type</label>
                             <select name="unit_type" id="unit_type" class="form-control">
                                 <option value selected disabled>Choose the unit type</option>
@@ -26,10 +26,29 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <label for="file">Choose Unit</label>
                             <select name="unit" id="unit" class="form-control">
                                 <option value selected disabled>Choose the unit</option>
+                                @forelse ($units as $item)
+                                    <option value={{$item->id}}>{{$item->unit_name}}</option>
+                                @empty
+                                    
+                                @endforelse
+                            </select>
+                            @error('unit')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-md-3">
+                            <label for="file">Choose Step</label>
+                            <select name="step" id="unit" class="form-control">
+                                <option value selected disabled>Choose the unit</option>
+                                @forelse ($steps as $item)
+                                    <option value={{$item->id}}>{{$item->step_name}}</option>
+                                @empty
+                                    
+                                @endforelse
                             </select>
                             @error('unit')
                                 <small class="text-danger">{{ $message }}</small>
@@ -42,9 +61,9 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-md-1">
-                            <button type="submit" class="btn btn-primary my-4"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
-                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary my-4"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
                     </div>
                 </form>
             </div>
