@@ -10,9 +10,14 @@ class Step extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'step_name',
+        'descriptions',
+    ];
+
 
     /**
-     * 
+     *
      */
     public function files(){
         return $this->hasMany(CourseUnitFiles::class);
