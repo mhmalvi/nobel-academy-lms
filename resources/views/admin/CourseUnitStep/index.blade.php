@@ -15,27 +15,27 @@
                 </div>
 
                 <div class="ibox-content">
-                    <form action="" method="post">
+                    <form action="{{ route('admin.course.steps') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <label for="code">Code</label>
-                            <input type="text" name="code" id="code" class="form-control" placeholder="Short code of the category..." value="{{old('code')}}"/>
-                            @error('code')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" name="category_name" id="category_name" class="form-control" placeholder="Title of the category..." value="{{old('category_name')}}"/>
-                            @error('category_name')
+                            <label for="step_name">Step Name</label>
+                            <input type="text" name="step_name" id="step_name" class="form-control" placeholder="Step Name of the category..." value="{{old('step_name')}}"/>
+                            @error('step_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="desc">Descriptions</label>
-                            <textarea name="descriptions" id="descriptions" class="form-control" rows="10">{{old('descriptions')}}</textarea>
+                            <textarea name="description" id="descriptions" class="form-control" rows="10">{{old('descriptions')}}</textarea>
                             @error('descriptions')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Upload File</label>
+                            <input type="file" class="form-control" value="Upload"/>
+                            @error('category_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

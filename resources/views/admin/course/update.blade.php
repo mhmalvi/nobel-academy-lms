@@ -13,13 +13,13 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="title">Couse Title <small class="text-danger">*</small></label>
-                                <input type="text" 
-                                    name="course_name" 
-                                    class="form-control" 
-                                    placeholder="Course title..." 
-                                    value="{{($course->course_name) ? $course->course_name : old('course_name')}}" 
-                                    autofocus 
-                                    required 
+                                <input type="text"
+                                    name="course_name"
+                                    class="form-control"
+                                    placeholder="Course title..."
+                                    value="{{($course->course_name) ? $course->course_name : old('course_name')}}"
+                                    autofocus
+                                    required
                                 />
                                 @error('course_name')
                                     <small class="text-danger">{{ $message }}</small>
@@ -35,7 +35,7 @@
                                             {{$item->first_name}}&nbsp;{{$item->last_name}}
                                         </option>
                                     @empty
-                                        
+
                                     @endforelse
                                 </select>
                                 @error('tutor_id')
@@ -45,9 +45,9 @@
                         </div>
                         <div class="form-group">
                             <label for="des">Descriptions</label>
-                            <textarea 
-                                name="descriptions" 
-                                class="form-control" 
+                            <textarea
+                                name="descriptions"
+                                class="form-control"
                                 id="des">
                                 {{($course->descriptions) ? $course->descriptions : old('descriptions')}}
                             </textarea>
@@ -63,11 +63,11 @@
                     <div class="ibox-content">
                         <div class="form-group">
                             <label for="code">Course Code <small class="text-danger">*</small></label>
-                            <input type="text" 
-                                name="course_code" 
-                                class="form-control" 
-                                placeholder="Short code of the course..." 
-                                value="{{($course->course_code) ? $course->course_code : old('course_code')}}" 
+                            <input type="text"
+                                name="course_code"
+                                class="form-control"
+                                placeholder="Short code of the course..."
+                                value="{{($course->course_code) ? $course->course_code : old('course_code')}}"
                                 required/>
                             @error('course_code')
                                 <small class="text-danger">{{ $message }}</small>
@@ -82,7 +82,7 @@
                                         {{$item->category_name}}
                                     </option>
                                 @empty
-                                    
+
                                 @endforelse
                             </select>
                             @error('category')
@@ -91,10 +91,10 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Total Units <small class="text-danger">*</small></label>
-                            <input type="text" 
-                                name="units" 
-                                class="form-control" 
-                                placeholder="Total course units..." 
+                            <input type="text"
+                                name="units"
+                                class="form-control"
+                                placeholder="Total course units..."
                                 value="{{($course->course_units) ? $course->course_units : old('units')}}"/>
                             @error('units')
                                 <small class="text-danger">{{ $message }}</small>
@@ -107,7 +107,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-    
+
                         <div class="form-group">
                             <label for="title">Thumbnail ( .png | .jpg | .jpeg ) <small class="text-danger">*</small></label>
                             <div class="avatar-upload">
@@ -124,7 +124,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-    
+
                         <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('courseUpdateForm').submit();">
                             <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save
                         </button>
@@ -132,7 +132,7 @@
                         <a href="{{route('admin.courses')}}" class="btn btn-light">Cancel</a>
                     </div>
                 </div>
-    
+
                 <div class="py-2 d-flex justify-content-center">
                     <img src="" alt="" class=""  id="image-preview" />
                 </div>

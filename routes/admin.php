@@ -48,6 +48,7 @@ Route::prefix('course')->group(function(){
 
     //Steps
     Route::get('steps', 'CourseUnitStepController@index')->name('course.steps');
+    Route::post('/steps', 'CourseUnitStepController@store')->name('course.steps');
 });
 
 
@@ -74,7 +75,7 @@ Route::prefix('students')->group(function(){
 
     Route::get('enrollment', 'StudentController@create')->name('student.enrollment');
     Route::post('enrollment', 'StudentController@store');
-    
+
     Route::get('course-enrollment', 'CourseEnrollmentController@create')->name('course.enrollment');
     Route::post('course-enrollment', 'CourseEnrollmentController@store');
 
