@@ -47,21 +47,17 @@
         </div>
         <div class="col-md-8">
             <div class="ibox ">
-                <div class="ibox-title">
-                    <h5>So far you have created!!!</h5>
-                </div>
                 <div class="ibox-content" id="ibox-content">
                     <div class="sk-spinner sk-spinner-pulse"></div>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="categories">
+                        <table class="table table-striped table-bordered table-hover" id="steps">
                             <thead>
                                 <tr class="text-center">
                                     <th width="5%" class="text-left">
                                         <input type="checkbox" id="select-all">
                                     </th>
-                                    <th width="20%">Category Code</th>
-                                    <th width="50%">Category</th>
-                                    <th width="15%">Created at</th>
+                                    <th width="70%">Step</th>
+                                    <th width="25%">Created at</th>
                                 </tr>
                             </thead>
                         </table>
@@ -75,4 +71,5 @@
 @push('js')
     <script src="{{asset('assets/admin/js/plugins/dataTables/datatables.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
+    @include('admin.CourseUnitSteps.scripts')
 @endpush
