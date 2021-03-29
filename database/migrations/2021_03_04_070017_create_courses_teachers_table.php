@@ -16,18 +16,25 @@ class CreateCoursesTeachersTable extends Migration
         Schema::create('courses_teachers', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique()->nullable();
+
             $table->unsignedBigInteger('action_user')->nullable();
             $table->foreign('action_user')
                     ->references('id')->on('users')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+
             $table->unsignedBigInteger('teacher_id')->nullable();
             $table->foreign('teacher_id')
                     ->references('id')->on('teachers')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+            
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
                     ->references('id')->on('courses')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }

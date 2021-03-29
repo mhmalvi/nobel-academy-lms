@@ -20,22 +20,27 @@ class CreateUnitProgressTable extends Migration
             $table->unsignedBigInteger('action_user')->nullable();
             $table->foreign('action_user')
                     ->references('id')->on('users')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
             
             $table->unsignedBigInteger('student_id')->nullable();
             $table->foreign('student_id')
                     ->references('id')->on('students')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
             
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
                     ->references('id')->on('courses')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
 
             $table->unsignedBigInteger('course_unit_id')->nullable();
             $table->foreign('course_unit_id')
                     ->references('id')->on('course_units')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+                    
             $table->integer('current_step')->default(1);
             $table->integer('complete_step')->default(0);
             $table->timestamps();

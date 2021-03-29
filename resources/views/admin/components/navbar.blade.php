@@ -67,9 +67,6 @@
                     <li class="{{(Route::currentRouteName() === 'admin.units') ? 'active' : ''}}">
                         <a href="{{route('admin.units')}}">Manage Units</a>
                     </li>
-                    <li class="{{(Route::currentRouteName() === 'admin.course.unit') ? 'active' : ''}}">
-                        <a href="{{route('admin.course.unit')}}">Add Unit</a>
-                    </li>
                     <li class="{{(Route::currentRouteName() === 'admin.course.steps') ? 'active' : ''}}">
                         <a href="{{route('admin.course.steps')}}">Manage Steps</a>
                     </li>

@@ -23,7 +23,8 @@ class CreateCourseUnitsTable extends Migration
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
                     ->references('id')->on('courses')
-                    ->onDelete('cascade');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
             $table->enum('unit_type', ['core', 'elective'])->nullable();
             $table->string('unit_code')->unique()->nullable();
             $table->string('unit_name');

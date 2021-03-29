@@ -40,6 +40,10 @@ Route::prefix('course')->group(function(){
     Route::get('/units', 'CourseUnitController@index')->name('units');
     Route::get('add-unit', 'CourseUnitController@create')->name('course.unit');
     Route::post('add-unit', 'CourseUnitController@store');
+    Route::get('all-units', 'CourseUnitController@getData');
+    Route::get('get-unit', 'CourseUnitController@edit');
+    Route::put('update/{id}/unit', 'CourseUnitController@update')->name('unit.update');
+    Route::delete('remove/unit', 'CourseUnitController@destroy');
 
 
     //Steps

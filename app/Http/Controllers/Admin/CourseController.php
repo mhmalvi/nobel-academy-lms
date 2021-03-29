@@ -38,7 +38,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('admin.course.index');
+        return view('admin.Course.index');
     }
 
 
@@ -49,7 +49,7 @@ class CourseController extends Controller
     public function create(){
         $categories = CourseCategory::all();
         $teachers = Teacher::all();
-        return view('admin.course.create', compact('categories', 'teachers'));
+        return view('admin.Course.create', compact('categories', 'teachers'));
     }
 
 
@@ -166,7 +166,7 @@ class CourseController extends Controller
                 $categories = CourseCategory::all();
                 $teachers = Teacher::all();
 
-                return view('admin.course.update', compact('categories', 'teachers', 'course'));
+                return view('admin.Course.update', compact('categories', 'teachers', 'course'));
             }
         } catch (\Throwable $th) {
             /**
@@ -294,7 +294,7 @@ class CourseController extends Controller
 
 
     /**
-     * 
+     * Remove Course
      */
     public function destroy(Request $request){
         $arr = $request->id;
@@ -304,7 +304,8 @@ class CourseController extends Controller
 
         try {
             return response()->json([
-                'data' => DB::delete("DELETE FROM courses WHERE id IN ($csv)")
+                'data' => DB::delete("DELETE FROM courses WHERE id IN ($csv)"),
+                'status' => 200
                 ]);
         } catch (\Throwable $th) {
             /**

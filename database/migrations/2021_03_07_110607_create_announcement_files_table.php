@@ -16,10 +16,13 @@ class CreateAnnouncementFilesTable extends Migration
         Schema::create('announcement_files', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique()->nullable();
+
             $table->unsignedBigInteger('announcement_id')->nullable();
             $table->foreign('announcement_id')
                     ->references('id')->on('announcements')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            
             $table->string('file_name')->nullable();
             $table->text('file_path')->nullable();
             $table->text('file_ext')->nullable();

@@ -16,14 +16,19 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique()->nullable();
+
             $table->unsignedBigInteger('action_user')->nullable();
             $table->foreign('action_user')
                     ->references('id')->on('users')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+            
             $table->unsignedBigInteger('role_id')->nullable();
             $table->foreign('role_id')
                     ->references('id')->on('roles')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+            
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
