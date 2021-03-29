@@ -161,10 +161,11 @@ class CourseController extends Controller
     public function edit(Request $request){
         try {
             if ($request->expectsJson()) {
-                $id = AppCryption::decrypt($request->id);
+                $id = $request->id;
                 $course = Course::find($id);
                 $categories = CourseCategory::all();
                 $teachers = Teacher::all();
+
                 return view('admin.course.update', compact('categories', 'teachers', 'course'));
             }
         } catch (\Throwable $th) {
@@ -187,7 +188,7 @@ class CourseController extends Controller
         try{
             $files = null;
             $image = null;
-            $id = AppCryption::decrypt($id);
+            $id = $id;
 
             if($request->hasFile('image')){
                 $file = $request->file('image');
@@ -298,7 +299,7 @@ class CourseController extends Controller
     public function destroy(Request $request){
         $arr = $request->id;
         $csv = implode(", ", array_map(function($arr){
-            return AppCryption::decrypt($arr);
+            return $arr;
         }, $arr));
 
         try {

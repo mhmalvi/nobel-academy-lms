@@ -36,7 +36,8 @@ class CreateUnitProgressTable extends Migration
             $table->foreign('course_unit_id')
                     ->references('id')->on('course_units')
                     ->onDelete('cascade');
-            $table->text('steps')->nullable();
+            $table->integer('current_step')->default(1);
+            $table->integer('complete_step')->default(0);
             $table->timestamps();
         });
     }

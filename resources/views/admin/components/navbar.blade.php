@@ -59,19 +59,19 @@
                 <a href="javascript:void(0)"><i class="fa fa-book" aria-hidden="true"></i> <span class="nav-label">Course</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="{{(Route::currentRouteName() === 'admin.course.category') ? 'active' : ''}}">
-                        <a href="{{route('admin.course.category')}}">Category</a>
+                        <a href="{{route('admin.course.category')}}">Manage Categories</a>
                     </li>
                     <li class="{{(Route::currentRouteName() === 'admin.courses') ? 'active' : ''}}">
-                        <a href="{{route('admin.courses')}}">Courses</a>
-                    </li>
-                    <li class="{{(Route::currentRouteName() === 'admin.course.add') ? 'active' : ''}}">
-                        <a href="{{route('admin.course.add')}}">Add Course</a>
+                        <a href="{{route('admin.courses')}}">Manage Courses</a>
                     </li>
                     <li class="{{(Route::currentRouteName() === 'admin.units') ? 'active' : ''}}">
-                        <a href="{{route('admin.units')}}">Units</a>
+                        <a href="{{route('admin.units')}}">Manage Units</a>
                     </li>
                     <li class="{{(Route::currentRouteName() === 'admin.course.unit') ? 'active' : ''}}">
                         <a href="{{route('admin.course.unit')}}">Add Unit</a>
+                    </li>
+                    <li class="{{(Route::currentRouteName() === 'admin.course.steps') ? 'active' : ''}}">
+                        <a href="{{route('admin.course.steps')}}">Manage Steps</a>
                     </li>
                 </ul>
             </li>

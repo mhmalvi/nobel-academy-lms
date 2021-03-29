@@ -37,9 +37,13 @@ Route::prefix('course')->group(function(){
     Route::delete('remove', 'CourseController@destroy');
 
     //units
-    Route::get('/core-units', 'CourseUnitController@index')->name('units');
+    Route::get('/units', 'CourseUnitController@index')->name('units');
     Route::get('add-unit', 'CourseUnitController@create')->name('course.unit');
     Route::post('add-unit', 'CourseUnitController@store');
+
+
+    //Steps
+    Route::get('steps', 'CourseUnitStepController@index')->name('course.steps');
 });
 
 

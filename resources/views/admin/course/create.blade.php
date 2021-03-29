@@ -1,14 +1,9 @@
-@extends('admin.layouts.app')
+<link rel="stylesheet" href="{{asset('assets/admin/css/plugins/summernote/summernote-bs4.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/admin/css/plugins/select2/select2.min.css')}}"/>
+@include('admin.course.styles')
 
-@section('title', 'Create Course')
 
-@push('css')
-    <link rel="stylesheet" href="{{asset('assets/admin/css/plugins/summernote/summernote-bs4.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/admin/css/plugins/select2/select2.min.css')}}"/>
-    @include('admin.course.styles')
-@endpush
-
-@section('content')
+<div class="animated fadeIn">
     <form action="{{route('admin.course.add')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -115,10 +110,28 @@
             </div>
         </div>
     </form>
-@endsection
+</div>
 
-@push('js')
-    <script src="{{asset('assets/admin/js/plugins/summernote/summernote-bs4.js')}}"></script>
-    <script src="{{asset('assets/admin/js/plugins/select2/select2.full.min.js')}}"></script>
-    @include('admin.course.scripts')
-@endpush
+<script src="{{asset('assets/admin/js/plugins/summernote/summernote-bs4.js')}}"></script>
+<script src="{{asset('assets/admin/js/plugins/select2/select2.full.min.js')}}"></script>
+<script>
+    $(document).ready(function () {
+        $("#tutors").select2({
+            placeholder: 'Select course instructor(s)'
+        });
+
+        $('#des').summernote({
+            height: 500,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ],
+            placeholder: 'Descriptions about the course...',
+            disableResizeEditor: true
+        });
+    })
+</script>
+@include('admin.course.scripts')
+
