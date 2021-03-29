@@ -8,13 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\User;
 use App\Models\Course;
-use App\Support\AppCryption;
 
 class CourseUnit extends Model
 {
     use HasFactory, SoftDeletes;
 
+
     protected $fillable = ['action_user', 'course_id', 'unit_type', 'unit_code', 'unit_name', 'descriptions', 'is_published'];
+
+
+    /**
+     * Format Datetime
+     */
+    public function getCreatedAtAttribute($value){
+        return date("M d, Y", strtotime($value));
+    }
 
 
     /**

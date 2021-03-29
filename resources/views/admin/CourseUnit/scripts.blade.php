@@ -6,19 +6,19 @@
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
                 {
-                    text: '<i class="fa fa-plus-circle text-success" aria-hidden="true">&nbsp;New Course</i>',
+                    text: '<i class="fa fa-plus-circle text-success" aria-hidden="true">&nbsp;New Unit</i>',
                     action: function ( e, dt, node, config ) {
                         addUnit("{{route('admin.course.unit')}}");
                     }
                 },
                 {
-                    text: '<i class="fa fa-pencil-square-o text-info" aria-hidden="true">&nbsp;Edit Course</i>',
+                    text: '<i class="fa fa-pencil-square-o text-info" aria-hidden="true">&nbsp;Edit Unit</i>',
                     action: function ( e, dt, node, config ) {
                         edit('get-unit','.categories:checked');
                     }
                 },
                 {
-                    text: '<i class="fa fa-trash-o text-danger" aria-hidden="true">&nbsp;Delete Course</i>',
+                    text: '<i class="fa fa-trash-o text-danger" aria-hidden="true">&nbsp;Delete Unit</i>',
                     action: function ( e, dt, node, config ) {
                         remove('remove/unit','.categories:checked');
                     }
@@ -38,11 +38,11 @@
                 },
             columns: [
                 { data: null, defaultContent: '' },
-                { data: "unit_type" },
-                { data: "unit_code"},
-                { data: "unit_name"},
-                { data: "course_id"},
-                { data: "created_at"},
+                { data: "Type" },
+                { data: "Code"},
+                { data: "Unit"},
+                { data: "Course"},
+                { data: "Created"},
             ],
             columnDefs: [{
                 'targets': 0,

@@ -36,7 +36,7 @@ class CourseUnitController extends Controller
      * 
      */
     public function getData(){
-        return new CourseUnitCollection(CourseUnit::orderBy('created_at', 'desc')->get());
+        return new CourseUnitCollection(CourseUnit::with('course')->orderBy('created_at', 'desc')->get());
     }
     
 
@@ -200,17 +200,15 @@ class CourseUnitController extends Controller
                 'descriptions' => $request->descriptions
             ]);
 
-            if($unit->id){
-                /**
-                 * retun successfull notification
-                 */
-                $notification = [
-                    'message'   =>  "{$unit->unit_name} successfully saved",
-                    'alert-type'    =>  'success'
-                ];
-        
-                return redirect()->back()->with($notification);
-            }
+            /**
+             * retun successfull notification
+             */
+            $notification = [
+                'message'   =>  "{$unit->unit_name} successfully saved",
+                'alert-type'    =>  'success'
+            ];
+    
+            return redirect()->back()->with($notification);
         }
         catch(\Throwable $th){
             /**
