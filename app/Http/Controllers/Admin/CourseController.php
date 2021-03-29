@@ -294,7 +294,7 @@ class CourseController extends Controller
 
 
     /**
-     * 
+     * Remove Course
      */
     public function destroy(Request $request){
         $arr = $request->id;

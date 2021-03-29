@@ -19,15 +19,21 @@ class CreateCourseUnitFilesTable extends Migration
             $table->unsignedBigInteger('action_user')->nullable();
             $table->foreign('action_user')
                     ->references('id')->on('users')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->foreign('unit_id')
                     ->references('id')->on('course_units')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
             $table->unsignedBigInteger('step_id')->nullable();
             $table->foreign('step_id')
                     ->references('id')->on('steps')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
             $table->string('file_name')->nullable();
             $table->text('file_path')->nullable();
             $table->text('file_ext')->nullable();

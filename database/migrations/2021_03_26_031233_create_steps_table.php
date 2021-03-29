@@ -16,10 +16,13 @@ class CreateStepsTable extends Migration
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->nullable();
+            
             $table->unsignedBigInteger('action_user')->nullable();
             $table->foreign('action_user')
                     ->references('id')->on('users')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+
             $table->string('step_name');
             $table->text('descriptions')->nullable();
             $table->timestamps();

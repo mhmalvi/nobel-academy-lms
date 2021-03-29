@@ -7,7 +7,6 @@ use App\Models\Course;
 use App\Models\CourseUnit;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Support\AppCryption;
 use App\Models\CourseUnitFiles;
 use App\Exceptions\AppExceptions;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +15,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CourseUnitRequest;
 use App\Http\Requests\FileUploadRequest;
+use App\Http\Resources\CourseUnitCollection;
 use App\Models\Step;
+use Illuminate\Support\Facades\DB;
 
 class CourseUnitController extends Controller
 {
@@ -26,8 +27,16 @@ class CourseUnitController extends Controller
      */
     public function index()
     {
-        $units = CourseUnit::orderBy('created_at', 'desc')->get();
-        return view('admin.units.units', compact('units'));
+        return view('admin.CourseUnit.index');
+    }
+
+
+
+    /**
+     * 
+     */
+    public function getData(){
+        return new CourseUnitCollection(CourseUnit::orderBy('created_at', 'desc')->get());
     }
     
 
@@ -38,7 +47,7 @@ class CourseUnitController extends Controller
      */
     public function create(){
         $courses = Course::all();
-        return view('admin.units.create', compact('courses'));
+        return view('admin.CourseUnit.create', compact('courses'));
     }
 
 
@@ -153,13 +162,74 @@ class CourseUnitController extends Controller
 
 
     /**
+     * 
+     */
+    public function edit(Request $request){
+        try {
+            if ($request->expectsJson()) {
+                $id = $request->id;
+                $unit = CourseUnit::find($id);
+                $courses = Course::all();
+
+                return view('admin.CourseUnit.update', compact('courses', 'unit'));
+            }
+        } catch (\Throwable $th) {
+            /**
+             * Return exception
+             */
+            return response()->json([
+                'data' => AppExceptions::throwback($th),
+                'status' => 404
+            ]);
+        }
+    }
+
+
+
+    /**
+     * 
+     */
+    public function update(Request $request, $id){
+        try{
+            $unit = CourseUnit::where('id', $id)->update([
+                'action_user' => Auth::id(),
+                'course_id' => $request->course,
+                'unit_type' => $request->unit_type,
+                'unit_code' => ($request->unit_code) ? Str::upper($request->unit_code) : null,
+                'unit_name' => Str::title($request->unit_name),
+                'descriptions' => $request->descriptions
+            ]);
+
+            if($unit->id){
+                /**
+                 * retun successfull notification
+                 */
+                $notification = [
+                    'message'   =>  "{$unit->unit_name} successfully saved",
+                    'alert-type'    =>  'success'
+                ];
+        
+                return redirect()->back()->with($notification);
+            }
+        }
+        catch(\Throwable $th){
+            /**
+             * Return the exceptions
+             */
+            return redirect()->back()->with(AppExceptions::throwback($th));
+        }
+    }
+
+
+
+    /**
      * Files
      */
     public function files(){
         $units = CourseUnit::all();
         $steps = Step::all();
         $files = CourseUnitFiles::orderBy('created_at', 'asc')->get();
-        return view('admin.units.files', compact('files', 'units', 'steps'));
+        return view('admin.CourseUnit.files', compact('files', 'units', 'steps'));
     }
 
 
@@ -251,6 +321,36 @@ class CourseUnitController extends Controller
              * Return the exceptions
              */
             return redirect()->back()->with(AppExceptions::throwback($th));
+        }
+    }
+
+
+
+    
+    /**
+     * Remove Course
+     */
+    public function destroy(Request $request){
+        $arr = $request->id;
+        $csv = implode(", ", array_map(function($arr){
+            return $arr;
+        }, $arr));
+
+        try {
+            return response()->json(
+                [
+                    'data' => DB::delete("DELETE FROM course_units WHERE id IN ($csv)"),
+                    'status' => 200
+                ]
+            );
+        } catch (\Throwable $th) {
+            /**
+             * Return exception
+             */
+            return response()->json([
+                'data' => AppExceptions::throwback($th),
+                'status' => 404
+            ]);
         }
     }
 }

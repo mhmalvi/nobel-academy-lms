@@ -16,14 +16,19 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique()->nullable();
+
             $table->unsignedBigInteger('action_user')->nullable();
             $table->foreign('action_user')
                     ->references('id')->on('users')
-                    ->onDelete('set null');
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+            
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')
                     ->references('id')->on('users')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone')->nullable();
