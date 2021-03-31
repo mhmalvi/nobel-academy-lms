@@ -7,13 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Enrollment;
 use App\Models\CoursesTeacher;
-use App\Support\AppCryption;
+use Illuminate\Support\Str;
 
 class Teacher extends Model
 {
     use HasFactory;
 
     protected $fillable = ['action_user', 'user_id', 'first_name', 'last_name', 'phone', 'mobile', 'address_one', 'address_two'];
+
+
+    /**
+     * Set first name upper case first
+     */
+    public function setFirstNameAttribute($value){
+        $this->attributes['first_name'] = Str::ucfirst($value);
+    }
+
+
+    /**
+     * Set last name upper case first
+     */
+    public function setLastNameAttribute($value){
+        $this->attributes['last_name'] = Str::ucfirst($value);
+    }
 
 
     /**

@@ -21,7 +21,7 @@
             <div class="pt-3">
                 <div class="alert alert-soft-success d-flex align-items-center card-margin" role="alert">
                     <i class="material-icons mr-3">star</i>
-                    <div class="text-body"><strong>Congratulations.</strong> You have completed {{$unit->progress->complete_step}} of 5 lessons. </div>
+                    <div class="text-body"><strong>Congratulations.</strong> You have completed {{$unit->progress->complete_step}} of 5 Steps. </div>
                 </div>
             </div>
             <div class="row">
@@ -104,7 +104,7 @@
                                     <h1 class="mb-2">{{$getStep->step_name}}</h1>
                                 </div>
                                 <div>
-                                    @if ($unit->progress->current_step == 5 && $unit->progress->current_step == $getStep->id)
+                                    @if ($unit->progress->current_step == count($steps) && $unit->progress->current_step == $getStep->id)
                                         <form action="{{route('complete.step', ['unitId' => $unit->id, 'id' => $getStep->id])}}" method="post" id="assesment">
                                             @csrf
                                         </form>
@@ -113,7 +113,7 @@
                                         </button>
                                     @endif
 
-                                    @if ($unit->progress->current_step < 5 && $unit->progress->current_step == $getStep->id)
+                                    @if ($unit->progress->current_step < count($steps) && $unit->progress->current_step == $getStep->id)
                                         <form action="{{route('complete.step', ['unitId' => $unit->id, 'id' => $getStep->id])}}" method="post" id="complete">
                                             @csrf
                                         </form>

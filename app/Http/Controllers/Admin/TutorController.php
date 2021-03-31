@@ -6,11 +6,9 @@ use Exception;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Teacher;
-use Illuminate\Support\Str;
 use App\Models\CoursesTeacher;
 use App\Exceptions\AppExceptions;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateUserRequest;
@@ -78,10 +76,10 @@ class TutorController extends Controller
     
             $data = [
                 'action_user' => Auth::id(),
-                'name' => Str::ucfirst($request->name),
+                'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'password' => Hash::make($request->password),
+                'password' => $request->password,
                 'photo' => $file,
                 'user_type' => 'teacher',
                 'action_user' => Auth::id()
@@ -93,8 +91,8 @@ class TutorController extends Controller
                 $teacher = Teacher::create([
                     'action_user' => Auth::id(),
                     'user_id' => $user->id,
-                    'first_name' => Str::ucfirst($request->fName),
-                    'last_name' => Str::ucfirst($request->lName),
+                    'first_name' => $request->fName,
+                    'last_name' => $request->lName,
                     'phone' => $request->phone,
                     'mobile' => $request->mobile,
                     'address_one' => $request->address,
@@ -107,7 +105,7 @@ class TutorController extends Controller
                             CoursesTeacher::create([
                                 'action_user' => Auth::id(),
                                 'teacher_id' => $teacher->id,
-                                'course_id' => AppCryption::decrypt($course)
+                                'course_id' => $course
                             ]);
                         }
                     }

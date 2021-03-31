@@ -71,7 +71,7 @@ class StudentController extends Controller
                 'name' => Str::ucfirst($request->name),
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'password' => Hash::make($request->password),
+                'password' => $request->password,
                 'photo' => $file,
                 'user_type' => 'student',
                 'action_user' => Auth::id()
@@ -107,7 +107,7 @@ class StudentController extends Controller
                         'alert-type'    =>  'success'
                     ];
             
-                    return redirect()->route('admin.assign', $request->student_id)->with($notification);
+                    return redirect()->route('admin.assign', $student->id)->with($notification);
                 }
                 else{
                 /**

@@ -28,7 +28,7 @@
                 <a href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i></i><span class="nav-label">Instructor</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="{{(Route::currentRouteName() === 'admin.instructor.add') ? 'active' : ''}}">
-                        <a href="{{route('admin.instructor.add')}}">Add New</a>
+                        <a href="{{route('admin.instructor.add')}}">Add New Instructor</a>
                     </li>
                     <li class="{{(Route::currentRouteName() === 'admin.instructors') ? 'active' : ''}}">
                         <a href="{{route('admin.instructors')}}">Manage Instructors</a>
@@ -42,10 +42,10 @@
                 <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="nav-label">Student</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="{{(Route::currentRouteName() === 'admin.student.enrollment') ? 'active' : ''}}">
-                        <a href="{{route('admin.student.enrollment')}}">Enrollment</a>
+                        <a href="{{route('admin.student.enrollment')}}">Add New Student</a>
                     </li>
                     <li class="{{(Route::currentRouteName() === 'admin.course.enrollment') ? 'active' : ''}}">
-                        <a href="{{route('admin.course.enrollment')}}">Course Enroll</a>
+                        <a href="{{route('admin.course.enrollment')}}">Course Enrollment</a>
                     </li>
                     <li class="{{(Route::currentRouteName() === 'admin.students') ? 'active' : ''}}">
                         <a href="{{route('admin.students')}}">Manage Students</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Step;
 use Illuminate\Http\Request;
 use App\Exceptions\AppExceptions;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseUnitStepRequest;
@@ -41,6 +42,7 @@ class CourseUnitStepController extends Controller
             ];
 
             $step = Step::updateOrCreate($id, [
+                'action_user' => Auth::id(),
                 'step_name'=>$request->step_name,
                 'descriptions'=>$request->description
             ]);
