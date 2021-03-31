@@ -17,6 +17,30 @@ class Step extends Model
 
 
     /**
+     * Attributr that should be casts
+     */
+    protected $casts = [
+        'created_at' => 'datetime:d-M-Y',
+    ];
+
+
+    /**
+     * 
+     */
+    public function getCreatedAtAttribute($value){
+        return date("M d, Y", strtotime($value));
+    }
+
+
+    /**
+     * 
+     */
+    public function setStepNameAttribute($value){
+        $this->attributes['step_name'] = ucfirst($value);
+    }
+
+
+    /**
      *
      */
     public function files(){

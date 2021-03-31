@@ -6,21 +6,15 @@
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
                 {
-                    text: '<i class="fa fa-plus-circle text-success" aria-hidden="true">&nbsp;New Unit</i>',
-                    action: function ( e, dt, node, config ) {
-                        // addUnit("{{route('admin.course.unit')}}");
-                    }
-                },
-                {
                     text: '<i class="fa fa-pencil-square-o text-info" aria-hidden="true">&nbsp;Edit Unit</i>',
                     action: function ( e, dt, node, config ) {
-                        // edit('get-unit','.categories:checked');
+                        edit('get-step','.steps:checked');
                     }
                 },
                 {
                     text: '<i class="fa fa-trash-o text-danger" aria-hidden="true">&nbsp;Delete Unit</i>',
                     action: function ( e, dt, node, config ) {
-                        // remove('remove/unit','.categories:checked');
+                        remove('remove/steps','.steps:checked');
                     }
                 },
                 {extend: 'pdf', title: 'ExampleFile'},
@@ -33,15 +27,12 @@
                 }
             ],
             ajax: {
-                url: 'all-units',
+                url: 'get-steps',
                 dataSrc: 'data'
                 },
             columns: [
                 { data: null, defaultContent: '' },
-                { data: "Type" },
-                { data: "Code"},
-                { data: "Unit"},
-                { data: "Course"},
+                { data: "Step" },
                 { data: "Created"},
             ],
             columnDefs: [{
@@ -50,40 +41,23 @@
                 'orderable': false,
                 'className': 'dt-body-center',
                 'render': function (data, type, full, meta){
-                    return '<input type="checkbox" class="categories" name="id[]" value="' + $('<div/>').text(data.id).html() + '">';
+                    return '<input type="checkbox" class="steps" name="id[]" value="' + $('<div/>').text(data.Id).html() + '">';
                 }
             }],
-            order: [[3, 'asc']]
+            order: [[1, 'asc']]
         });
 
 
-
         /*
-        ***Check - Uncheck
+        ***Check - Uncheck -all
         */
         $('#select-all').on('click', function(){
             // Get all rows with search applied
-            var rows = units.rows({ 'search': 'applied' }).nodes();
+            var rows = steps.rows({ 'search': 'applied' }).nodes();
 
             // Check/uncheck checkboxes for all rows in the table
             $('input[type="checkbox"]', rows).prop('checked', this.checked);
         });
-
-
-
-        // Add Unit
-        function addUnit(url) {
-            $.ajax({
-                url: url,
-                method: 'GET',
-                success: function(res){
-                    $("#content").html(res);
-                },
-                error: function (e) {
-                    alert(e);
-                }
-            })
-        }
 
 
 
@@ -102,8 +76,17 @@
                     url: url,
                     method: 'GET',
                     data: {id:$(checkbox).val()},
+                    dataType: 'json',
                     success: function(res){
-                        $("#content").html(res);
+                        if(res.status == 200){
+                            $("#id").val(res.data.Id);
+                            $('#step_name').val(res.data.Step);
+                            $('#descriptions').val(res.data.Details);
+                            $('input[type="checkbox"]').prop('checked', false);
+                        }
+                        else{
+                            toastr.warning(res.data.message);
+                        }
                     }
                 })
             }else{
@@ -133,7 +116,7 @@
                             if(res.data.status == 404){
                                 toastr.warning(res.data.message);
                             }else{   
-                                units.ajax.reload();
+                                steps.ajax.reload();
                                 toastr.success('Data Successfully Deleted');
                                 $('input[type="checkbox"]').prop('checked', false);
                             }

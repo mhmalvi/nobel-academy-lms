@@ -20,22 +20,22 @@
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
                             <label for="step_name">Step Name</label>
-                            <input type="text" name="step_name" id="step_name" class="form-control" placeholder="Step Name of the category..." value="{{old('step_name')}}"/>
+                            <input type="text" name="step_name" id="step_name" class="form-control" placeholder="Name of the step..." value="{{old('step_name')}}"/>
                             @error('step_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="desc">Descriptions</label>
-                            <textarea name="description" id="descriptions" class="form-control" rows="10">{{old('descriptions')}}</textarea>
+                            <label for="descriptions">Descriptions</label>
+                            <textarea name="descriptions" id="descriptions" class="form-control" rows="10">{{old('descriptions')}}</textarea>
                             @error('descriptions')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="title">Upload File</label>
-                            <input type="file" class="form-control" value="Upload"/>
-                            @error('category_name')
+                            <label for="files">Upload File</label>
+                            <input type="file" id="files" class="form-control" name="files" value="Upload" multiple/>
+                            @error('files')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

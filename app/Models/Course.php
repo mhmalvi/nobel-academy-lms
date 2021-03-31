@@ -34,7 +34,7 @@ class Course extends Model
 
 
     /**
-     * Attributr that shoul be casts
+     * Attributr that should be casts
      */
     protected $casts = [
         'created_at' => 'datetime:d-M-Y',
