@@ -14,13 +14,13 @@
                 {
                     text: '<i class="fa fa-pencil-square-o text-info" aria-hidden="true">&nbsp;Edit Unit</i>',
                     action: function ( e, dt, node, config ) {
-                        edit('get-unit','.categories:checked');
+                        edit('get-unit','.units:checked');
                     }
                 },
                 {
                     text: '<i class="fa fa-trash-o text-danger" aria-hidden="true">&nbsp;Delete Unit</i>',
                     action: function ( e, dt, node, config ) {
-                        remove('remove/unit','.categories:checked');
+                        remove('remove/unit','.units:checked');
                     }
                 },
                 {extend: 'pdf', title: 'ExampleFile'},
@@ -50,7 +50,7 @@
                 'orderable': false,
                 'className': 'dt-body-center',
                 'render': function (data, type, full, meta){
-                    return '<input type="checkbox" class="categories" name="id[]" value="' + $('<div/>').text(data.id).html() + '">';
+                    return '<input type="checkbox" class="units" name="id[]" value="' + $('<div/>').text(data.Id).html() + '">';
                 }
             }],
             order: [[3, 'asc']]
