@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="ibox-content">
-                    <form action="{{ route('admin.course.steps') }}" method="POST">
+                    <form action="{{ route('admin.course.step') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">

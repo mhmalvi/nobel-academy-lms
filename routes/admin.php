@@ -49,7 +49,7 @@ Route::prefix('course')->group(function(){
     //Steps
     Route::get('steps', 'CourseUnitStepController@index')->name('course.steps');
     Route::get('get-steps', 'CourseUnitStepController@getAllSteps');
-    Route::post('/steps', 'CourseUnitStepController@store')->name('course.steps');
+    Route::post('/steps', 'CourseUnitStepController@store')->name('course.step');
     Route::get('/get-step', 'CourseUnitStepController@edit');
     Route::delete('remove/steps', 'CourseUnitStepController@destroy');
 });
