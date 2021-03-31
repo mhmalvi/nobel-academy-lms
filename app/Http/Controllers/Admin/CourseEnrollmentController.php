@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UnitProgress;
+use App\Exceptions\AppExceptions;
 
 class CourseEnrollmentController extends Controller
 {
@@ -44,66 +45,79 @@ class CourseEnrollmentController extends Controller
      * 
      */
     public function assignUnit(Request $request, $id){
-        (array) $units = [];
+        try {
+            (array) $units = [];
 
-        $enrollment = Enrollment::where('id', $id)->first();
-
-        if($request->unit == 'core'){
-            foreach ($request->units as $id) {
-                $unit = CourseUnit::findOrFail($id);
-
-                array_push($units, $unit->unit_code);
-
-                /**
-                 * Create or update
-                 * unit process report/data
-                 */
-                UnitProgress::updateOrCreate(
-                    [
-                        'student_id' => $enrollment->student_id,
-                        'course_id' => $enrollment->course_id,
-                        'course_unit_id' => $id
-                    ],
-                    [
-                        'action_user' => Auth::id(),
-                        'student_id' => $enrollment->student_id,
-                        'course_id' => $enrollment->course_id,
-                        'course_unit_id' => $id,
-                    ]
-                );
+            $enrollment = Enrollment::where('id', $id)->first();
+    
+    
+            if($request->unit == 'core'){
+                foreach ($request->units as $code) {
+                    $unit = CourseUnit::where('unit_code', $code)->first();
+    
+                    array_push($units, $unit->unit_code);
+    
+                    /**
+                     * Create or update
+                     * unit process report/data
+                     */
+                    UnitProgress::updateOrCreate(
+                        [
+                            'student_id' => $enrollment->student_id,
+                            'course_id' => $enrollment->course_id,
+                            'course_unit_id' => $id
+                        ],
+                        [
+                            'action_user' => Auth::id(),
+                            'student_id' => $enrollment->student_id,
+                            'course_id' => $enrollment->course_id,
+                            'course_unit_id' => $unit->id,
+                        ]
+                    );
+                }
+                $enrollment->core_units = $units;
+                $enrollment->save();
             }
-            $enrollment->core_units = $units;
-            $enrollment->save();
-        }
-
-        if($request->unit == 'elective'){
-            foreach ($request->units as $id) {
-                $unit = CourseUnit::findOrFail($id);
-
-                array_push($units, $unit->unit_code);
-
-                /**
-                 * Create or update
-                 * unit process report/data
-                 */
-                UnitProgress::updateOrCreate(
-                    [
-                        'student_id' => $enrollment->student_id,
-                        'course_id' => $enrollment->course_id,
-                        'course_unit_id' => $id
-                    ],
-                    [
-                        'action_user' => Auth::id(),
-                        'student_id' => $enrollment->student_id,
-                        'course_id' => $enrollment->course_id,
-                        'course_unit_id' => $id,
-                    ]
-                );
+    
+            if($request->unit == 'elective'){
+                foreach ($request->units as $code) {
+                    $unit = CourseUnit::where('unit_code', $code)->first();
+    
+                    array_push($units, $unit->unit_code);
+    
+                    /**
+                     * Create or update
+                     * unit process report/data
+                     */
+                    UnitProgress::updateOrCreate(
+                        [
+                            'student_id' => $enrollment->student_id,
+                            'course_id' => $enrollment->course_id,
+                            'course_unit_id' => $id
+                        ],
+                        [
+                            'action_user' => Auth::id(),
+                            'student_id' => $enrollment->student_id,
+                            'course_id' => $enrollment->course_id,
+                            'course_unit_id' => $unit->id,
+                        ]
+                    );
+                }
+                $enrollment->elective_units = $units;
+                $enrollment->save();
             }
-            $enrollment->elective_units = $units;
-            $enrollment->save();
+    
+            $notification = [
+                'message'   =>  "Unit succefully assigned",
+                'alert-type'    =>  'success'
+            ];
+    
+            return redirect()->back()->with($notification);
+        } catch (\Throwable $th) {
+            /**
+             * Return exception
+             */
+            return redirect()->back()->with(AppExceptions::throwback($th));
         }
-
-        return redirect()->back();
     }
 }

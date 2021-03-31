@@ -20,15 +20,24 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
 
-    Route::prefix('course')->group(function () {
-        Route::get('{id}/student', 'CourseController@index')->name('course');
-        Route::get('{id}/instructor', 'CourseController@course')->name('teacher.course');
+    /**
+     * Student's Panel
+     */
+    Route::prefix('student')->group(function(){
+        Route::get('{id}/course', 'StudentCourseController@index')->name('course');
+        Route::get('{unique_id}/unit', 'StudentCourseController@courseUnit')->name('unit');
+        Route::get('{unitId}/step/{stepId}', 'StudentCourseController@getStep')->name('step');
+        Route::post('{unitId}/complete-step/{id}', 'StudentCourseController@completeStep')->name('complete.step');
     });
-    
-    Route::prefix('unit')->group(function () {
-        Route::get('{unique_id}', 'CourseController@courseUnit')->name('unit');
-        Route::get('{unitId}/step/{stepId}', 'CourseController@getStep')->name('step');
-        Route::post('{unitId}/complete-step/{id}', 'CourseController@completeStep')->name('complete.step');
+
+
+
+    /**
+     * Teacher's Panel
+     */
+    Route::prefix('instructor')->group(function(){
+        Route::get('{id}', 'TeacherCourseController@index')->name('teacher.course');
+        Route::get('{id}/unit', 'TeacherCourseController@courseUnit')->name('teacher.unit');
     });
     
     Route::get('file-upload', 'FileController@index')->name('file');

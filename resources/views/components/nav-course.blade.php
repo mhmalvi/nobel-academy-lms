@@ -12,9 +12,11 @@
         <ul class="sidebar-submenu collapse" id="course_menu">
             {{-- Core Menu --}}
             <li class="sidebar-menu-item {{(request()->segment(1) === 'unit') ? 'active open' : ''}}">
-                <a class="sidebar-menu-button" data-toggle="collapse" href="#core_units">
+                <a class="sidebar-menu-button" data-toggle="{{(!is_null($enrollment->core_units)) ? 'collapse' : ''}}" href="#core_units">
                     <span class="sidebar-menu-text">Core Units</span>
-                    <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                    @if (!is_null($enrollment->core_units))
+                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                    @endif
                 </a>
                 <ul class="sidebar-submenu collapse" id="core_units">
                     @forelse ($enrollment->course->units->where('unit_type', 'core') as $item)
@@ -46,14 +48,13 @@
 
             {{-- Elective Menu --}}
             <li class="sidebar-menu-item">
-                <a class="sidebar-menu-button" data-toggle="collapse" href="#elective_units">
+                <a class="sidebar-menu-button" data-toggle="{{(!is_null($enrollment->elective_units)) ? 'collapse' : ''}}" href="#elective_units">
                     <span class="sidebar-menu-text">Elective Units</span>
-                    <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                    @if (!is_null($enrollment->elective_units))
+                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                    @endif
                 </a>
                 <ul class="sidebar-submenu collapse" id="elective_units">
-                    @php
-                        $enrollment = auth()->user()->student->enrollment->first();
-                    @endphp
                     @forelse ($enrollment->course->units->where('unit_type', 'elective') as $item)
                         @if (!is_null($enrollment->elective_units) && in_array($item->unit_code, $enrollment->elective_units))
                             <li class="sidebar-menu-item">
@@ -82,7 +83,8 @@
             </li>
         </ul>
     </li>
-{{-- @elseif(Auth::user()->user_type == 'teacher')
+
+@elseif(Auth::user()->user_type == 'teacher')
     @if (count(auth()->user()->teacher->courses) == '1')
         <li class="sidebar-menu-item {{(request()->segment(1) === 'course') ? 'active' : ''}}">
             @php
@@ -97,7 +99,7 @@
         <li class="sidebar-menu-item {{(request()->segment(1) === 'course') ? 'active open' : ''}}">
             <a class="sidebar-menu-button" data-toggle="collapse" href="#dashboards_menu">
             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">subtitles</i>
-            <span class="sidebar-menu-text">{{__('My Course(s)')}}</span>
+            <span class="sidebar-menu-text">{{__('My Courses')}}</span>
                 <span class="ml-auto sidebar-menu-toggle-icon"></span>
             </a>
             <ul class="sidebar-submenu collapse show" id="dashboards_menu">
@@ -116,5 +118,5 @@
                 @endforelse
             </ul>
         </li>
-    @endif --}}
+    @endif
 @endif

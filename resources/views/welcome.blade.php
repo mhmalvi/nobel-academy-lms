@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><a href="" class="headings-color">UI Design &amp; Code</a></h5>
                         <p class="card-text">
-                            {{auth()->user()->student->enrollment->first()->course->units->where('unit_type', 'core')}}
+
                         </p>
                     </div>
                 </div>

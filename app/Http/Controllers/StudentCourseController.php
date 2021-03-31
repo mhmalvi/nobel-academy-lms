@@ -10,7 +10,7 @@ use App\Models\Step;
 use App\Models\UnitProgress;
 use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class StudentCourseController extends Controller
 {
     /**
      * 
@@ -28,22 +28,12 @@ class CourseController extends Controller
     /**
      * 
      */
-    public function course($id){
-        $course = Course::where('id', $id)->first();
-        return view('teacher.course', compact('course'));
-    }
-
-
-
-    /**
-     * 
-     */
-    public function courseUnit($unique_id = null, $stepId = null){
+    public function courseUnit($unique_id = null){
         $steps = Step::all();
         $files = CourseUnitFiles::all();
         $unit = CourseUnit::with('progress')->where('id', $unique_id)->first();
 
-        return view('unit', compact('unit', 'files', 'steps'));
+        return view('student.unit', compact('unit', 'files', 'steps'));
     }
 
 

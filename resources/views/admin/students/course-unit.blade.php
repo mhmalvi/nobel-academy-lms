@@ -33,7 +33,7 @@
                                                         <input type="checkbox" 
                                                         class="i-checks" 
                                                         name="units[]" 
-                                                        value="{{$item->id}}" 
+                                                        value="{{$item->unit_code}}" 
                                                         {{(!is_null($enrollment->core_units) && in_array($item->unit_code, $enrollment->core_units)) ? 'checked' : ''}}
                                                         />
                                                     </td>

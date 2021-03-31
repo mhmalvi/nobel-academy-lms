@@ -25,7 +25,7 @@
             <div class="mdk-header-layout__content">
                 <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
                     <div class="mdk-drawer-layout__content page">
-                        @if (request()->segment(1) !== 'unit')
+                        @if (request()->segment(3) !== 'unit')
                             <div class="container-fluid page__heading-container">
                                 <div class="page__heading d-flex align-items-end">
                                     <div class="flex">
