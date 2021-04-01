@@ -116,5 +116,10 @@
                 </div>
             </div>
         </div>
+
+        
+        <br>
+
+        {{$files->links()}}
     </div>
 @endsection

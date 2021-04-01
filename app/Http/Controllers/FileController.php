@@ -21,7 +21,7 @@ class FileController extends Controller
     public function index(){
         $steps = Step::all();
         $units = CourseUnit::all();
-        $files = CourseUnitFiles::where('action_user', Auth::id())->paginate(5);
+        $files = CourseUnitFiles::where('action_user', Auth::id())->paginate(10);
         return view('teacher.file', compact('steps', 'units', 'files'));
     }
 

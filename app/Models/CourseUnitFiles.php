@@ -16,11 +16,12 @@ class CourseUnitFiles extends Model
 
 
     /**
-     * 
+     * Format Datetime
      */
-    public function actionuser(){
-        return $this->belongsTo(User::class, 'action_user');
+    public function getCreatedAtAttribute($value){
+        return date("M d, Y", strtotime($value));
     }
+
 
 
     /**
