@@ -25,7 +25,7 @@
 
             {{-- Instructor --}}
             <li class="{{(request()->segment(2) === 'instructors') ? 'active' : ''}}">
-                <a href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i></i><span class="nav-label">Instructor</span><span class="fa arrow"></span></a>
+                <a href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i></i><span class="nav-label">Instructors</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="{{(Route::currentRouteName() === 'admin.instructor.add') ? 'active' : ''}}">
                         <a href="{{route('admin.instructor.add')}}">Add New Instructor</a>
@@ -39,7 +39,7 @@
 
             {{-- Student --}}
             <li class="{{(request()->segment(2) === 'students') ? 'active' : ''}}">
-                <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="nav-label">Student</span><span class="fa arrow"></span></a>
+                <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="nav-label">Students</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="{{(Route::currentRouteName() === 'admin.student.enrollment') ? 'active' : ''}}">
                         <a href="{{route('admin.student.enrollment')}}">Add New Student</a>
@@ -74,13 +74,10 @@
             </li>
 
             {{-- Manage Files --}}
-            <li class="{{(request()->segment(2) === 'files') ? 'active' : ''}}">
-                <a href="javascript:void(0)"><i class="fa fa-files-o" aria-hidden="true"></i><span class="nav-label">Resources</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li class="{{(Route::currentRouteName() === 'admin.unit.files') ? 'active' : ''}}">
-                        <a href="{{route('admin.unit.files')}}">Unit</a>
-                    </li>
-                </ul>
+            <li class="{{(Route::currentRouteName() === 'admin.share.resource') ? 'active' : ""}}">
+                <a href="{{route('admin.share.resource')}}"><i class="fa fa-files-o" aria-hidden="true"></i>
+                    <span class="nav-label">Share Resources</span>
+                </a>
             </li>
 
 

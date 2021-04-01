@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('title', "Share Resource")
-@section('nav', 'share-resources')
-@section('heading', "Share Resource")
-
 @section('content')
     <div class="container-fluid page__container">
         @if (Session::has('message'))

@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('title', $course->course_code)
-@section('nav', $course->course_code)
-@section('heading', $course->course_name)
-
 @push('css')
     <link type="text/css" href="{{asset('assets/vendor/select2/select2.min.css')}}" rel="stylesheet">
 @endpush

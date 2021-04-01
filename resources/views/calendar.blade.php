@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Calendar')
-@section('nav', 'Caladar')
-@section('heading', 'Event Calendar')
-
 @push('css')
     <!-- FullCalendar -->
     <link type="text/css" href="{{asset('assets/vendor/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet">

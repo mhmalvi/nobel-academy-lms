@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('title', $course->course_code)
-@section('nav', $course->course_code)
-@section('heading', $course->course_name)
-
 @section('content')
     <div class="container-fluid page__container">
         <div class="row">

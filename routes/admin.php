@@ -55,10 +55,20 @@ Route::prefix('course')->group(function(){
 });
 
 
+
 /**
  * Unit
  */
 Route::post('get-unit', 'CourseUnitController@getUnits')->name('get.unit');
+
+
+
+/**
+ * Share Resources
+ */
+Route::get('share-resources', 'ResourceController@index')->name('share.resource');
+Route::post('share-resources', 'ResourceController@store');
+
 
 
 /**

@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
-@section('nav', 'Dashboard')
-@section('heading', 'Dashboard')
-
 @section('content')
     <div class="container-fluid page__container">
         <div class="row">

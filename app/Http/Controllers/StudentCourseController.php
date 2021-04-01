@@ -46,7 +46,7 @@ class StudentCourseController extends Controller
         $files = CourseUnitFiles::all();
         $getStep = Step::with('files')->findOrFail($stepId);
         $unit = CourseUnit::with('progress')->where('id', $unitId)->first();
-        return view('unit', compact('unit', 'files', 'steps', 'getStep'));
+        return view('student.unit', compact('unit', 'files', 'steps', 'getStep'));
     }
 
 

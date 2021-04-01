@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'User Profile')
-@section('nav', 'edit profile')
-@section('heading', 'Edit Account')
-
 @push('css')
     <!-- Dropzone -->
     <link type="text/css" href="{{asset('assets/css/vendor-dropzone.css')}}" rel="stylesheet">
