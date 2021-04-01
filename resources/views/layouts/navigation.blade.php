@@ -18,9 +18,11 @@
                     </a>
                 </li>
 
-
-                {{-- Course --}}
-                @include('components.nav-course')
+                @if (Auth::user()->user_type == 'student')
+                    @include('student.nav')
+                @elseif(Auth::user()->user_type == 'teacher')
+                    @include('teacher.nav')
+                @endif
 
 
                 {{-- Profile --}}

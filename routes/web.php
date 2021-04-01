@@ -39,9 +39,10 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::get('{id}', 'TeacherCourseController@index')->name('teacher.course');
         Route::get('{id}/unit', 'TeacherCourseController@courseUnit')->name('teacher.unit');
     });
+
+    Route::get('share/resources', 'FileController@index')->name('share.resource');
+    Route::post('share/resources', 'FileController@store');
     
-    Route::get('file-upload', 'FileController@index')->name('file');
-    Route::post('file-upload', 'FileController@store');
     Route::get('download/{file}', 'FileController@fileDownload')->name('download.unitFile');
     
     Route::get('calendar', 'CalendarController@index')->name('calendar');

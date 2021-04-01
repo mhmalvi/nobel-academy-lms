@@ -3,79 +3,105 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Step;
+use App\Models\CourseUnit;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Models\TempUserPhoto;
 use App\Models\CourseUnitFiles;
 use App\Exceptions\AppExceptions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\FileUploadRequest;
+use Illuminate\Support\Facades\Session;
 
 class FileController extends Controller
 {
     /**
-     * 
+     * GET['share/resources']
      */
     public function index(){
-        return view('teacher.file');
+        $steps = Step::all();
+        $units = CourseUnit::all();
+        $files = CourseUnitFiles::where('action_user', Auth::id())->paginate(5);
+        return view('teacher.file', compact('steps', 'units', 'files'));
     }
 
 
     /**
-     * 
+     * POST['share/resources']
      */
-    public function store(Request $request){
-        try{
-            if($request->hasFile('files')){
-                $files = $request->file('files');
+    public function store(FileUploadRequest $request){
+        try {
+            $files = $request->files;
 
-                foreach ($files as $file) {
-                    $allowedfileExtension = ['pdf', 'docx', 'xlxs', 'ppt'];
-                    $name = $file->getClientOriginalName();
-                    $extension = $file->getClientOriginalExtension();
-                    $check = in_array($extension, $allowedfileExtension);
-                    $unique = Str::random(8);
+            //start loop
+            foreach ($files as $file) {
+                /**
+                 * Get the file name without extension
+                 */
+                $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $allowedfileExtension = ['pdf', 'docx', 'xlsx', 'ppt'];
+                $check = in_array($extension, $allowedfileExtension);
+                $unique = Str::random(8);
 
-                    if ($check) {
-                        $filename = "{$request->code}_{$name}_{$unique}.{$extension}";
+                if ($check) {
+                    $filename = "{$name}_{$unique}.{$extension}";
 
-                        $unit = CourseUnitFiles::create([
-                            'action_user' => Auth::id(),
-                            'unit_id' => $request->code,
-                            'file_name' => $filename,
-                            'file_path' => storage_path('public/courses/units/'.$filename),
-                            'file_ext' => $extension,
-                            'file_meta_data' => null
-                        ]);
+                    $unit_file = CourseUnitFiles::create([
+                        'action_user' => Auth::id(),
+                        'unit_id' => $request->unit,
+                        'step_id' => $request->step,
+                        'file_name' => $filename,
+                        'file_path' => storage_path('public/courses/units/'.$filename),
+                        'file_ext' => $extension,
+                        'file_meta_data' => null,
+                        'is_approved' => 'n'
+                    ]);
 
-                        if($unit->id){
-                            //check if directory exist or not
-                            if (!Storage::exists("public/courses/units")) {
-                                Storage::makeDirectory("public/courses/units");
-                            }
-                            Storage::putFileAs('public/courses/units', $file, $filename);
+                    if($unit_file->id){
+                        /**
+                         * Check if derectory exist or not
+                         * Create a new directory if not exist
+                         */
+
+                        if (!Storage::exists("public/courses/units")) {
+                            Storage::makeDirectory("public/courses/units");
                         }
-                    }else{
-                        throw new Exception("Something went wrong!"); 
-                    }
-                }
 
-                $notification = [
-                    'message'   =>  "successfully saved",
-                    'alert-type'    =>  'success'
-                ];
-        
-                return redirect()->back()->with($notification);
+                        //store image into storage directory
+                        Storage::putFileAs('public/courses/units', $file, $filename);
+                    }
+                    else{
+                        /**
+                         * Throw an exception if request cannot be processed
+                         */
+                        throw new Exception("File cannot be saved to server", 1);
+                    }
+                }else{
+                    /**
+                     * Throw an exception if request cannot be processed
+                     */
+                    throw new Exception("Invalid file formate", 1);
+                }
             }
-            else{
-                throw new Exception("Something went wrong!");
-            }
-        }
-        catch(\Throwable $th){
+            //loop end
+
             /**
-             * Return the exception
+             * retun successfull notification
              */
-            return redirect()->back()->with(AppExceptions::throwback($th));
+            Session::flash('message', "Files successfully send for confirmation");
+            Session::flash('alert-class', 'alert-soft-success');
+
+            return back();
+        } catch (\Throwable $th) {
+            /**
+             * retun successfull notification
+             */
+            // Session::flash('message', $th->getMessage());
+            Session::flash('message', "Something went wrong!");
+            Session::flash('alert-class', 'alert-soft-warning');
+
+            return back();
         }
     }
 
@@ -85,59 +111,6 @@ class FileController extends Controller
      */
     public function fileDownload($file){
         return Storage::download("public/courses/units/{$file}");
-    }
-
-
-
-    /**
-     * Temporary profile picture upload
-     */
-    public function TempProfilePic(Request $request){
-        try {
-            if($request->hasFile('file')){
-                $id = uniqid();
-                $date = now()->timestamp;
-                $file = $request->file('file');
-                /**
-                 * Get the file name without extension
-                 */
-                $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $ext = $file->getClientOriginalExtension();
-                $filename = "{$id}-{$name}-{$date}.{$ext}";
-                $folder = uniqid().'-'.now()->timestamp;
-
-                /**
-                 * Check if derectory exist or not
-                 * Create a new directory if not exist
-                 */
-                if (!Storage::exists("public/users/".$folder)) {
-                    Storage::makeDirectory("public/users/".$folder);
-                }
-
-                /**
-                 * Store the file in temporary directory
-                 */
-                Storage::putFileAs('public/users/'.$folder, $file, $filename);
-
-                $response = TempUserPhoto::create([
-                    'filename' => $filename,
-                    'foldername' => $folder,
-                ]);
-
-                return response()->json([
-                    'data' => $response,
-                    'status' => 200
-                ]);
-            }else{
-                throw new Exception("Error Processing Request", 1);
-                
-            }
-        } catch (\Throwable $th) {
-            /**
-             * Return the exception
-             */
-            return redirect()->back()->with(AppExceptions::throwback($th));
-        }
     }
 
 }

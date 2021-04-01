@@ -16,57 +16,6 @@
                     <img src="{{asset('storage/courses/'.$course->course_thumbnail)}}" class="img-fluid" alt="Responsive image">
                 </div>
 
-
-                <div class="card mt-5">
-                    <div class="card-body">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label for="Step">Unit</label>
-                                <select name="step" id="unit" class="form-control">
-                                    <option value disabled selected>Select course unit</option>
-                                    <optgroup label = "Core Units">
-                                        @forelse ($course->units as $item)
-                                            @if($item->unit_type == 'core')
-                                                <option value="">{{$item->unit_name}}</option>
-                                            @endif
-                                        @empty
-                                            <option>No item found!</option>
-                                        @endforelse
-                                    </optgroup>
-                                    <optgroup label = "Elective Units">
-                                        @forelse ($course->units as $item)
-                                            @if($item->unit_type == 'elective')
-                                                <option value="">{{$item->unit_name}}</option>
-                                            @endif
-                                        @empty
-                                            <option>No item found!</option>
-                                        @endforelse
-                                    </optgroup>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="Step">Step</label>
-                                <select name="step" id="step" class="form-control">
-                                    <option value disabled selected>Select step</option>
-                                    @forelse ($steps as $item)
-                                        <option value="{{$item->id}}">{{$item->step_name}}</option>
-                                    @empty
-                                        <option>No item found!</option>
-                                    @endforelse
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="files">Files</label>
-                                <input type="file" name="files" class="form-control" multiple/>
-                            </div>
-
-                            <button type="submit" class="btn btn-outline-dark">Save</button>
-                        </form>
-                    </div>
-                </div>
-
-
                 @if (!is_null($course->descriptions))
                     <div class="page__heading">
                         <div class="mb-3">

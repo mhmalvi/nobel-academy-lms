@@ -24,7 +24,6 @@ class FileUploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'unit_type' => 'required',
             'unit' => 'required',
             'step' => 'required',
             'files' => 'required'
