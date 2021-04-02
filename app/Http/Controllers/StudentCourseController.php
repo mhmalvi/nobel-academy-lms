@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assesment;
 use App\Models\Course;
 use App\Models\CourseUnit;
 use App\Models\CourseUnitFiles;
@@ -9,13 +10,16 @@ use App\Models\Enrollment;
 use App\Models\Step;
 use App\Models\UnitProgress;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class StudentCourseController extends Controller
 {
     /**
      * 
      */
-    public function index($id){
+    public function index(int $id){
         $course = Course::where('id', $id)->first();
         $enrollment = Enrollment::where('student_id', Auth::user()->student->id)
             ->where('course_id', $id)
@@ -28,7 +32,7 @@ class StudentCourseController extends Controller
     /**
      * 
      */
-    public function courseUnit($unique_id = null){
+    public function courseUnit(int $unique_id = null){
         $steps = Step::all();
         $files = CourseUnitFiles::all();
         $unit = CourseUnit::with('progress')->where('id', $unique_id)->first();
@@ -41,7 +45,7 @@ class StudentCourseController extends Controller
     /**
      * Unit Steps
      */
-    public function getStep($unitId, $stepId){
+    public function getStep(int $unitId, int $stepId){
         $steps = Step::all();
         $files = CourseUnitFiles::all();
         $getStep = Step::with('files')->findOrFail($stepId);
@@ -54,9 +58,31 @@ class StudentCourseController extends Controller
     /**
      * 
      */
-    public function completeStep($unitId, $id)
+    public function completeStep(Request $request, $unitId, $id)
     {
+        $steps = Step::all();
         $progress = UnitProgress::where('student_id', Auth::user()->student->id)->where('course_unit_id', $unitId)->first();
+
+        if($request->has('link') && count($steps) == $id){
+            $rules = [
+                'link' => 'required',
+            ];
+
+            $message = [
+                'link.required' => 'You must provide assignments drive link'
+            ];
+
+            Validator::make($request->all(), $rules, $message )->validate();
+
+            Assesment::create([
+                'student_id' => Auth::user()->student->id,
+                'unit_id' => $unitId,
+                'links' => $request->link
+            ]);
+
+            Session::flash('assesment', 'Assenment request submited successfully, you will get notified shortly');
+        }
+
         $progress->complete_step = $id;
         $progress->current_step = $progress->current_step + 1;
         $progress->save();

@@ -25,6 +25,13 @@
                         <div class="text-body"><strong>Congratulations.</strong> You have completed {{$unit->progress->complete_step}} of 5 Steps. </div>
                     </div>
                 @endif
+
+                @if (Session::has('assesment'))
+                    <div class="alert alert-soft-success d-flex align-items-center card-margin" role="alert">
+                        <i class="material-icons mr-3">star</i>
+                        <div class="text-body">{{Session::get('assesment')}}</div>
+                    </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -101,48 +108,63 @@
                                     Magni laudantium quod repudiandae et consequuntur exercitationem.
                                 </p>
                             </div>
-                            <div class="card">
-                                @if (count($getStep->files) > 0)
-                                    <ul class="list-group list-lessons">
-                                        @forelse ($getStep->files as $item)
+
+                            @if (count($getStep->files) > 0)
+                                <div class="card">
+                                    <div class="card-body">
+                                        <ul class="list-group list-lessons">
+                                            @forelse ($getStep->files as $item)
+                                                <li class="list-group-item d-flex">
+                                                    <a href="{{route('download.unitFile', $item->file_name)}}">
+                                                        @if ($item->file_ext == 'pdf')
+                                                            <i class="fa fa-file-pdf pr-2"></i>
+                                                        @elseif($item->file_ext == 'docx')
+                                                            <i class="fa fa-file-word pr-2"></i>
+                                                        @elseif($item->file_ext == 'xlsx')
+                                                            <i class="fa fa-file-excel pr-2"></i>
+                                                        @elseif($item->file_ext == 'ppt')
+                                                            <i class="fa fa-file-powerpoint pr-2"></i>
+                                                        @endif
+                                                        {{$item->file_name}}
+                                                    </a>
+                                                    <div class="ml-auto d-flex align-items-center">
+                                                        <span class="text-muted">
+                                                            <i class="material-icons icon-16pt icon-light">file_download</i>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            @empty
                                             <li class="list-group-item d-flex">
-                                                <a href="{{route('download.unitFile', $item->file_name)}}">
-                                                    @if ($item->file_ext == 'pdf')
-                                                        <i class="fa fa-file-pdf pr-2"></i>
-                                                    @elseif($item->file_ext == 'docx')
-                                                        <i class="fa fa-file-word pr-2"></i>
-                                                    @elseif($item->file_ext == 'xlsx')
-                                                        <i class="fa fa-file-excel pr-2"></i>
-                                                    @elseif($item->file_ext == 'ppt')
-                                                        <i class="fa fa-file-powerpoint pr-2"></i>
-                                                    @endif
-                                                    {{$item->file_name}}
-                                                </a>
-                                                <div class="ml-auto d-flex align-items-center">
-                                                    <span class="text-muted">
-                                                        <i class="material-icons icon-16pt icon-light">file_download</i>
-                                                    </span>
-                                                </div>
+                                                No File Found!
                                             </li>
-                                        @empty
-                                        <li class="list-group-item d-flex">
-                                            No File Found!
-                                        </li>
-                                        @endforelse
-                                    </ul>
-                                @endif
-                            </div>
+                                            @endforelse
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
 
                             @if ($unit->progress->current_step == count($steps) && $unit->progress->current_step == $getStep->id)
-                                <form action="{{route('complete.step', ['unitId' => $unit->id, 'id' => $getStep->id])}}" method="post" id="assesment">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="text" name="" class="form-control" />
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6>Share you assignments google drive link</h6>
+                                </div>
+                                    <div class="card-body">
+                                        <form action="{{route('complete.step', ['unitId' => $unit->id, 'id' => $getStep->id])}}" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="text" name="link" class="form-control" placeholder="Your assignments drive link"/>
+                                                @error('link')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <button type="submit" class="btn btn-outline-info">
+                                                Request for assesment <i class="material-icons ml-2">check</i>
+                                            </button>
+                                        </form>
                                     </div>
-                                </form>
-                                <button type="button" class="btn btn-outline-info" onclick="event.preventDefault(); document.getElementById('assesment').submit()">
-                                    Request for assesment <i class="material-icons ml-2">check</i>
-                                </button>
+                                </div>
                             @endif
                         </div>
                     @else

@@ -28,6 +28,7 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::get('{unique_id}/unit', 'StudentCourseController@courseUnit')->name('unit');
         Route::get('{unitId}/step/{stepId}', 'StudentCourseController@getStep')->name('step');
         Route::post('{unitId}/complete-step/{id}', 'StudentCourseController@completeStep')->name('complete.step');
+        // Route::post('{unitId}/assesment/{stepId}', 'StudentCourseController@assesment')->name('student.asses');
     });
 
 
