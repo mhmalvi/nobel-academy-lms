@@ -6,13 +6,13 @@ use Exception;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Teacher;
+use App\Support\AppCryption;
 use App\Models\CoursesTeacher;
 use App\Exceptions\AppExceptions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateUserRequest;
-use App\Support\AppCryption;
 
 class TutorController extends Controller
 {

@@ -44,6 +44,6 @@ class CourseUnitFiles extends Model
      * 
      */
     public function unit(){
-        return $this->belongsTo(CourseUnit::class);
+        return $this->belongsTo(CourseUnit::class, 'unit_id');
     }
 }

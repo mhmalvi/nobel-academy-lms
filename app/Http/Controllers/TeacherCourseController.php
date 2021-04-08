@@ -25,9 +25,8 @@ class TeacherCourseController extends Controller
      */
     public function courseUnit($id){
         $steps = Step::all();
-        $files = CourseUnitFiles::all();
-        $unit = CourseUnit::with('progress')->where('id', $id)->first();
+        $unit = CourseUnit::with('files')->where('id', $id)->first();
 
-        return view('teacher.unit', compact('unit', 'files', 'steps'));
+        return view('teacher.unit', compact('unit', 'steps'));
     }
 }

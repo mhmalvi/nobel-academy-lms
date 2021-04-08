@@ -48,7 +48,7 @@
                             type="email" 
                             required="" 
                             class="form-control form-control-prepended" 
-                            placeholder="john@doe.com" 
+                            placeholder="example@eamil.com" 
                             value="{{old('email')}}" 
                             name="email"
                         autofocus>

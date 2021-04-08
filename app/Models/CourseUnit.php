@@ -53,6 +53,6 @@ class CourseUnit extends Model
      * 
      */
     public function files(){
-        return $this->hasMany(CourseUnitFiles::class);
+        return $this->hasMany(CourseUnitFiles::class, 'unit_id');
     }
 }
