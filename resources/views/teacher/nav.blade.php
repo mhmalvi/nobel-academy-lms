@@ -33,9 +33,9 @@
     </li>
 @endif
 
-<li class="sidebar-menu-item {{(request()->segment(1) === 'course') ? 'active' : ''}}">
+<li class="sidebar-menu-item {{(request()->segment(2) === 'resources') ? 'active' : ''}}">
     <a class="sidebar-menu-button" href="{{route('share.resource')}}">
-        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">subtitles</i>
+        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">backup</i>
         <span class="sidebar-menu-text">{{__('Share Resource')}}</span>
     </a>
 </li>
