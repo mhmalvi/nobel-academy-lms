@@ -21,9 +21,9 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th width="5%"><input type="checkbox"></th>
-                                        <th width = "20%">Photo</th>
                                         <th width="20%">Student Name</th>
-                                        <th width="20%">Email</th>
+                                        <th width="20%">Course</th>
+                                        <th width="20%">Status</th>
                                         <th width="15%">Enrolled By</th>
                                         <th width="15%">Enrolled At</th>
                                     </tr>
@@ -41,10 +41,13 @@
                                         <tr class="text-center">
                                             <td><input type="checkbox"></td>
                                             <td>
-                                                <img src="{{asset('storage/users/'.$item->user->photo)}}" alt="{{$item->user->name}}" width="50">
+                                                <a href="{{route('admin.assign', $item->id)}}">
+                                                    {{$item->first_name}}&nbsp;{{$item->last_name}}
+                                                    <i class="fa fa-link text-secondary" aria-hidden="true"></i>
+                                                </a>
                                             </td>
-                                            <td>{{$item->first_name}}&nbsp;{{$item->last_name}}</td>
-                                            <td>{{$item->user->email}}</td>
+                                            <td>{{$item->enrollment->course->course_name}}</td>
+                                            <td></td>
                                             <td>{{$item->actionuser->name}}</td>
                                             <td>{{$date}}</td>
                                         </tr>

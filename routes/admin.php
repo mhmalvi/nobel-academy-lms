@@ -83,11 +83,9 @@ Route::prefix('students')->group(function(){
     Route::get('enrollment', 'StudentController@create')->name('student.enrollment');
     Route::post('enrollment', 'StudentController@store');
 
-    Route::get('course-enrollment', 'CourseEnrollmentController@create')->name('course.enrollment');
-    Route::post('course-enrollment', 'CourseEnrollmentController@store');
-
-    Route::get('{id}/unit-assign', 'CourseEnrollmentController@unit')->name('assign');
-    Route::post('{id}/unit-assign', 'CourseEnrollmentController@assignUnit');
+    Route::get('{id}/profile', 'StudentController@profile')->name('assign');
+    Route::post('{id}/assign-unit', 'CourseUnitController@assign')->name('unit.assign');
+    Route::delete('{id}/remove-assigned-unit', 'CourseUnitController@removeAssignedUnit')->name('remove.assign');
 });
 
 

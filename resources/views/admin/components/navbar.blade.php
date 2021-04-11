@@ -44,10 +44,7 @@
                     <li class="{{(Route::currentRouteName() === 'admin.student.enrollment') ? 'active' : ''}}">
                         <a href="{{route('admin.student.enrollment')}}">Add New Student</a>
                     </li>
-                    <li class="{{(Route::currentRouteName() === 'admin.course.enrollment') ? 'active' : ''}}">
-                        <a href="{{route('admin.course.enrollment')}}">Course Enrollment</a>
-                    </li>
-                    <li class="{{(Route::currentRouteName() === 'admin.students') ? 'active' : ''}}">
+                    <li class="{{(Route::currentRouteName() === 'admin.students' || Route::currentRouteName() === 'admin.assign') ? 'active' : ''}}">
                         <a href="{{route('admin.students')}}">Manage Students</a>
                     </li>
                 </ul>

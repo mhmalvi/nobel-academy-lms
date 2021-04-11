@@ -18,6 +18,8 @@ use App\Http\Requests\FileUploadRequest;
 use App\Http\Resources\CourseUnitCollection;
 use App\Models\Step;
 use Illuminate\Support\Facades\DB;
+use App\Models\Enrollment;
+use App\Models\UnitProgress;
 
 class CourseUnitController extends Controller
 {
@@ -348,6 +350,110 @@ class CourseUnitController extends Controller
             return response()->json([
                 'data' => AppExceptions::throwback($th),
                 'status' => 404
+            ]);
+        }
+    }
+
+
+
+    /**
+     * 
+     */
+    public function assign(Request $request, int $id){
+        try {
+            $enrollment = Enrollment::where('student_id', $id)->first();
+            $unit = CourseUnit::where('unit_code', $request->code)->first();
+            (array) $core = (is_null($enrollment->core_units)) ? [] :$enrollment->core_units;
+            (array) $elective = (is_null($enrollment->elective_units)) ? [] :$enrollment->elective_units;
+    
+    
+            if($unit->unit_type == 'core'){
+                array_push($core, $request->code);
+                $enrollment->core_units = $core;
+                $enrollment->save();
+            }
+    
+            if($unit->unit_type == 'elective'){
+                array_push($elective, $unit->unit_code);
+                $enrollment->elective_units = $elective;
+                $enrollment->save();
+            }
+
+            /**
+             * Create or update
+             * unit process report/data
+             */
+            UnitProgress::create(
+                [
+                    'action_user' => Auth::id(),
+                    'student_id' => $enrollment->student_id,
+                    'course_id' => $enrollment->course_id,
+                    'course_unit_id' => $unit->id,
+                ]
+            );
+
+            return response()->json([
+                'message' => "Successfully saved",
+                'status' => 200
+            ]);
+        } catch (\Throwable $th) {
+            /**
+             * Return exception
+             */
+            return response()->json([
+                'message' => $th->getMessage(),
+                'status' => 503
+            ]);
+        }
+    }
+
+
+
+    /**
+     * 
+     */
+    public function removeAssignedUnit(Request $request, int $id){
+        try {
+            $enrollment = Enrollment::where('student_id', $id)->first();
+            $unit = CourseUnit::where('unit_code', $request->code)->first();
+            (array) $core = $enrollment->core_units;
+            (array) $elective = $enrollment->elective_units;
+    
+            if(!is_null($core) && $unit->unit_type == 'core'){
+                $new = array_diff($core, array($request->code));
+                $enrollment->core_units = $new;
+                $enrollment->save();
+            }
+    
+            if(!is_null($elective) && $unit->unit_type == 'elective'){
+                array_push($elective, $unit->unit_code);
+                $enrollment->elective_units = $elective;
+                $enrollment->save();
+            }
+
+            /**
+             * Create or update
+             * unit process report/data
+             */
+            $progress = UnitProgress::where(
+                [
+                    'student_id' => $enrollment->student_id,
+                    'course_id' => $enrollment->course_id,
+                    'course_unit_id' => $unit->id,
+                ]
+            )->delete();
+
+            return response()->json([
+                'message' => "Successfully saved",
+                'status' => 200
+            ]);
+        } catch (\Throwable $th) {
+            /**
+             * Return exception
+             */
+            return response()->json([
+                'message' => $th->getMessage(),
+                'status' => 503
             ]);
         }
     }

@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 use App\Exceptions\AppExceptions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Models\CourseUnit;
 use App\Http\Requests\EnrollmentRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -129,5 +129,17 @@ class StudentController extends Controller
              */
             return redirect()->back()->with(AppExceptions::throwback($th));
         }
+    }
+
+
+    /**
+     * Get['admin/students/{id}/profile']
+     * 
+     * @return view
+     */
+    public function profile(int $id){
+        $student = Student::with('enrollment')->findOrFail($id);
+        $units = CourseUnit::where('course_id', $student->enrollment->course->id)->get();
+        return view('admin.students.profile', compact('student', 'units'));
     }
 }
