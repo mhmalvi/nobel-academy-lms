@@ -46,6 +46,11 @@ Route::prefix('course')->group(function(){
     Route::post('/steps', 'CourseUnitStepController@store')->name('course.step');
     Route::get('/get-step', 'CourseUnitStepController@edit');
     Route::delete('remove/steps', 'CourseUnitStepController@destroy');
+
+
+    //Share Resources
+    Route::get('share-resources', 'ResourceController@index')->name('share.resource');
+    Route::post('share-resources', 'ResourceController@store');
 });
 
 
@@ -55,13 +60,6 @@ Route::prefix('course')->group(function(){
  */
 Route::post('get-unit', 'CourseUnitController@getUnits')->name('get.unit');
 
-
-
-/**
- * Share Resources
- */
-Route::get('share-resources', 'ResourceController@index')->name('share.resource');
-Route::post('share-resources', 'ResourceController@store');
 
 
 

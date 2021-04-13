@@ -67,14 +67,10 @@
                     <li class="{{(Route::currentRouteName() === 'admin.course.steps') ? 'active' : ''}}">
                         <a href="{{route('admin.course.steps')}}">Manage Steps</a>
                     </li>
+                    <li class="{{(Route::currentRouteName() === 'admin.share.resource') ? 'active' : ""}}">
+                        <a href="{{route('admin.share.resource')}}">Share Resources</a>
+                    </li>
                 </ul>
-            </li>
-
-            {{-- Manage Files --}}
-            <li class="{{(Route::currentRouteName() === 'admin.share.resource') ? 'active' : ""}}">
-                <a href="{{route('admin.share.resource')}}"><i class="fa fa-files-o" aria-hidden="true"></i>
-                    <span class="nav-label">Share Resources</span>
-                </a>
             </li>
 
 
