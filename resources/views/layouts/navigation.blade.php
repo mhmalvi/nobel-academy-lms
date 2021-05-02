@@ -18,13 +18,7 @@
                     </a>
                 </li>
 
-                @if (Auth::user()->user_type == 'student')
-                    @include('student.nav')
-                @elseif(Auth::user()->user_type == 'teacher')
-                    @include('teacher.nav')
-                @endif
-
-
+                
                 {{-- Profile --}}
                 <li class="sidebar-menu-item {{(Route::currentRouteName() == 'edit.profile') ? 'active' : ''}}">
                     <a class="sidebar-menu-button" href="{{route('edit.profile')}}">
@@ -32,6 +26,12 @@
                         <span class="sidebar-menu-text">My Profile</span>
                     </a>
                 </li>
+
+                @if (Auth::user()->user_type == 'student')
+                    @include('student.nav')
+                @elseif(Auth::user()->user_type == 'teacher')
+                    @include('teacher.nav')
+                @endif
             </ul>
         </div>
     </div>

@@ -33,7 +33,7 @@ class EnrollmentRequest extends FormRequest
             'phone' => 'required',
             'address' => 'required',
             'course_id' => 'required|string',
-            'tutor_id' => 'required|integer',
+            'tutor_id' => 'integer',
             'avatar' => [
                 'image',
                 Rule::dimensions()->maxWidth(300)->maxHeight(300)->ratio(1 / 1),

@@ -25,7 +25,7 @@
             <div class="mdk-header-layout__content">
                 <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
                     <div class="mdk-drawer-layout__content page">
-                        <div class="py-4"></div>
+                        {{-- <div class="py-4"></div> --}}
                         @yield('content')
                     </div>
                     <!-- // END drawer-layout__content -->

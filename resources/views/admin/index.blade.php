@@ -7,7 +7,7 @@
         <div class="col-lg-3">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Total Enrolled Students</h5>
+                    <h5>Total Students</h5>
                 </div>
                 <div class="ibox-content">
                     <h1 class="no-margins">
