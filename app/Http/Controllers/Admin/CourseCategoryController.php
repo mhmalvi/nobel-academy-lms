@@ -19,7 +19,8 @@ class CourseCategoryController extends Controller
     /**
      * Category Collections
      */
-    public function getData(){
+    public function getData()
+    {
         return new CourseCategoryCollection(CourseCategory::all());
     }
 
@@ -29,7 +30,8 @@ class CourseCategoryController extends Controller
      * return create catgory page
      * with created categories
      */
-    public function index(){
+    public function index()
+    {
         $categories = CourseCategory::orderBy('created_at', 'desc')->get();
         return view('admin.categories.create', compact('categories'));
     }
@@ -40,33 +42,33 @@ class CourseCategoryController extends Controller
      * Store newly created categories
      * CategoryRequest check for valid request
      */
-    public function storeOrUpdate(CategoryRequest $request){
-        try{
+    public function storeOrUpdate(CategoryRequest $request)
+    {
+        try {
             $id = [
-                'id' => ($request->id)? AppCryption::decrypt($request->id) : null,
+                'id' => ($request->id) ? AppCryption::decrypt($request->id) : null,
             ];
 
             $data = [
                 'action_user' => Auth::id(),
-                'category_code' => ($request->code)? Str::ucfirst($request->code) : null,
-                'category_name' => Str::title($request->category_name),
+                'category_code' => ($request->code) ? Str::ucfirst($request->code) : null,
+                'category_name' => $request->category_name,
                 'descriptions' => $request->descriptions
             ];
 
             $category = CourseCategory::updateOrCreate($id, $data);
 
-            if($category->id){
+            if ($category->id) {
                 $category->uuid = $category->id;
                 $category->save();
                 $notification = [
                     'message'   =>  "{$category->category_name} successfully saved",
                     'alert-type'    =>  'success'
                 ];
-        
+
                 return redirect()->back()->with($notification);
             }
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             /**
              * Return exception
              */
@@ -79,14 +81,14 @@ class CourseCategoryController extends Controller
     /**
      * Get by id
      */
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         try {
 
             $id = AppCryption::decrypt($request->id);
             return new CourseCategoryResource(
                 CourseCategory::findOrFail($id)
             );
-
         } catch (\Throwable $th) {
             /**
              * Return exception
@@ -103,9 +105,10 @@ class CourseCategoryController extends Controller
     /**
      * Remove Data
      */
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $arr = $request->id;
-        $csv = implode(", ", array_map(function($arr){
+        $csv = implode(", ", array_map(function ($arr) {
             return AppCryption::decrypt($arr);
         }, $arr));
 

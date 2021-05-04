@@ -15,20 +15,30 @@ class CourseCategory extends Model
     protected $hidden = ['id'];
 
     protected $fillable = ['uuid', 'action_user', 'category_code', 'category_name', 'descriptions'];
-  
-    
+
+
     /**
      * Encrypt uuid
      */
-    public function setUuidAttribute($value){
+    public function setUuidAttribute($value)
+    {
         $this->attributes['uuid'] = AppCryption::encrypt($value);
+    }
+
+    /**
+     * Encrypt uuid
+     */
+    public function setCategoryNameAttribute($value)
+    {
+        $this->attributes['category_name'] = ucfirst($value);
     }
 
 
     /**
      * Format Datetime
      */
-    public function getCreatedAtAttribute($value){
+    public function getCreatedAtAttribute($value)
+    {
         return date("M d, Y", strtotime($value));
     }
 
@@ -36,7 +46,8 @@ class CourseCategory extends Model
     /**
      * 
      */
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'action_user');
     }
 
@@ -44,7 +55,8 @@ class CourseCategory extends Model
     /**
      * 
      */
-    public function courses(){
+    public function courses()
+    {
         return $this->hasMany(Course::class);
     }
 }

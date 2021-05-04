@@ -23,8 +23,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $students = Student::orderBy('created_at', 'desc')->get();
+    public function index()
+    {
+        $students = Student::with('enrollment')->orderBy('created_at', 'desc')->get();
         return view('admin.students.index', compact('students'));
     }
 
@@ -33,22 +34,24 @@ class StudentController extends Controller
     /**
      * 
      */
-    public function create(){ 
+    public function create()
+    {
         $courses = Course::all();
         $teachers = Teacher::all();
-        return view('admin.students.create',compact('teachers', 'courses'));
+        return view('admin.students.create', compact('teachers', 'courses'));
     }
 
-    
+
 
     /**
      * 
      */
-    public function store(EnrollmentRequest $request){
+    public function store(EnrollmentRequest $request)
+    {
         try {
             $file = null;
 
-            if($request->hasFile('avatar')){
+            if ($request->hasFile('avatar')) {
                 /**
                  * Check if derectory exist or not
                  * Create a new directory if not exist
@@ -56,16 +59,16 @@ class StudentController extends Controller
                 if (!Storage::exists("public/users")) {
                     Storage::makeDirectory("public/users");
                 }
-    
+
                 $image = $request->file('avatar');
                 $imgExtension = $image->getClientOriginalExtension();
-    
-                $file = date('dmy-hms').'.'.$imgExtension;
-    
+
+                $file = date('dmy-hms') . '.' . $imgExtension;
+
                 //Store the file after saving it to the databse
                 Storage::putFileAs('public/users', $image, $file);
             }
-    
+
             $data = [
                 'action_user' => Auth::id(),
                 'name' => Str::ucfirst($request->name),
@@ -79,7 +82,7 @@ class StudentController extends Controller
 
             $user = User::create($data);
 
-            if($user->id){
+            if ($user->id) {
                 $student = Student::create([
                     'action_user' => Auth::id(),
                     'user_id' => $user->id,
@@ -92,7 +95,7 @@ class StudentController extends Controller
                     'is_enrolled' => 'y'
                 ]);
 
-                if($student->id){
+                if ($student->id) {
                     Enrollment::create([
                         'action_user' => Auth::id(),
                         'student_id' => $student->id,
@@ -106,23 +109,20 @@ class StudentController extends Controller
                         'message'   =>  "successfully saved",
                         'alert-type'    =>  'success'
                     ];
-            
-                    return redirect()->route('admin.assign', $student->id)->with($notification);
-                }
-                else{
-                /**
-                 * Throw an exception if request cannot be processed
-                 */
-                throw new Exception("Error Processing Request", 1);
-                }
-            }
-            else{
-                /**
-                 * Throw an exception if request cannot be processed
-                 */
-                throw new Exception("Error Processing Request", 1);
-            }
 
+                    return redirect()->route('admin.assign', $student->id)->with($notification);
+                } else {
+                    /**
+                     * Throw an exception if request cannot be processed
+                     */
+                    throw new Exception("Error Processing Request", 1);
+                }
+            } else {
+                /**
+                 * Throw an exception if request cannot be processed
+                 */
+                throw new Exception("Error Processing Request", 1);
+            }
         } catch (\Throwable $th) {
             /**
              * Return the exceptions
@@ -137,7 +137,8 @@ class StudentController extends Controller
      * 
      * @return view
      */
-    public function profile(int $id){
+    public function profile(int $id)
+    {
         $student = Student::with('enrollment')->findOrFail($id);
         $units = CourseUnit::where('course_id', $student->enrollment->course->id)->get();
         return view('admin.students.profile', compact('student', 'units'));

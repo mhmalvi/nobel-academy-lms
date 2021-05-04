@@ -2,12 +2,17 @@
 
 @section('title', 'Courses')
 
-@push('css')
-    <link href="{{asset('assets/admin/css/plugins/dataTables/datatables.min.css')}}" rel="stylesheet">
-@endpush
+    @push('css')
+        <link href="{{ asset('assets/admin/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+    @endpush
 
 @section('content')
     <div class="container-fluid" id="content">
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ route('admin.course.add') }}" class="btn btn-primary">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Add New Course
+            </a>
+        </div>
         <div class="ibox">
             <div class="ibox-content" id="ibox-content">
                 <div class="sk-spinner sk-spinner-pulse"></div>
@@ -29,8 +34,7 @@
 @endsection
 
 @push('js')
-    <script src="{{asset('assets/admin/js/plugins/dataTables/datatables.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
     @include('admin.course.scripts')
 @endpush
-

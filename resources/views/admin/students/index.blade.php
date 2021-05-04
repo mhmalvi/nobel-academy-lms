@@ -2,9 +2,9 @@
 
 @section('title', 'List Students')
 
-@push('css')
-    <link rel="stylesheet" href="{{asset('assets/admin/css/plugins/dataTables/datatables.min.css')}}"/>
-@endpush
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('assets/admin/css/plugins/dataTables/datatables.min.css') }}" />
+    @endpush
 
 @section('content')
     <div class="container-fluid">
@@ -28,31 +28,31 @@
                                         <th width="15%">Enrolled At</th>
                                     </tr>
                                 </thead>
-        
+
                                 <tbody>
                                     @php
                                         $i = 1;
                                     @endphp
                                     @forelse ($students as $item)
                                         @php
-                                            $date = date("M d, Y", strtotime($item->created_at));
+                                            $date = date('M d, Y', strtotime($item->created_at));
                                         @endphp
-        
+
                                         <tr class="text-center">
                                             <td><input type="checkbox"></td>
                                             <td>
-                                                <a href="{{route('admin.assign', $item->id)}}">
-                                                    {{$item->first_name}}&nbsp;{{$item->last_name}}
+                                                <a href="{{ route('admin.assign', $item->id) }}">
+                                                    {{ $item->first_name }}&nbsp;{{ $item->last_name }}
                                                     <i class="fa fa-link text-secondary" aria-hidden="true"></i>
                                                 </a>
                                             </td>
-                                            <td>{{$item->enrollment->course->course_name}}</td>
+                                            <td>{{ $item->enrollment->course->course_name }}</td>
                                             <td></td>
-                                            <td>{{$item->actionuser->name}}</td>
-                                            <td>{{$date}}</td>
+                                            <td>{{ $item->actionuser->name }}</td>
+                                            <td>{{ $date }}</td>
                                         </tr>
                                     @empty
-                                        
+
                                     @endforelse
                                 </tbody>
                             </table>
@@ -65,33 +65,48 @@
 @endsection
 
 @push('js')
-    <script src="{{asset('assets/admin/js/plugins/dataTables/datatables.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#core').DataTable({
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                buttons: [
-                    {extend: 'copy'},
-                    {extend: 'csv'},
-                    {extend: 'excel', title: 'ExampleFile'},
-                    {extend: 'pdf', title: 'ExampleFile'},
-                    {extend: 'print',
-                        customize: function (win){
+                buttons: [{
+                        extend: 'copy'
+                    },
+                    {
+                        extend: 'csv'
+                    },
+                    {
+                        extend: 'excel',
+                        title: 'ExampleFile'
+                    },
+                    {
+                        extend: 'pdf',
+                        title: 'ExampleFile'
+                    },
+                    {
+                        extend: 'print',
+                        customize: function(win) {
                             $(win.document.body).addClass('white-bg');
                             $(win.document.body).css('font-size', '10px');
-                            $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
+                            $(win.document.body).find('table').addClass('compact').css('font-size',
+                                'inherit');
                         }
                     }
                 ],
-                columnDefs: [
-                    { orderable: false, targets: 0 }
-                ],
-                order: [[2, 'asc']]
+                columnDefs: [{
+                    orderable: false,
+                    targets: 0
+                }],
+                order: [
+                    [2, 'asc']
+                ]
             });
         });
+
     </script>
 @endpush

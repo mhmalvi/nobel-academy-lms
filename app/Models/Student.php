@@ -16,7 +16,8 @@ class Student extends Model
     /**
      * Student's user account informations
      */
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
@@ -24,7 +25,8 @@ class Student extends Model
     /**
      * Action user's information
      */
-    public function actionuser(){
+    public function actionuser()
+    {
         return $this->belongsTo(User::class, 'action_user');
     }
 
@@ -32,7 +34,8 @@ class Student extends Model
     /**
      * Enrollment
      */
-    public function enrollment(){
+    public function enrollment()
+    {
         return $this->hasOne(Enrollment::class);
     }
 }

@@ -18,7 +18,8 @@ class ResourceController extends Controller
     /**
      * GET['admin/share-resources']
      */
-    public function index(){
+    public function index()
+    {
         $steps = Step::all();
         $units = CourseUnit::all();
         $files = CourseUnitFiles::all();
@@ -31,7 +32,8 @@ class ResourceController extends Controller
      * POST['admin/share-resources']
      */
 
-    public function store(FileUploadRequest $request){
+    public function store(FileUploadRequest $request)
+    {
         try {
             $files = $request->files;
 
@@ -42,7 +44,7 @@ class ResourceController extends Controller
                  */
                 $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $extension = $file->getClientOriginalExtension();
-                $allowedfileExtension = ['pdf', 'docx', 'xlsx', 'ppt'];
+                $allowedfileExtension = ['pdf', 'docx', 'xlsx', 'pptx', 'dotx'];
                 $check = in_array($extension, $allowedfileExtension);
                 $unique = Str::random(8);
 
@@ -54,14 +56,14 @@ class ResourceController extends Controller
                         'unit_id' => $request->unit,
                         'step_id' => $request->step,
                         'file_name' => $filename,
-                        'file_path' => storage_path('public/courses/units/'.$filename),
+                        'file_path' => storage_path('public/courses/units/' . $filename),
                         'file_ext' => $extension,
                         'file_meta_data' => null,
                         'is_approved' => 'y',
                         'approved_by' => Auth::id()
                     ]);
 
-                    if($unit_file->id){
+                    if ($unit_file->id) {
                         /**
                          * Check if derectory exist or not
                          * Create a new directory if not exist
@@ -73,14 +75,13 @@ class ResourceController extends Controller
 
                         //store image into storage directory
                         Storage::putFileAs('public/courses/units', $file, $filename);
-                    }
-                    else{
+                    } else {
                         /**
                          * Throw an exception if request cannot be processed
                          */
                         throw new Exception("File cannot be saved to server", 1);
                     }
-                }else{
+                } else {
                     /**
                      * Throw an exception if request cannot be processed
                      */
