@@ -11,7 +11,8 @@ class HomeController extends Controller
     /**
      * 
      */
-    public function index(){
+    public function index()
+    {
         $totalStd = DB::table('students')->count();
         $totalTch = DB::table('teachers')->count();
         $totalCrs = DB::table('courses')->count();
