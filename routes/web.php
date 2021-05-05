@@ -17,13 +17,14 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('index');
-    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+
+    Route::get('/dashboard', 'AppController@index')->name('dashboard');
 
 
     /**
      * Student's Panel
      */
-    Route::prefix('student')->group(function(){
+    Route::prefix('student')->group(function () {
         Route::get('{id}/course', 'StudentCourseController@index')->name('course');
         Route::get('{unique_id}/unit', 'StudentCourseController@courseUnit')->name('unit');
         Route::get('{unitId}/step/{stepId}', 'StudentCourseController@getStep')->name('step');
@@ -36,20 +37,20 @@ Route::middleware(['auth', 'user'])->group(function () {
     /**
      * Teacher's Panel
      */
-    Route::prefix('instructor')->group(function(){
+    Route::prefix('instructor')->group(function () {
         Route::get('{id}', 'TeacherCourseController@index')->name('teacher.course');
         Route::get('{id}/unit', 'TeacherCourseController@courseUnit')->name('teacher.unit');
     });
 
     Route::get('share/resources', 'FileController@index')->name('share.resource');
     Route::post('share/resources', 'FileController@store');
-    
+
     Route::get('download/{file}', 'FileController@fileDownload')->name('download.unitFile');
-    
+
     Route::get('calendar', 'CalendarController@index')->name('calendar');
-    
+
     Route::get('edit-profile', 'AppController@userProfile')->name('edit.profile');
     Route::post('edit-profile', 'AppController@updateProfileInfo');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

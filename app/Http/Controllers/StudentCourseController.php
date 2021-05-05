@@ -85,7 +85,9 @@ class StudentCourseController extends Controller
                 'links' => $request->link
             ]);
 
-            Session::flash('assesment', 'Assenment request submited successfully, you will get notified shortly');
+            Session::flash('assesment', 'Assenment request submited successfully, you will be notified shortly');
+
+            return back();
         }
 
         $progress->complete_step = $id;

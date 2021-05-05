@@ -8,13 +8,42 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Exceptions\AppExceptions;
+use App\Models\Course;
+use App\Models\Enrollment;
+use App\Models\UnitProgress;
 
 class AppController extends Controller
 {
     /**
+     * 
+     * 
+     */
+    public function index()
+    {
+        $enroll = null;
+        $course = null;
+        $progress = null;
+        $lastProgress = null;
+
+        if (Auth::user()->user_type === 'student') {
+            $enroll = Enrollment::where('student_id', Auth::user()->student->id)->first();
+            $progress = UnitProgress::where('student_id', Auth::user()->student->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            $lastProgress = UnitProgress::where('student_id', Auth::user()->student->id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+            $course = Course::findOrFail($enroll->course_id);
+        }
+        return view('dashboard', compact('enroll', 'course', 'progress', 'lastProgress'));
+    }
+
+    /**
      * Return the view for calender
      */
-    public function calendar(){
+    public function calendar()
+    {
         return view('calendar');
     }
 
@@ -22,7 +51,8 @@ class AppController extends Controller
     /**
      * 
      */
-    public function userProfile(){
+    public function userProfile()
+    {
         return view('profile');
     }
 
@@ -30,9 +60,10 @@ class AppController extends Controller
     /**
      * 
      */
-    public function updateProfileInfo(Request $request){
+    public function updateProfileInfo(Request $request)
+    {
         try {
-            if(Auth::user()->user_type == 'student'){
+            if (Auth::user()->user_type == 'student') {
                 $user = User::with('student')->where('id', Auth::id())->first();
                 $user->name = $request->name;
                 $user->student->first_name = $request->fname;
@@ -43,8 +74,7 @@ class AppController extends Controller
                 $user->student->address_two = $request->addressTwo;
                 $user->save();
                 $user->student->save();
-            }
-            elseif (Auth::user()->user_type == 'teacher') {
+            } elseif (Auth::user()->user_type == 'teacher') {
                 $user = User::with('teacher')->where('id', Auth::id())->first();
                 $user->name = $request->name;
                 $user->teacher->first_name = $request->fname;
@@ -56,8 +86,8 @@ class AppController extends Controller
                 $user->save();
                 $user->teacher->save();
             }
-    
-            if($request->hasFile('avatar')){
+
+            if ($request->hasFile('avatar')) {
                 /**
                  * Check if derectory exist or not
                  * Create a new directory if not exist
@@ -65,30 +95,30 @@ class AppController extends Controller
                 if (!Storage::exists("public/users")) {
                     Storage::makeDirectory("public/users");
                 }
-    
+
                 $image = $request->file('avatar');
                 $imgExtension = $image->getClientOriginalExtension();
-    
-                $file = uniqid().'-'.now()->timestamp.'.'.$imgExtension;
-    
+
+                $file = uniqid() . '-' . now()->timestamp . '.' . $imgExtension;
+
                 //Store the file after saving it to the databse
-                Storage::delete("public/users/".$user->photo);
+                Storage::delete("public/users/" . $user->photo);
                 Storage::putFileAs('public/users', $image, $file);
-    
+
                 $user->photo = $file;
                 $user->save();
             }
-    
-            if($request->has('npass') && $user->password == Hash::make($request->opass)){
+
+            if ($request->has('npass') && $user->password == Hash::make($request->opass)) {
                 $user->password = Hash::make($request->npass);
                 $user->save();
             }
-    
+
             $notification = [
                 'message'   =>  "Your profile updated successfully",
                 'alert-type'    =>  'success'
             ];
-    
+
             return redirect()->back()->with($notification);
         } catch (\Throwable $th) {
             /**
