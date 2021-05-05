@@ -19,7 +19,8 @@ class StudentCourseController extends Controller
     /**
      * 
      */
-    public function index(int $id){
+    public function index(int $id)
+    {
         $course = Course::where('id', $id)->first();
         $enrollment = Enrollment::where('student_id', Auth::user()->student->id)
             ->where('course_id', $id)
@@ -32,12 +33,14 @@ class StudentCourseController extends Controller
     /**
      * 
      */
-    public function courseUnit(int $unique_id = null){
+    public function courseUnit(int $unique_id = null)
+    {
         $steps = Step::all();
         $files = CourseUnitFiles::all();
-        $unit = CourseUnit::with('progress')->where('id', $unique_id)->first();
+        $unit = CourseUnit::where('id', $unique_id)->first();
+        $progress = UnitProgress::where('student_id', auth()->user()->student->id)->where('course_unit_id', $unit->id)->first();
 
-        return view('student.unit', compact('unit', 'files', 'steps'));
+        return view('student.unit', compact('unit', 'files', 'steps', 'progress'));
     }
 
 
@@ -45,12 +48,14 @@ class StudentCourseController extends Controller
     /**
      * Unit Steps
      */
-    public function getStep(int $unitId, int $stepId){
+    public function getStep(int $unitId, int $stepId)
+    {
         $steps = Step::all();
         $files = CourseUnitFiles::all();
         $getStep = Step::with('files')->findOrFail($stepId);
         $unit = CourseUnit::with('progress')->where('id', $unitId)->first();
-        return view('student.unit', compact('unit', 'files', 'steps', 'getStep'));
+        $progress = UnitProgress::where('student_id', auth()->user()->student->id)->where('course_unit_id', $unit->id)->first();
+        return view('student.unit', compact('unit', 'files', 'steps', 'getStep', 'progress'));
     }
 
 
@@ -63,7 +68,7 @@ class StudentCourseController extends Controller
         $steps = Step::all();
         $progress = UnitProgress::where('student_id', Auth::user()->student->id)->where('course_unit_id', $unitId)->first();
 
-        if($request->has('link') && count($steps) == $id){
+        if ($request->has('link') && count($steps) == $id) {
             $rules = [
                 'link' => 'required',
             ];
@@ -72,7 +77,7 @@ class StudentCourseController extends Controller
                 'link.required' => 'You must provide assignments drive link'
             ];
 
-            Validator::make($request->all(), $rules, $message )->validate();
+            Validator::make($request->all(), $rules, $message)->validate();
 
             Assesment::create([
                 'student_id' => Auth::user()->student->id,
@@ -87,6 +92,6 @@ class StudentCourseController extends Controller
         $progress->current_step = $progress->current_step + 1;
         $progress->save();
 
-        return redirect()->back();
+        return redirect()->route('step', ['unitId' => $unitId, 'stepId' => $progress->current_step]);
     }
 }

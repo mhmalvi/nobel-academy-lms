@@ -37,17 +37,19 @@ class CourseUnitController extends Controller
     /**
      * 
      */
-    public function getData(){
+    public function getData()
+    {
         return new CourseUnitCollection(CourseUnit::with('course')->orderBy('created_at', 'desc')->get());
     }
-    
+
 
 
     /**
      * Show the form for creating a new unit.
      *
      */
-    public function create(){
+    public function create()
+    {
         $courses = Course::all();
         return view('admin.CourseUnit.create', compact('courses'));
     }
@@ -60,15 +62,14 @@ class CourseUnitController extends Controller
      * create a collection of results in
      * return JSON end point
      */
-    public function getUnits(Request $request){
-        if($request->name == 'core'){
+    public function getUnits(Request $request)
+    {
+        if ($request->name == 'core') {
 
             return new UnitResource(CourseUnit::where('unit_type', 'core')->get());
-
-        }elseif($request->name == 'elective'){
+        } elseif ($request->name == 'elective') {
 
             return new UnitResource(CourseUnit::where('unit_type', 'elective')->get());
-
         }
     }
 
@@ -79,8 +80,9 @@ class CourseUnitController extends Controller
      * Store newly created course unit in database
      * Check if request is valid
      */
-    public function store(CourseUnitRequest $request){
-        try{
+    public function store(CourseUnitRequest $request)
+    {
+        try {
             $unit = CourseUnit::create([
                 'action_user' => Auth::id(),
                 'course_id' => $request->course,
@@ -90,7 +92,7 @@ class CourseUnitController extends Controller
                 'descriptions' => $request->descriptions
             ]);
 
-            if($request->hasFile('files')){
+            if ($request->hasFile('files')) {
                 $files = $request->file('files');
 
                 //start loop
@@ -111,14 +113,14 @@ class CourseUnitController extends Controller
                             'action_user' => Auth::id(),
                             'unit_id' => $unit->id,
                             'file_name' => $filename,
-                            'file_path' => storage_path('public/courses/units/'.$filename),
+                            'file_path' => storage_path('public/courses/units/' . $filename),
                             'file_ext' => $extension,
                             'file_meta_data' => null,
                             'is_approved' => 'y',
                             'approved_by' => Auth::id()
                         ]);
 
-                        if($unit_file->id){
+                        if ($unit_file->id) {
                             /**
                              * Check if derectory exist or not
                              * Create a new directory if not exist
@@ -131,7 +133,7 @@ class CourseUnitController extends Controller
                             //store image into storage directory
                             Storage::putFileAs('public/courses/units', $file, $filename);
                         }
-                    }else{
+                    } else {
                         /**
                          * Throw an exception if request cannot be processed
                          */
@@ -141,7 +143,7 @@ class CourseUnitController extends Controller
                 //loop end
             }
 
-            if($unit->id){
+            if ($unit->id) {
                 /**
                  * retun successfull notification
                  */
@@ -149,11 +151,10 @@ class CourseUnitController extends Controller
                     'message'   =>  "{$unit->unit_name} successfully saved",
                     'alert-type'    =>  'success'
                 ];
-        
+
                 return redirect()->back()->with($notification);
             }
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             /**
              * Return the exceptions
              */
@@ -166,7 +167,8 @@ class CourseUnitController extends Controller
     /**
      * 
      */
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         try {
             if ($request->expectsJson()) {
                 $id = $request->id;
@@ -191,8 +193,9 @@ class CourseUnitController extends Controller
     /**
      * 
      */
-    public function update(Request $request, $id){
-        try{
+    public function update(Request $request, $id)
+    {
+        try {
             $unit = CourseUnit::where('id', $id)->update([
                 'action_user' => Auth::id(),
                 'course_id' => $request->course,
@@ -209,10 +212,9 @@ class CourseUnitController extends Controller
                 'message'   =>  "{$unit->unit_name} successfully saved",
                 'alert-type'    =>  'success'
             ];
-    
+
             return redirect()->back()->with($notification);
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             /**
              * Return the exceptions
              */
@@ -225,7 +227,8 @@ class CourseUnitController extends Controller
     /**
      * Files
      */
-    public function files(){
+    public function files()
+    {
         $units = CourseUnit::all();
         $steps = Step::all();
         $files = CourseUnitFiles::orderBy('created_at', 'asc')->get();
@@ -235,15 +238,16 @@ class CourseUnitController extends Controller
 
 
     /**
-    * Store Files
-    */
-    public function storeFile(FileUploadRequest $request){
+     * Store Files
+     */
+    public function storeFile(FileUploadRequest $request)
+    {
         try {
             /**
              * Checking if incoming request has files
              * else throw an exception
              */
-            if($request->hasFile('files')){
+            if ($request->hasFile('files')) {
                 $files = $request->file('files');
 
                 //start loop
@@ -265,14 +269,14 @@ class CourseUnitController extends Controller
                             'unit_id' => $request->unit,
                             'step_id' => $request->step,
                             'file_name' => $filename,
-                            'file_path' => storage_path('public/courses/units/'.$filename),
+                            'file_path' => storage_path('public/courses/units/' . $filename),
                             'file_ext' => $extension,
                             'file_meta_data' => null,
                             'is_approved' => 'y',
                             'approved_by' => Auth::id()
                         ]);
 
-                        if($unit_file->id){
+                        if ($unit_file->id) {
                             /**
                              * Check if derectory exist or not
                              * Create a new directory if not exist
@@ -284,14 +288,13 @@ class CourseUnitController extends Controller
 
                             //store image into storage directory
                             Storage::putFileAs('public/courses/units', $file, $filename);
-                        }
-                        else{
+                        } else {
                             /**
                              * Throw an exception if request cannot be processed
                              */
                             throw new Exception("File cannot be saved to server", 1);
                         }
-                    }else{
+                    } else {
                         /**
                          * Throw an exception if request cannot be processed
                          */
@@ -309,8 +312,7 @@ class CourseUnitController extends Controller
                 ];
 
                 return redirect()->back()->with($notification);
-
-            }else{
+            } else {
                 /**
                  * Throw an exception if request cannot be processed
                  */
@@ -326,13 +328,14 @@ class CourseUnitController extends Controller
 
 
 
-    
+
     /**
      * Remove Course
      */
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $arr = $request->id;
-        $csv = implode(", ", array_map(function($arr){
+        $csv = implode(", ", array_map(function ($arr) {
             return $arr;
         }, $arr));
 
@@ -359,21 +362,22 @@ class CourseUnitController extends Controller
     /**
      * 
      */
-    public function assign(Request $request, int $id){
+    public function assign(Request $request, int $id)
+    {
         try {
             $enrollment = Enrollment::where('student_id', $id)->first();
             $unit = CourseUnit::where('unit_code', $request->code)->first();
-            (array) $core = (is_null($enrollment->core_units)) ? [] :$enrollment->core_units;
-            (array) $elective = (is_null($enrollment->elective_units)) ? [] :$enrollment->elective_units;
-    
-    
-            if($unit->unit_type == 'core'){
+            (array) $core = (is_null($enrollment->core_units)) ? [] : $enrollment->core_units;
+            (array) $elective = (is_null($enrollment->elective_units)) ? [] : $enrollment->elective_units;
+
+
+            if ($unit->unit_type == 'core') {
                 array_push($core, $request->code);
                 $enrollment->core_units = $core;
                 $enrollment->save();
             }
-    
-            if($unit->unit_type == 'elective'){
+
+            if ($unit->unit_type == 'elective') {
                 array_push($elective, $unit->unit_code);
                 $enrollment->elective_units = $elective;
                 $enrollment->save();
@@ -412,20 +416,21 @@ class CourseUnitController extends Controller
     /**
      * 
      */
-    public function removeAssignedUnit(Request $request, int $id){
+    public function removeAssignedUnit(Request $request, int $id)
+    {
         try {
             $enrollment = Enrollment::where('student_id', $id)->first();
             $unit = CourseUnit::where('unit_code', $request->code)->first();
             (array) $core = $enrollment->core_units;
             (array) $elective = $enrollment->elective_units;
-    
-            if(!is_null($core) && $unit->unit_type == 'core'){
+
+            if (!is_null($core) && $unit->unit_type == 'core') {
                 $new = array_diff($core, array($request->code));
                 $enrollment->core_units = $new;
                 $enrollment->save();
             }
-    
-            if(!is_null($elective) && $unit->unit_type == 'elective'){
+
+            if (!is_null($elective) && $unit->unit_type == 'elective') {
                 array_push($elective, $unit->unit_code);
                 $enrollment->elective_units = $elective;
                 $enrollment->save();
@@ -458,4 +463,3 @@ class CourseUnitController extends Controller
         }
     }
 }
-

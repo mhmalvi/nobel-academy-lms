@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container-fluid page__heading-container">
+        <div class="page__heading d-flex align-items-end">
+            <div class="flex">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
+                                    class="material-icons icon-20pt">home</i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                </nav>
+                <h1 class="m-0">Dashboard</h1>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid page__container">
         <div class="row">
             <div class="col-lg-8">
@@ -10,7 +24,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><a href="" class="headings-color">UI Design &amp; Code</a></h5>
                         <p class="card-text">
-                            <h2>hello</h2>
+                        <h2>hello</h2>
                         </p>
                     </div>
                 </div>

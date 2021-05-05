@@ -2,13 +2,27 @@
 
 @push('css')
     <!-- Dropzone -->
-    <link type="text/css" href="{{asset('assets/css/vendor-dropzone.css')}}" rel="stylesheet">
-    <link type="text/css"href="{{asset('assets/css/vendor-dropzone.rtl.css')}}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.rtl.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
+    <div class="container-fluid page__heading-container">
+        <div class="page__heading d-flex align-items-end">
+            <div class="flex">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
+                                    class="material-icons icon-20pt">home</i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                </nav>
+                <h1 class="m-0">My Profile</h1>
+            </div>
+        </div>
+    </div>
     <div class="container page__container">
-        <form action="{{route('edit.profile')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('edit.profile') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card card-form">
                 <div class="row no-gutters">
@@ -22,13 +36,15 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="fname">First name</label>
-                                        <input id="fname" name="fname" type="text" class="form-control" placeholder="First name" value="{{Auth::user()->teacher->first_name}}">
+                                        <input id="fname" name="fname" type="text" class="form-control"
+                                            placeholder="First name" value="{{ Auth::user()->teacher->first_name }}">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lname">Last name</label>
-                                        <input id="lname" name="lname" type="text" class="form-control" placeholder="Last name" value="{{Auth::user()->teacher->last_name}}">
+                                        <input id="lname" name="lname" type="text" class="form-control"
+                                            placeholder="Last name" value="{{ Auth::user()->teacher->last_name }}">
                                     </div>
                                 </div>
                             </div>
@@ -36,23 +52,29 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="phone">Phone Number</label>
-                                        <input id="phone" name="phone" type="text" class="form-control" placeholder="Phone number" value="{{Auth::user()->teacher->phone}}">
+                                        <input id="phone" name="phone" type="text" class="form-control"
+                                            placeholder="Phone number" value="{{ Auth::user()->teacher->phone }}">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="mobile">Mobile Number</label>
-                                        <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Mobile number" value="{{Auth::user()->teacher->mobile}}">
+                                        <input id="mobile" name="mobile" type="text" class="form-control"
+                                            placeholder="Mobile number" value="{{ Auth::user()->teacher->mobile }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="addressOne">Present Address</label>
-                                <textarea id="addressOne" name="addressOne" rows="4" class="form-control" placeholder="Present Address ..." style="resize: none;">{{Auth::user()->teacher->address_one}}</textarea>
+                                <textarea id="addressOne" name="addressOne" rows="4" class="form-control"
+                                    placeholder="Present Address ..."
+                                    style="resize: none;">{{ Auth::user()->teacher->address_one }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="addressTwo">Peramnent Address</label>
-                                <textarea id="addressTwo" name="addressTwo" rows="4" class="form-control" placeholder="Permanent Address ..." style="resize: none;">{{Auth::user()->teacher->address_two}}</textarea>
+                                <textarea id="addressTwo" name="addressTwo" rows="4" class="form-control"
+                                    placeholder="Permanent Address ..."
+                                    style="resize: none;">{{ Auth::user()->teacher->address_two }}</textarea>
                             </div>
                         @endif
 
@@ -61,13 +83,15 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="fname">First name</label>
-                                        <input id="fname" name="fname" type="text" class="form-control" placeholder="First name" value="{{Auth::user()->student->first_name}}">
+                                        <input id="fname" name="fname" type="text" class="form-control"
+                                            placeholder="First name" value="{{ Auth::user()->student->first_name }}">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="lname">Last name</label>
-                                        <input id="lname" name="lname" type="text" class="form-control" placeholder="Last name" value="{{Auth::user()->student->last_name}}">
+                                        <input id="lname" name="lname" type="text" class="form-control"
+                                            placeholder="Last name" value="{{ Auth::user()->student->last_name }}">
                                     </div>
                                 </div>
                             </div>
@@ -75,23 +99,29 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="phone">Phone Number</label>
-                                        <input id="phone" name="phone" type="text" class="form-control" placeholder="Phone number" value="{{Auth::user()->student->phone}}">
+                                        <input id="phone" name="phone" type="text" class="form-control"
+                                            placeholder="Phone number" value="{{ Auth::user()->student->phone }}">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="mobile">Mobile Number</label>
-                                        <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Mobile number" value="{{Auth::user()->student->mobile}}">
+                                        <input id="mobile" name="mobile" type="text" class="form-control"
+                                            placeholder="Mobile number" value="{{ Auth::user()->student->mobile }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="addressOne">Present Address</label>
-                                <textarea id="addressOne" name="addressOne" rows="4" class="form-control" placeholder="Present Address ..." style="resize: none;">{{Auth::user()->student->address_one}}</textarea>
+                                <textarea id="addressOne" name="addressOne" rows="4" class="form-control"
+                                    placeholder="Present Address ..."
+                                    style="resize: none;">{{ Auth::user()->student->address_one }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="addressTwo">Peramnent Address</label>
-                                <textarea id="addressTwo" name="addressTwo" rows="4" class="form-control" placeholder="Permanent Address ..." style="resize: none;">{{Auth::user()->student->address_two}}</textarea>
+                                <textarea id="addressTwo" name="addressTwo" rows="4" class="form-control"
+                                    placeholder="Permanent Address ..."
+                                    style="resize: none;">{{ Auth::user()->student->address_two }}</textarea>
                             </div>
                         @endif
                     </div>
@@ -107,16 +137,19 @@
                     <div class="col-lg-8 card-form__body card-body">
                         <div class="form-group">
                             <label for="opass">Old Password</label>
-                            <input style="width: 470px;" id="opass" name="opass" type="password" class="form-control" placeholder="Old password"/>
+                            <input style="width: 470px;" id="opass" name="opass" type="password" class="form-control"
+                                placeholder="Old password" />
                         </div>
                         <div class="form-group">
                             <label for="npass">New Password</label>
-                            <input style="width: 470px;" id="npass" name="npass" type="password" class="form-control" placeholder="New password"/>
+                            <input style="width: 470px;" id="npass" name="npass" type="password" class="form-control"
+                                placeholder="New password" />
                             <small class="invalid-feedback">The new password must not be empty.</small>
                         </div>
                         <div class="form-group">
                             <label for="cpass">Confirm Password</label>
-                            <input style="width: 470px;" id="cpass" name="cpass" type="password" class="form-control" placeholder="Confirm password"/>
+                            <input style="width: 470px;" id="cpass" name="cpass" type="password" class="form-control"
+                                placeholder="Confirm password" />
                         </div>
                     </div>
                 </div>
@@ -133,11 +166,12 @@
                     <div class="col-lg-8 card-form__body card-body">
                         <div class="form-group">
                             <label for="user">User Name</label>
-                            <input style="width: 470px;" id="user" name="name" type="text" class="form-control" placeholder="User name" value="{{Auth::user()->name}}">
+                            <input style="width: 470px;" id="user" name="name" type="text" class="form-control"
+                                placeholder="User name" value="{{ Auth::user()->name }}">
                         </div>
                         <div class="form-group">
                             <label for="avatar">Image</label>
-                            <input style="width: 470px;" type="file" class="form-control" name="avatar" id="avatar"/>
+                            <input style="width: 470px;" type="file" class="form-control" name="avatar" id="avatar" />
                             {{-- <label>Avatar</label>
                             <div class="dz-clickable media align-items-center" 
                             data-toggle="dropzone" 
@@ -167,6 +201,6 @@
 
 @push('js')
     <!-- Dropzone -->
-    <script src="{{asset('assets/vendor/dropzone.min.js')}}"></script>
-    <script src="{{asset('assets/js/dropzone.js')}}"></script>
+    <script src="{{ asset('assets/vendor/dropzone.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dropzone.js') }}"></script>
 @endpush
