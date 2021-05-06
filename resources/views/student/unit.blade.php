@@ -101,52 +101,60 @@
                                         </div>
                                     </div>
                                     <!-- END -->
-                                    <div class="my-4">
-                                        <strong class="text-dark-gray">DESCRIPTION</strong>
-                                        <br>
-                                        <p class="text-justify">
-                                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis,
-                                            necessitatibus consequatur asperiores consectetur, ea corrupti sapiente dolorum
-                                            quibusdam accusamus eveniet ad maxime temporibus?
-                                            Magni laudantium quod repudiandae et consequuntur exercitationem.
-                                        </p>
-                                    </div>
-
-                                    @if (count($getStep->files) > 0)
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <ul class="list-group list-lessons">
-                                                    @forelse ($getStep->files as $item)
-                                                        <li class="list-group-item d-flex">
-                                                            <a href="{{ route('download.unitFile', $item->file_name) }}">
-                                                                @if ($item->file_ext == 'pdf')
-                                                                    <i class="fa fa-file-pdf pr-2"></i>
-                                                                @elseif($item->file_ext == 'docx' || $item->file_ext ==
-                                                                    'dotx')
-                                                                    <i class="fa fa-file-word pr-2"></i>
-                                                                @elseif($item->file_ext == 'xlsx')
-                                                                    <i class="fa fa-file-excel pr-2"></i>
-                                                                @elseif($item->file_ext == 'pptx')
-                                                                    <i class="fa fa-file-powerpoint pr-2"></i>
-                                                                @endif
-                                                                {{ $item->file_name }}
-                                                            </a>
-                                                            <div class="ml-auto d-flex align-items-center">
-                                                                <span class="text-muted">
-                                                                    <i
-                                                                        class="material-icons icon-16pt icon-light">file_download</i>
-                                                                </span>
-                                                            </div>
-                                                        </li>
-                                                    @empty
-                                                        <li class="list-group-item d-flex">
-                                                            No File Found!
-                                                        </li>
-                                                    @endforelse
-                                                </ul>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <img src="{{ asset('assets/images/steps/' . $getStep->thumbnail) }}" alt=""
+                                                class="img-fluid py-5" style="max-width: 150px;">
+                                            <div class="my-4">
+                                                <strong class="text-dark-gray">DESCRIPTION</strong>
+                                                <br>
+                                                <p class="text-justify">
+                                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis,
+                                                    necessitatibus consequatur asperiores consectetur, ea corrupti sapiente
+                                                    dolorum
+                                                    quibusdam accusamus eveniet ad maxime temporibus?
+                                                    Magni laudantium quod repudiandae et consequuntur exercitationem.
+                                                </p>
                                             </div>
                                         </div>
-                                    @endif
+                                        <div class="col-md-5 mt-5">
+                                            @if (count($getStep->files) > 0)
+                                                <div class="card">
+                                                    <ul class="list-group list-lessons">
+                                                        @forelse ($getStep->files as $item)
+                                                            <li class="list-group-item d-flex">
+                                                                <a
+                                                                    href="{{ route('download.unitFile', $item->file_name) }}">
+                                                                    @if ($item->file_ext == 'pdf')
+                                                                        <i class="fa fa-file-pdf pr-2"></i>
+                                                                    @elseif($item->file_ext == 'docx' ||
+                                                                        $item->file_ext ==
+                                                                        'dotx')
+                                                                        <i class="fa fa-file-word pr-2"></i>
+                                                                    @elseif($item->file_ext == 'xlsx')
+                                                                        <i class="fa fa-file-excel pr-2"></i>
+                                                                    @elseif($item->file_ext == 'pptx')
+                                                                        <i class="fa fa-file-powerpoint pr-2"></i>
+                                                                    @endif
+                                                                    {{ $item->file_name }}
+                                                                </a>
+                                                                <div class="ml-auto d-flex align-items-center">
+                                                                    <span class="text-primary">
+                                                                        <i
+                                                                            class="material-icons icon-16pt icon-dark">file_download</i>
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        @empty
+                                                            <li class="list-group-item d-flex">
+                                                                No File Found!
+                                                            </li>
+                                                        @endforelse
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
 
                                     @if ($unit->progress->current_step == count($steps) && $unit->progress->current_step == $getStep->id)
 

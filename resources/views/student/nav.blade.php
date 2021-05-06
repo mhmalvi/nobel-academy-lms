@@ -11,7 +11,7 @@ $enrollment = auth()
     class="sidebar-menu-item {{ request()->segment(3) === 'unit' || request()->segment(3) === 'step' ? 'active open' : '' }}">
     <a class="sidebar-menu-button" data-toggle="collapse" href="#course_menu">
         <span class="sidebar-menu-text" style="line-height: 25px;">
-            {{ __($enrollment->course->course_name) }}
+            {{ __($enrollment->course->course_code) }} - {{ __($enrollment->course->course_name) }}
         </span>
         <span class="ml-auto sidebar-menu-toggle-icon"></span>
     </a>
