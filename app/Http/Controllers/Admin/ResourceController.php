@@ -23,7 +23,7 @@ class ResourceController extends Controller
         $steps = Step::all();
         $units = CourseUnit::all();
         $files = CourseUnitFiles::all();
-        return view('admin.resource.index', compact('steps', 'units', 'files'));
+        return view('admin.Resource.index', compact('steps', 'units', 'files'));
     }
 
 

@@ -51,6 +51,20 @@
             </li>
 
 
+            {{-- Assesment --}}
+            @php
+                $assesment = \App\Models\Assesment::where('status', 'pending')->sum('status');
+            @endphp
+            <li class="{{ Route::currentRouteName() === 'admin.assesments' ? 'active' : '' }}">
+                <a href="{{route('admin.assesments')}}"><i class="fa fa-magic"></i> 
+                    <span class="nav-label">Assesment</span>&nbsp;
+                    @if ($assesment > 0)
+                        <span class="label label-info float-right">{{$assesment}}</span>
+                    @endif
+                </a>
+            </li>
+
+
             {{-- Instructor --}}
             <li class="{{ request()->segment(2) === 'instructors' ? 'active' : '' }}">
                 <a href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i></i><span

@@ -54,6 +54,12 @@ Route::prefix('course')->group(function(){
 });
 
 
+/**
+ * 
+ */
+Route::get('assesment-requests', 'AssesmentsController@index')->name('assesments');
+
+
 
 /**
  * Unit

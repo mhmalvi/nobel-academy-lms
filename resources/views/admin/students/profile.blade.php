@@ -11,13 +11,13 @@
             <div class="ibox selected">
                 <div class="ibox-content">
                     <div class="row m-b-lg">
-                        <div class="col-lg-2">
+                        <div class="col-sm-6 col-md-6 col-lg-4">
                             <div class="m-b-sm">
-                                <img class="rounded" src="{{ asset('storage/users/' . $student->user->photo) }}"
+                                <img class="img-fluid" src="{{ asset('storage/users/' . $student->user->photo) }}"
                                     alt="image" />
                             </div>
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-sm-6 col-md-6 col-lg-8">
                             <h2>
                                 <strong>{{ $student->first_name }}&nbsp;{{ $student->last_name }}</strong>
                             </h2>
