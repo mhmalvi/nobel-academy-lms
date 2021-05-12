@@ -13,7 +13,7 @@ class AssesmentsController extends Controller
      */
     public function index()
     {
-        $assesments = Assesment::where('status', 'pending')->get();
+        $assesments = Assesment::with(['student', 'course', 'unit'])->where('status', 'pending')->get();
         return view('admin.assesment.index', compact('assesments'));
     }
 }

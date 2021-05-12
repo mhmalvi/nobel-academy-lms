@@ -16,7 +16,6 @@
                     <tr>
                         <th>#</th>
                         <th>Student</th>
-                        <th>Course</th>
                         <th>Unit Code</th>
                         <th>Status</th>
                     </tr>
@@ -25,10 +24,9 @@
                         @forelse ($assesments as $item)
                             <tr>
                                 <td></td>
-                                <td>{{$item->student_id}}</td>
-                                <td>{{$item->course_id}}</td>
-                                <td>{{$item->unit_id}}</td>
-                                <td>
+                                <td>{{$item->student->first_name}} {{$item->student->last_name}}</td>
+                                <td>{{$item->unit->unit_code}}</td>
+                                <td width="10%">
                                     <select class="status" data-id="{{$item->id}}">
                                         <option value="pending" {{($item->status === 'pending') ? 'selected' : ''}}>Pending</option>
                                         <option value="approve" {{($item->status === 'approve') ? 'selected' : ''}}>Approve</option>
@@ -47,26 +45,22 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Launch demo modal
-    </button>
-        </div>
     <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Modal title</h4>
-                    <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                    <h4 class="modal-title">Make Assesment Schedule</h4>
+                    <small class="font-bold">Choose preferd date and time to take the assesment exam</small>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <input type="text" id="demo" class="form-control"/>
+                            <input type="text" id="demo" class="form-control" placeholder="Choose date and time"/>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary save">Save</button>
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -81,15 +75,22 @@
         $(document).ready(function(){
 
             
-            $('#demo').datetimepicker({
-                inline:true,
-            });
+            $('#demo').datetimepicker();
 
             $(".status").on("change", function() {
                 var id = $(this).data('id');
                 var status = $(this).val();
 
-                console.log(status);
+                if(status === 'approve'){
+                    $("#myModal").modal('show');
+
+                    $(".save").on("click", function(e){
+                        e.preventDefault();
+                        var dateTime = $("#demo").val();
+
+                        console.log(dateTime);
+                    })
+                }
             })
         })
     </script>
