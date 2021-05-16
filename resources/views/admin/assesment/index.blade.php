@@ -84,26 +84,42 @@
                 var status = $(this).val();
                 var dateTime = null;
 
+                function request(status) {
+
+                    var assesmentStatus = status;
+
+                    $.ajax({
+                        url: "{!! route('admin.assesments') !!}",
+                        method: "POST",
+                        data: {assesment : id, status:  assesmentStatus, schedule: dateTime},
+                        dataType: "json",
+                        statusCode: {
+                            200: function(res) {
+                                toastr.success(res.status);
+                            },
+                            503: function(res) {
+                                toastr.warning(res.status);
+                            }
+                        },
+                        success: function(res) {
+                            $("#myModal").modal('hide');
+                        }
+                    });
+                }
+
                 if(status === 'approved'){
                     $("#myModal").modal('show');
 
                     $(".save").on("click", function(e){
                         e.preventDefault();
                         var dateTime = $("#demo").val();
-                    })
-                }
 
-                
-                $.ajax({
-                    url: "{!! route('admin.assesments') !!}",
-                    method: "POST",
-                    data: {assesment : id, status:  status, schedule: dateTime},
-                    dataType: "json",
-                    success: function (res) {
-                        console.log(res);
-                    }
-                });
-            })
+                        request(status);
+                    })
+                }else{
+                    request(status);
+                }
+            });
         })
     </script>
 @endpush

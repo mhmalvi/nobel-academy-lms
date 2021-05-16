@@ -179,7 +179,8 @@ return [
          * Custom Service Providers
          */
         App\Providers\AppExceptionsServiceProvider::class,
-        App\Providers\AppCryptionServiceProvider::class
+        App\Providers\AppCryptionServiceProvider::class,
+        App\Providers\TimeDiffServiceProvider::class,
 
     ],
 
@@ -237,7 +238,8 @@ return [
          * Custom
          */
         'AppException' => App\Exceptions\AppExceptions::class,
-        'AppCryption' => App\Support\AppCryption::class
+        'AppCryption' => App\Support\AppCryption::class,
+        'TimeDiff' => App\Providers\TimeDiffServiceProvider::class
     ],
 
 ];

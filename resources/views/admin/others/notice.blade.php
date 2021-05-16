@@ -8,11 +8,11 @@
 @endpush
 
 @section('content')
-    <div class="container-fluid">
-        <form action="{{route('admin.announcement.post')}}" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
-                <div class="col-md-9 col-sm-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <form action="{{route('admin.announcement.post')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="form-group">
@@ -31,32 +31,37 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-12">
+
                     <div class="ibox">
                         <div class="ibox-content">
-                            <div class="form-group">
-                                <div class="avatar-upload">
-                                    <div class="avatar-edit" data-toggle="tooltip" data-placement="top" title="Upload Image">
-                                        <input type='file' id="imageUpload" name="file" accept=".png, .jpg, .jpeg" />
-                                        <label for="imageUpload"></label>
-                                    </div>
-                                    <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url({{asset('assets/admin/thumb.png')}});">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p>Upload Thumbnail</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit" data-toggle="tooltip" data-placement="top" title="Upload Image">
+                                                <input type='file' id="imageUpload" name="file" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div id="imagePreview" style="background-image: url({{asset('assets/admin/thumb.png')}});">
+                                                </div>
+                                            </div>
                                         </div>
+                                        @error('file')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
-                                @error('file')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Publish</button>
-                        </div>  
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-primary">Publish</button>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 @endsection
 

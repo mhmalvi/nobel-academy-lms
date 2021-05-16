@@ -28,7 +28,7 @@ class AdminController extends Controller
      * 
      */
     public function notice(){
-        $notices = DB::table('announcements')->join('announcement_files','announcements.id', '=', 'announcement_files.announcement_id')->get();
+        $notices = DB::table('announcements')->get();
         return view('admin.others.manage-notices', compact('notices'));
     }
 

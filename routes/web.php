@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth', 'user'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('index');
+    Route::get('/', 'AppController@index')->name('index');
 
     Route::get('/dashboard', 'AppController@index')->name('dashboard');
 
@@ -51,6 +49,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('edit-profile', 'AppController@userProfile')->name('edit.profile');
     Route::post('edit-profile', 'AppController@updateProfileInfo');
+
+    Route::get('announcements/{id}', 'AppController@notice')->name('notice');
 });
 
 require __DIR__ . '/auth.php';
