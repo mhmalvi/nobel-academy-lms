@@ -37,7 +37,7 @@ class CreateAssesmentsTable extends Migration
             
             $table->text('links')->nullable();
             $table->dateTime('schedule')->nullable();
-            $table->enum('status', ['pending', 'approve', 'reject'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'reject'])->default('pending');
             $table->timestamps();
         });
     }

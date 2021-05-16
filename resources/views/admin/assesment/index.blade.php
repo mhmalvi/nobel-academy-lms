@@ -29,13 +29,13 @@
                                 <td width="10%">
                                     <select class="status" data-id="{{$item->id}}">
                                         <option value="pending" {{($item->status === 'pending') ? 'selected' : ''}}>Pending</option>
-                                        <option value="approve" {{($item->status === 'approve') ? 'selected' : ''}}>Approve</option>
+                                        <option value="approved" {{($item->status === 'approved') ? 'selected' : ''}}>Approved</option>
                                         <option value="reject" {{($item->status === 'reject') ? 'selected' : ''}}>Reject</option>
                                     </select>
                                 </td>
                             </tr>
                         @empty
-                            <tr>
+                            <tr class="text-center">
                                 <td colspan="4">No Data Found</td>
                             </tr>
                         @endforelse
@@ -75,22 +75,34 @@
         $(document).ready(function(){
 
             
-            $('#demo').datetimepicker();
+            $('#demo').datetimepicker({
+                format:'Y-m-d H:m:s',
+            });
 
             $(".status").on("change", function() {
                 var id = $(this).data('id');
                 var status = $(this).val();
+                var dateTime = null;
 
-                if(status === 'approve'){
+                if(status === 'approved'){
                     $("#myModal").modal('show');
 
                     $(".save").on("click", function(e){
                         e.preventDefault();
                         var dateTime = $("#demo").val();
-
-                        console.log(dateTime);
                     })
                 }
+
+                
+                $.ajax({
+                    url: "{!! route('admin.assesments') !!}",
+                    method: "POST",
+                    data: {assesment : id, status:  status, schedule: dateTime},
+                    dataType: "json",
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
             })
         })
     </script>

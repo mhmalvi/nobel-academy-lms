@@ -55,9 +55,10 @@ Route::prefix('course')->group(function(){
 
 
 /**
- * 
+ * Assesment
  */
 Route::get('assesment-requests', 'AssesmentsController@index')->name('assesments');
+Route::post('assesment-requests', 'AssesmentsController@update');
 
 
 
