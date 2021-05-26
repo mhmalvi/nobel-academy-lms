@@ -11,6 +11,7 @@ use App\Exceptions\AppExceptions;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\UnitProgress;
+use DB;
 
 class AppController extends Controller
 {
@@ -24,6 +25,7 @@ class AppController extends Controller
         $course = null;
         $progress = null;
         $lastProgress = null;
+        $notices = DB::table('announcements')->orderBy('created_at', 'desc')->take(5)->get();
 
         if (Auth::user()->user_type === 'student') {
             $enroll = Enrollment::where('student_id', Auth::user()->student->id)->first();
@@ -36,7 +38,7 @@ class AppController extends Controller
                 ->first();
             $course = Course::findOrFail($enroll->course_id);
         }
-        return view('dashboard', compact('enroll', 'course', 'progress', 'lastProgress'));
+        return view('dashboard', compact('enroll', 'course', 'progress', 'lastProgress', 'notices'));
     }
 
     /**
@@ -125,6 +127,17 @@ class AppController extends Controller
              * Return the exceptions
              */
             return redirect()->back()->with(AppExceptions::throwback($th));
+        }
+    }
+
+
+    public function notice($id){
+        try {
+            $notice = DB::table('announcements')->where('id', $id)->first();
+
+            return view('announcement', compact('notice'));
+        } catch (\Throwable $th) {
+            //throw $th;
         }
     }
 }

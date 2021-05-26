@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="ibox">
@@ -20,14 +20,13 @@
                             <table class="table table-striped table-bordered table-hover" id="notice">
                                 <thead>
                                     <tr class="text-center">
-                                        <th width="5%"><input type="checkbox"></th>
-                                        <th width="20%">Image</th>
-                                        <th width="50%">Title</th>
-                                        <th width="15%">Creaated At</th>
+                                        <th width="10%"><input type="checkbox"></th>
+                                        <th width="70%">Title</th>
+                                        <th width="20%">Creaated At</th>
                                     </tr>
                                 </thead>
         
-                                <tbody style="font-size: 10px;">
+                                <tbody>
                                     @php
                                         $i = 1;
                                     @endphp
@@ -38,9 +37,6 @@
         
                                         <tr class="text-center">
                                             <td><input type="checkbox"></td>
-                                            <td>
-                                                <img src="{{asset('storage/announcements/'.$item->file_name)}}" alt="" class="img-fluid" style="max-width: 80px;" />
-                                            </td>
                                             <td>{{$item->subject}}</td>
                                             <td>{{$date}}</td>
                                         </tr>
