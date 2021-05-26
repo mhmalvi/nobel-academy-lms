@@ -15,11 +15,11 @@ class CourseResource extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection->map(function($res){
+            'data' => $this->collection->map(function ($res) {
                 $data = [
                     'UniqueId' => $res->id,
-                    'Code' => $res->course_code,
-                    'Course' => $res->course_name,
+                    'Code' => $res->code,
+                    'Course' => $res->name,
                     'Created' => $res->created_at
                 ];
 

@@ -20,16 +20,16 @@ class Course extends Model
 
     protected $fillable = [
         'action_user',
-        'course_code',
-        'course_name',
+        'code',
+        'name',
         'course_category_id',
-        'course_units',
+        'units',
         'descriptions',
         'is_published',
         'total_enrolled',
         'total_teachers',
         'total_files',
-        'course_thumbnail'
+        'thumbnail'
     ];
 
 
@@ -40,8 +40,9 @@ class Course extends Model
         'created_at' => 'datetime:d-M-Y',
     ];
 
-    public function getCourseCategoryIdAttribute($value){
-        if(is_null($value)){
+    public function getCourseCategoryIdAttribute($value)
+    {
+        if (is_null($value)) {
             return 'Uncategorized';
         }
 
@@ -49,7 +50,8 @@ class Course extends Model
     }
 
 
-    public function getCreatedAtAttribute($value){
+    public function getCreatedAtAttribute($value)
+    {
         return date("M d, Y", strtotime($value));
     }
 
@@ -57,7 +59,8 @@ class Course extends Model
     /**
      * Each course is cretaed by one user
      */
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'action_user');
     }
 
@@ -65,7 +68,8 @@ class Course extends Model
     /**
      * Each course belongs to atleast one category
      */
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(CourseCategory::class, 'course_category_id');
     }
 
@@ -73,7 +77,8 @@ class Course extends Model
     /**
      * A course have many units
      */
-    public function units(){
+    public function units()
+    {
         return $this->hasMany(CourseUnit::class);
     }
 
@@ -81,7 +86,8 @@ class Course extends Model
     /**
      * A course may have many enrollment
      */
-    public function enrollments(){
+    public function enrollments()
+    {
         return $this->hasMany(Enrollment::class);
     }
 
@@ -89,7 +95,8 @@ class Course extends Model
     /**
      * A course may have many teachers
      */
-    public function teachers(){
+    public function teachers()
+    {
         return $this->hasMany(CoursesTeacher::class);
     }
 }
