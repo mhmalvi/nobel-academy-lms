@@ -89,7 +89,7 @@
             <div class="col-lg-8">
 
                 <div class="card">
-                    <img src="{{ asset('assets/images/posts/thought-catalog-214785.jpg') }}" class="card-img-top" alt="">
+                    <img src="{{ asset('assets/images/thought-catalog-214785.jpg') }}" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title"><a href="" class="headings-color">UI Design &amp; Code</a></h5>
                         <p class="card-text">
