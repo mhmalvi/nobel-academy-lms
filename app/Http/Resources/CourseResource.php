@@ -18,8 +18,8 @@ class CourseResource extends ResourceCollection
             'data' => $this->collection->map(function ($res) {
                 $data = [
                     'UniqueId' => $res->id,
-                    'Code' => $res->code,
-                    'Course' => $res->name,
+                    'Code' => $res->course_code,
+                    'Course' => $res->course_name,
                     'Created' => $res->created_at
                 ];
 

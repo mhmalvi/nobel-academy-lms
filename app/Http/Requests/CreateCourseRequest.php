@@ -67,10 +67,10 @@ class CreateCourseRequest extends FormRequest
 
         $course = Course::create([
             'action_user'           => Auth::id(),
-            'code'                  => $this->course_code,
-            'name'                  => $this->course_name,
+            'course_code'                  => $this->course_code,
+            'course_name'                  => $this->course_name,
             'course_category_id'    => ($this->has('category')) ? $this->category : null,
-            'units'                 => ($this->has('units')) ? $this->units : null,
+            'course_units'                 => ($this->has('units')) ? $this->units : null,
             'descriptions'          => ($this->has('descriptions')) ? $this->descriptions : null,
             'thumbnail'             => $imagename
         ]);
@@ -98,10 +98,10 @@ class CreateCourseRequest extends FormRequest
         $course = Course::findOrFail($id);
 
         $course->action_user        = Auth::id();
-        $course->code               = $this->course_code;
-        $course->name               = $this->course_name;
+        $course->course_code               = $this->course_code;
+        $course->course_name               = $this->course_name;
         $course->course_category_id = $this->category;
-        $course->units              = $this->units;
+        $course->course_units              = $this->units;
         $course->descriptions       = $this->descriptions;
 
         if ($this->has('image')) {

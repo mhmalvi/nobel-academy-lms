@@ -20,10 +20,10 @@ class Course extends Model
 
     protected $fillable = [
         'action_user',
-        'code',
-        'name',
+        'course_code',
+        'course_name',
         'course_category_id',
-        'units',
+        'course_units',
         'descriptions',
         'is_published',
         'total_enrolled',
