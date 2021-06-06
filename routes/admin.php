@@ -13,7 +13,7 @@ Route::get('dashboard', 'HomeController@index')->name('dashboard');
 /**
  * Course
  */
-Route::prefix('course')->group(function(){
+Route::prefix('course')->group(function () {
     //categories
     Route::get('categories', 'CourseCategoryController@index')->name('course.category');
     Route::post('categories', 'CourseCategoryController@storeOrUpdate');
@@ -73,7 +73,7 @@ Route::post('get-unit', 'CourseUnitController@getUnits')->name('get.unit');
 /**
  * Files
  */
-Route::prefix('files')->group(function(){
+Route::prefix('files')->group(function () {
     Route::get('units', 'CourseUnitController@files')->name('unit.files');
     Route::post('units', 'CourseUnitController@storeFile');
 });
@@ -82,8 +82,14 @@ Route::prefix('files')->group(function(){
 /**
  * Student
  */
-Route::prefix('students')->group(function(){
+Route::prefix('students')->group(function () {
     Route::get('/', 'StudentController@index')->name('students');
+
+    Route::name('student.')->group(function () {
+        Route::get('/{id}/update', 'StudentController@edit')->name('edit');
+        Route::put('/{id}/update', 'StudentController@update');
+        Route::delete('/{id}/remove', 'StudentController@delete')->name('delete');
+    });
 
     Route::get('enrollment', 'StudentController@create')->name('student.enrollment');
     Route::post('enrollment', 'StudentController@store');
@@ -97,7 +103,7 @@ Route::prefix('students')->group(function(){
 /**
  * Teacher
  */
-Route::prefix('instructors')->group(function(){
+Route::prefix('instructors')->group(function () {
     Route::get('/', 'TutorController@index')->name('instructors');
 
     Route::get('add-instructor', 'TutorController@create')->name('instructor.add');
@@ -117,10 +123,10 @@ Route::post('/post-new/announcement', 'AdminController@noticeStore');
 /**
  * Settings
  */
-Route::prefix('settings')->group(function(){
+Route::prefix('settings')->group(function () {
     Route::get('profile', 'AdminController@profileSettings')->name('profile');
     Route::post('profile', 'AdminController@profileUpdate')->name('userProfileUpdate');
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

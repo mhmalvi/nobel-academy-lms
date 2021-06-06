@@ -9,6 +9,7 @@ use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Enrollment;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Exceptions\AppExceptions;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -142,5 +143,89 @@ class StudentController extends Controller
         $student = Student::with('enrollment')->findOrFail($id);
         $units = CourseUnit::where('course_id', $student->enrollment->course->id)->get();
         return view('admin.students.profile', compact('student', 'units'));
+    }
+
+
+    /**
+     * @return view
+     */
+    public function edit($id)
+    {
+        try {
+            $student = Student::with(['user', 'enrollment'])->findOrFail($id);
+            $courses = Course::all();
+            $teachers = Teacher::all();
+            return view('admin.students.update', compact('student', 'courses', 'teachers'));
+        } catch (\Throwable $th) {
+            /**
+             * Return the exceptions
+             */
+            return redirect()->back()->with(AppExceptions::throwback($th));
+        }
+    }
+
+
+    /**
+     * 
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            $student = Student::findOrFail($id);
+
+
+            $student->first_name = $request->fName;
+            $student->last_name = $request->lName;
+            $student->phone = $request->phone;
+            $student->mobile = $request->mobile;
+            $student->address_one = $request->address;
+            $student->address_two = $request->address_op;
+
+            $student->save();
+
+            /**
+             * retun successfull notification
+             */
+            $notification = [
+                'message'   =>  "successfully saved",
+                'alert-type'    =>  'success'
+            ];
+
+            return redirect()->route('admin.students')->with($notification);
+        } catch (\Throwable $th) {
+            /**
+             * Return the exceptions
+             */
+            return redirect()->back()->with(AppExceptions::throwback($th));
+        }
+    }
+
+
+
+    /**
+     * 
+     */
+    public function delete($id)
+    {
+        try {
+            $student = Student::findOrFail($id);
+
+            $student->delete();
+
+            /**
+             * retun successfull notification
+             */
+            $notification = [
+                'message'   =>  "successfully deleted",
+                'alert-type'    =>  'success'
+            ];
+
+            return redirect()->route('admin.students')->with($notification);
+        } catch (\Throwable $th) {
+            /**
+             * Return the exceptions
+             */
+            return redirect()->back()->with(AppExceptions::throwback($th));
+        }
     }
 }
