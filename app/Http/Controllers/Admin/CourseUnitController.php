@@ -209,7 +209,7 @@ class CourseUnitController extends Controller
              * retun successfull notification
              */
             $notification = [
-                'message'   =>  "{$unit->unit_name} successfully saved",
+                'message'   =>  "successfully saved",
                 'alert-type'    =>  'success'
             ];
 

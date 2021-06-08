@@ -18,7 +18,8 @@ class FileController extends Controller
     /**
      * GET['share/resources']
      */
-    public function index(){
+    public function index()
+    {
         $steps = Step::all();
         $units = CourseUnit::all();
         $files = CourseUnitFiles::where('action_user', Auth::id())->paginate(10);
@@ -29,7 +30,8 @@ class FileController extends Controller
     /**
      * POST['share/resources']
      */
-    public function store(FileUploadRequest $request){
+    public function store(FileUploadRequest $request)
+    {
         try {
             $files = $request->files;
 
@@ -52,13 +54,13 @@ class FileController extends Controller
                         'unit_id' => $request->unit,
                         'step_id' => $request->step,
                         'file_name' => $filename,
-                        'file_path' => storage_path('public/courses/units/'.$filename),
+                        'file_path' => storage_path('public/courses/units/' . $filename),
                         'file_ext' => $extension,
                         'file_meta_data' => null,
                         'is_approved' => 'n'
                     ]);
 
-                    if($unit_file->id){
+                    if ($unit_file->id) {
                         /**
                          * Check if derectory exist or not
                          * Create a new directory if not exist
@@ -70,14 +72,13 @@ class FileController extends Controller
 
                         //store image into storage directory
                         Storage::putFileAs('public/courses/units', $file, $filename);
-                    }
-                    else{
+                    } else {
                         /**
                          * Throw an exception if request cannot be processed
                          */
                         throw new Exception("File cannot be saved to server", 1);
                     }
-                }else{
+                } else {
                     /**
                      * Throw an exception if request cannot be processed
                      */
@@ -109,8 +110,8 @@ class FileController extends Controller
     /**
      * File Download
      */
-    public function fileDownload($file){
-        return Storage::download("public/courses/units/{$file}");
+    public function fileDownload($file)
+    {
+        return Storage::download(asset('storage/courses/units/' . $file));
     }
-
 }

@@ -23,7 +23,6 @@
                                         <th width="5%"><input type="checkbox"></th>
                                         <th width="20%">Student Name</th>
                                         <th width="20%">Course</th>
-                                        <th width="20%">Status</th>
                                         <th width="15%">Enrolled By</th>
                                         <th width="15%">Enrolled At</th>
                                     </tr>
@@ -38,16 +37,17 @@
                                             $date = date('M d, Y', strtotime($item->created_at));
                                         @endphp
 
-                                        <tr class="text-center">
+                                        <tr class="text-center rows">
                                             <td><input type="checkbox"></td>
                                             <td>
-                                                <a href="{{ route('admin.assign', $item->id) }}">
-                                                    {{ $item->first_name }}&nbsp;{{ $item->last_name }}
-                                                    <i class="fa fa-link text-secondary" aria-hidden="true"></i>
-                                                </a>
+                                                {{ $item->first_name }}&nbsp;{{ $item->last_name }}
+                                                <div class="text-left actions">
+                                                    <a class="px-2 border" href="{{ route('admin.assign', $item->id) }}">Profile</a>
+                                                    <a class="px-2 border" href="{{ route('admin.student.edit', $item->id) }}">Edit</a>
+                                                    <a class="px-2 border" href="{{ route('admin.student.delete', $item->id) }}">Trash</a>
+                                                </div>
                                             </td>
                                             <td>{{ $item->enrollment->course->course_name }}</td>
-                                            <td></td>
                                             <td>{{ $item->actionuser->name }}</td>
                                             <td>{{ $date }}</td>
                                         </tr>

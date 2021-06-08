@@ -16,7 +16,7 @@
         </div>
         <div class="container-fluid page__container">
             <div class="py-3">
-                <img src="{{ asset('assets/office01.jpg') }}" class="img-fluid" alt="Responsive image">
+                <img src="{{ asset('assets/course_thumb.jpg') }}" class="img-fluid" alt="Responsive image">
             </div>
 
             <div class="pt-3">
