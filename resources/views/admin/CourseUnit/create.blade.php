@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{asset('assets/admin/css/plugins/summernote/summernote-bs4.css')}}"/>
 
-<div class="animated fadeIn">
+<div class="container animated fadeIn">
     <div class="ibox">
         <div class="ibox-title">
             <h5>Create New Unit</h5>
