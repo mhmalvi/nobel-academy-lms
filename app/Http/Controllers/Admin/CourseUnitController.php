@@ -29,7 +29,7 @@ class CourseUnitController extends Controller
      */
     public function index()
     {
-        return view('admin.CourseUnit.index');
+        return view('admin.courseUnit.index');
     }
 
 
@@ -51,7 +51,7 @@ class CourseUnitController extends Controller
     public function create()
     {
         $courses = Course::all();
-        return view('admin.CourseUnit.create', compact('courses'));
+        return view('admin.courseUnit.create', compact('courses'));
     }
 
 
@@ -175,7 +175,7 @@ class CourseUnitController extends Controller
                 $unit = CourseUnit::find($id);
                 $courses = Course::all();
 
-                return view('admin.CourseUnit.update', compact('courses', 'unit'));
+                return view('admin.courseUnit.update', compact('courses', 'unit'));
             }
         } catch (\Throwable $th) {
             /**
@@ -232,7 +232,7 @@ class CourseUnitController extends Controller
         $units = CourseUnit::all();
         $steps = Step::all();
         $files = CourseUnitFiles::orderBy('created_at', 'asc')->get();
-        return view('admin.CourseUnit.files', compact('files', 'units', 'steps'));
+        return view('admin.courseUnit.files', compact('files', 'units', 'steps'));
     }
 
 

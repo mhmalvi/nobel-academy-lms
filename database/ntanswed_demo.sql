@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 05, 2021 at 12:10 PM
+-- Generation Time: Jun 08, 2021 at 01:38 PM
 -- Server version: 5.7.34-log
 -- PHP Version: 7.3.28
 
@@ -296,7 +296,7 @@ CREATE TABLE `enrollments` (
 --
 
 INSERT INTO `enrollments` (`id`, `uuid`, `action_user`, `student_id`, `teacher_id`, `course_id`, `core_units`, `elective_units`, `is_passed`, `is_suspended`, `status`, `remark`, `created_at`, `updated_at`) VALUES
-(3, NULL, 1, 3, 2, 6, '[\"SHBBFAS001\",\"SHBBFAS001\"]', '[\"SHBBMUP001\"]', 'n', 'n', NULL, NULL, '2021-05-04 22:06:31', '2021-05-07 10:06:58');
+(3, NULL, 1, 3, 2, 6, '[\"SHBBFAS001\",\"SHBBFAS001\",\"SHBBFAS001\",\"SHBBFAS001\"]', '[\"SHBBMUP001\",\"SHBBMUP001\",\"SHBBMUP001\",\"SHBBMUP001\"]', 'n', 'n', NULL, NULL, '2021-05-04 22:06:31', '2021-06-06 02:37:01');
 
 -- --------------------------------------------------------
 
@@ -442,7 +442,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `uuid`, `action_user`, `user_id`, `first_name`, `last_name`, `phone`, `mobile`, `address_one`, `address_two`, `is_enrolled`, `created_at`, `updated_at`) VALUES
-(3, NULL, 1, 6, 'Student', 'One', '789456321', NULL, 'demo address', NULL, 'y', '2021-05-04 22:06:31', '2021-05-04 22:06:31');
+(3, NULL, 1, 6, 'Student', 'One', '789456321dgvdcvd', NULL, 'demo address', NULL, 'y', '2021-05-04 22:06:31', '2021-06-06 02:35:44');
 
 -- --------------------------------------------------------
 
@@ -513,7 +513,12 @@ CREATE TABLE `unit_progress` (
 INSERT INTO `unit_progress` (`id`, `uuid`, `action_user`, `student_id`, `course_id`, `course_unit_id`, `current_step`, `complete_step`, `created_at`, `updated_at`) VALUES
 (15, NULL, 1, 3, 6, 4, 5, 4, '2021-05-04 22:31:22', '2021-05-04 23:09:18'),
 (16, NULL, 1, 3, 6, 5, 5, 4, '2021-05-04 23:31:18', '2021-05-07 10:02:20'),
-(17, NULL, 1, 3, 6, 4, 1, 0, '2021-05-07 10:06:58', '2021-05-07 10:06:58');
+(17, NULL, 1, 3, 6, 4, 1, 0, '2021-05-07 10:06:58', '2021-05-07 10:06:58'),
+(18, NULL, 1, 3, 6, 4, 1, 0, '2021-06-06 02:36:43', '2021-06-06 02:36:43'),
+(19, NULL, 1, 3, 6, 4, 1, 0, '2021-06-06 02:36:46', '2021-06-06 02:36:46'),
+(20, NULL, 1, 3, 6, 5, 1, 0, '2021-06-06 02:36:49', '2021-06-06 02:36:49'),
+(21, NULL, 1, 3, 6, 5, 1, 0, '2021-06-06 02:36:54', '2021-06-06 02:36:54'),
+(22, NULL, 1, 3, 6, 5, 1, 0, '2021-06-06 02:37:01', '2021-06-06 02:37:01');
 
 -- --------------------------------------------------------
 
@@ -546,7 +551,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `uuid`, `action_user`, `role_id`, `name`, `email`, `email_verified_at`, `password`, `photo`, `user_type`, `is_admin`, `multi_course`, `is_suspended`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, NULL, 1, 'AN Rajin', 'admin@gmail.com', NULL, '$2y$10$WNc2cr7PId61Qi2BtMd/a.kKoLjtgUnGFxakNSrgWwOVTcH7wO4PS', '609a913854eed.jpg', 'staff', '1', 'no', 'no', NULL, NULL, '2021-05-11 06:14:16', NULL),
+(1, NULL, NULL, 1, 'AN Rajin', 'admin@gmail.com', NULL, '$2y$10$WNc2cr7PId61Qi2BtMd/a.kKoLjtgUnGFxakNSrgWwOVTcH7wO4PS', 'AN Rajin.jpg', 'staff', '1', 'no', 'no', NULL, NULL, '2021-06-05 21:59:42', NULL),
 (5, NULL, 1, NULL, 'Teacher', 'tech@gmail.com', NULL, '$2y$10$yGqL2ISs56clbiAo5RrXOescCeflldQu21ppVkEpwqnTEnNa/pvNC', '050521-040500.jpg', 'teacher', '0', 'no', 'no', NULL, '2021-05-04 22:05:00', '2021-05-04 22:05:00', NULL),
 (6, NULL, 1, NULL, 'Student', 'std@gmail.com', NULL, '$2y$10$zRqOwHR504r5MgIJVm92/ufIlOUjkGIVrOOQg7TFjLjC8NfwMf1pq', '60a12cc1a6632-1621175489.jpg', 'student', '0', 'no', 'no', NULL, '2021-05-04 22:06:31', '2021-05-16 06:31:29', NULL);
 
@@ -766,7 +771,7 @@ ALTER TABLE `assesments`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `courses_teachers`
@@ -850,7 +855,7 @@ ALTER TABLE `temp_user_photos`
 -- AUTO_INCREMENT for table `unit_progress`
 --
 ALTER TABLE `unit_progress`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`

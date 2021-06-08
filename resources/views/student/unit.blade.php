@@ -45,8 +45,6 @@
                 </div>
                 <!-- END -->
                 <div class="my-4">
-                    <strong class="text-dark-gray">DESCRIPTION</strong>
-                    <br>
                     <p class="text-justify">
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis,
                         necessitatibus consequatur asperiores consectetur, ea corrupti sapiente dolorum quibusdam accusamus
@@ -106,8 +104,6 @@
                                             <img src="{{ asset('assets/images/steps/' . $getStep->thumbnail) }}" alt=""
                                                 class="img-fluid py-5" style="max-width: 150px;">
                                             <div class="my-4">
-                                                <strong class="text-dark-gray">DESCRIPTION</strong>
-                                                <br>
                                                 <p class="text-justify">
                                                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis,
                                                     necessitatibus consequatur asperiores consectetur, ea corrupti sapiente

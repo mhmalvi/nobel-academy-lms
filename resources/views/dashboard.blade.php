@@ -59,14 +59,15 @@
                     </div>
                 </div>
 
-        <div class="row">
-            <div class="col-lg-8">
-
-                <div class="card">
-                    <img src="{{ asset('assets/images/thought-catalog-214785.jpg') }}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="" class="headings-color">UI Design &amp; Code</a></h5>
-                        <p class="card-text">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <img src="{{ asset('assets/images/thought-catalog-214785.jpg') }}" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="" class="headings-color">UI Design &amp; Code</a>
+                                </h5>
+                                <p class="card-text">
 
                                 </p>
                             </div>
@@ -116,7 +117,7 @@
                                 </div>
                             </div> 
                         @empty
-                            
+                            <p class="text-center py-3">No announcements posted</p>
                         @endforelse
                     </div>
                     <div class="card-footer text-center border-0">

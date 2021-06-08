@@ -15,7 +15,7 @@ class CourseResource extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection->map(function ($res) {
+            'data' => $this->collection->map(function($res){
                 $data = [
                     'UniqueId' => $res->id,
                     'Code' => $res->course_code,
