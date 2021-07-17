@@ -112,6 +112,6 @@ class FileController extends Controller
      */
     public function fileDownload($file)
     {
-        return Storage::download(asset('storage/courses/units/' . $file));
+        return response()->download(public_path("storage/" . $file));
     }
 }
