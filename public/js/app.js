@@ -19914,7 +19914,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      oldPassword: "",
+      newPassword: "",
+      password_confirmation: "",
+      isLoading: false,
+      success: null,
+      errors: []
+    };
+  },
+  methods: {
+    passwordMatched: function passwordMatched() {
+      if (this.newPassword == this.password_confirmation) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.isLoading = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("update-password", {
+        oldPassword: this.oldPassword,
+        password: this.newPassword,
+        password_confirmation: this.password_confirmation
+      }).then(function (res) {
+        _this.oldPassword = "";
+        _this.newPassword = "";
+        _this.password_confirmation = "";
+        _this.isLoading = false;
+        _this.success = res.data.msg;
+      })["catch"](function (err) {
+        _this.isLoading = false;
+        alert("Invalid request. Please Try arain");
+      });
+    }
+  },
+  computed: {
+    isValid: function isValid() {
+      return this.oldPassword && this.newPassword && this.passwordMatched() && !this.isLoading;
+    }
+  }
+});
 
 /***/ }),
 
@@ -19931,13 +19978,113 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "row no-gutters"
+};
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row no-gutters\"><div class=\"col-lg-4 card-body\"><p><strong class=\"headings-color\">Update Your Password</strong></p><p class=\"text-muted\">Change your password.</p></div><div class=\"col-lg-8 card-form__body card-body\"><div class=\"form-group\"><label for=\"opass\">Old Password</label><input style=\"width:470px;\" id=\"opass\" name=\"opass\" type=\"password\" class=\"form-control\" placeholder=\"Old password\"></div><div class=\"form-group\"><label for=\"npass\">New Password</label><input style=\"width:470px;\" id=\"npass\" name=\"npass\" type=\"password\" class=\"form-control\" placeholder=\"New password\"><small class=\"invalid-feedback\">The new password must not be empty.</small></div><div class=\"form-group\"><label for=\"cpass\">Confirm Password</label><input style=\"width:470px;\" id=\"cpass\" name=\"cpass\" type=\"password\" class=\"form-control\" placeholder=\"Confirm password\"></div><button type=\"button\" class=\"btn btn-success\">Save</button></div></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-lg-4 card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
+  "class": "headings-color"
+}, "Update Your Password")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "text-muted"
+}, "Change your password.")], -1
+/* HOISTED */
+);
+
+var _hoisted_3 = {
+  "class": "col-lg-8 card-form__body card-body"
+};
+var _hoisted_4 = {
+  key: 0,
+  "class": "alert alert-soft-success d-flex  align-items-center",
+  role: "alert"
+};
+var _hoisted_5 = {
+  "class": "text-body"
+};
+var _hoisted_6 = {
+  "class": "form-group"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "opass"
+}, "Old Password", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = {
+  "class": "form-group"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "npass"
+}, "New Password", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
+  "class": "form-group"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "cpass"
+}, "Confirm Password", -1
+/* HOISTED */
+);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", {
-    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
-  }, [_hoisted_1], 32
+    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $options.onSubmit();
+    }, ["prevent"])),
+    id: "reset"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [$data.success ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.success), 1
+  /* TEXT */
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    style: {
+      "width": "470px"
+    },
+    type: "password",
+    "class": "form-control",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.oldPassword = $event;
+    }),
+    placeholder: "Old password",
+    autocomplete: "false"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.oldPassword]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    style: {
+      "width": "470px"
+    },
+    type: "password",
+    "class": "form-control",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.newPassword = $event;
+    }),
+    placeholder: "New password"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newPassword]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    style: {
+      "width": "470px"
+    },
+    type: "password",
+    "class": ["form-control", !$options.passwordMatched() && 'is-invalid'],
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.password_confirmation = $event;
+    }),
+    placeholder: "Confirm password"
+  }, null, 2
+  /* CLASS */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.password_confirmation]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    type: "submit",
+    "class": ["btn btn-lg btn-primary", $data.isLoading && 'is-loading'],
+    disabled: !$options.isValid
+  }, "Update Password", 10
+  /* CLASS, PROPS */
+  , ["disabled"])])])], 32
   /* HYDRATE_EVENTS */
   );
 }
@@ -37719,6 +37866,18 @@ function compileToFunction(template, options) {
 /******/ 	// It's empty as some runtime module handles the default behavior
 /******/ 	__webpack_require__.x = x => {};
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
