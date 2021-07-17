@@ -83,8 +83,9 @@ Route::prefix('files')->group(function () {
  * Users
  */
 Route::prefix('users')->group(function () {
-    Route::view('/', 'admin.users.create')->name('user.create');
-    Route::post('/', 'UsersController@store');
+    Route::get('/', 'UsersController@index')->name('users');
+    Route::view('/create', 'admin.users.create')->name('user.create');
+    Route::post('/create', 'UsersController@store');
 });
 
 

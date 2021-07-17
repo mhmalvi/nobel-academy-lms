@@ -15,6 +15,17 @@ class UsersController extends Controller
     /**
      * 
      */
+    public function index()
+    {
+        $users = User::with('info')->paginate(10);
+
+        return view('admin.users.index', compact('users'));
+    }
+
+
+    /**
+     * 
+     */
     public function store(CreateUserRequest $request)
     {
         try {

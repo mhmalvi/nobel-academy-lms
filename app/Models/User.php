@@ -51,7 +51,7 @@ class User extends Authenticatable
 
 
     /**
-     * Set Password Hasable
+     * 
      */
     public function setNameAttribute($value)
     {
@@ -65,6 +65,23 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+
+    /**
+     * 
+     */
+    public function getUserTypeAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    /**
+     * User Info
+     */
+    public function info()
+    {
+        return $this->hasOne(UserInfo::class);
     }
 
 

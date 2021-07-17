@@ -64,23 +64,7 @@
                 </a>
             </li>
 
-
-            {{-- Instructor --}}
-            <li class="{{ request()->segment(2) === 'instructors' ? 'active' : '' }}">
-                <a href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i></i><span
-                        class="nav-label">Instructors</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li class="{{ Route::currentRouteName() === 'admin.instructor.add' ? 'active' : '' }}">
-                        <a href="{{ route('admin.instructor.add') }}">Add New Instructor</a>
-                    </li>
-                    <li class="{{ Route::currentRouteName() === 'admin.instructors' ? 'active' : '' }}">
-                        <a href="{{ route('admin.instructors') }}">Manage Instructors</a>
-                    </li>
-                </ul>
-            </li>
-
-
-            {{-- Student --}}
+            {{-- Users --}}
             <li class="{{ request()->segment(2) === 'students' ? 'active' : '' }}">
                 <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span
                         class="nav-label">Users</span><span class="fa arrow"></span></a>
@@ -90,7 +74,7 @@
                     </li>
                     <li
                         class="{{ Route::currentRouteName() === 'admin.students' || Route::currentRouteName() === 'admin.assign' ? 'active' : '' }}">
-                        <a href="{{ route('admin.students') }}">Manage Students</a>
+                        <a href="{{ route('admin.users') }}">Manage Users</a>
                     </li>
                 </ul>
             </li>
