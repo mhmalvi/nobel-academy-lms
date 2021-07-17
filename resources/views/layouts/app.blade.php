@@ -16,7 +16,7 @@
     <body class="layout-default">
         <div class="preloader"></div>
         <!-- Header Layout -->
-        <div class="mdk-header-layout js-mdk-header-layout">
+        <div class="mdk-header-layout js-mdk-header-layout" id="app">
             <!-- Header -->
             @include('layouts.header')
             <!-- // END Header -->
@@ -37,6 +37,8 @@
             <!-- // END header-layout__content -->
         </div>
         <!-- // END header-layout -->
+
+        <script src="{{ asset('js/app.js') }}"></script>
         @include('layouts.scripts')
     </body>
 </html>
