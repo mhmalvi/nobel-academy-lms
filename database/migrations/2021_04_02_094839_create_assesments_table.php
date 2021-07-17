@@ -19,22 +19,22 @@ class CreateAssesmentsTable extends Migration
 
             $table->unsignedBigInteger('student_id')->nullable();
             $table->foreign('student_id')
-                    ->references('id')->on('students')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            
+                ->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
-                    ->references('id')->on('courses')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            
+                ->references('id')->on('courses')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->foreign('unit_id')
-                    ->references('id')->on('course_units')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
-            
+                ->references('id')->on('course_units')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->text('links')->nullable();
             $table->dateTime('schedule')->nullable();
             $table->enum('status', ['pending', 'approved', 'reject'])->default('pending');

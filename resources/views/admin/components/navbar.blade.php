@@ -83,10 +83,10 @@
             {{-- Student --}}
             <li class="{{ request()->segment(2) === 'students' ? 'active' : '' }}">
                 <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span
-                        class="nav-label">Students</span><span class="fa arrow"></span></a>
+                        class="nav-label">Users</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="{{ Route::currentRouteName() === 'admin.student.enrollment' ? 'active' : '' }}">
-                        <a href="{{ route('admin.student.enrollment') }}">Add New Student</a>
+                        <a href="{{ route('admin.user.create') }}">Add New User</a>
                     </li>
                     <li
                         class="{{ Route::currentRouteName() === 'admin.students' || Route::currentRouteName() === 'admin.assign' ? 'active' : '' }}">

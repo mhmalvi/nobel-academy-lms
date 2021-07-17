@@ -16,13 +16,6 @@ class CreateCourseCategoriesTable extends Migration
         Schema::create('course_categories', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique()->nullable();
-
-            $table->unsignedBigInteger('action_user')->nullable();
-            $table->foreign('action_user')
-                    ->references('id')->on('users')
-                    ->onDelete('set null')
-                    ->onUpdate('cascade');
-            
             $table->string('category_code')->nullable();
             $table->string('category_name')->unique();
             $table->text('descriptions')->nullable();

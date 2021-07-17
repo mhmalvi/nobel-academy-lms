@@ -17,24 +17,18 @@ class CreateCoursesTeachersTable extends Migration
             $table->id();
             $table->string('uuid')->unique()->nullable();
 
-            $table->unsignedBigInteger('action_user')->nullable();
-            $table->foreign('action_user')
-                    ->references('id')->on('users')
-                    ->onDelete('set null')
-                    ->onUpdate('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->foreign('teacher_id')
-                    ->references('id')->on('teachers')
-                    ->onDelete('set null')
-                    ->onUpdate('cascade');
-            
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
-                    ->references('id')->on('courses')
-                    ->onDelete('set null')
-                    ->onUpdate('cascade');
-            
+                ->references('id')->on('courses')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

@@ -25,13 +25,14 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8|max:20',
             'fName' => 'required',
             'lName' => 'required',
             'phone' => 'required',
             'address' => 'required',
+            'user_type' => 'required',
             'avatar' => [
                 'image',
                 Rule::dimensions()->maxWidth(300)->maxHeight(300)->ratio(1 / 1),

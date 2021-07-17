@@ -15,10 +15,6 @@ class CreateActivationsTable extends Migration
     {
         Schema::create('activations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('action_user')->nullable();
-            $table->foreign('action_user')
-                    ->references('id')->on('users')
-                    ->onDelete('set null');
             $table->string('type');
             $table->enum('status', ['0', '1'])->default('0');
             $table->timestamps();

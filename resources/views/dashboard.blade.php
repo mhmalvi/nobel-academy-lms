@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="container-fluid page__container">
+    {{-- <div class="container-fluid page__container">
         <div class="row card-group-row">
             <div class="col-xl-8">
                 <div class="row">
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @push('js')
     <!-- Chart.js -->

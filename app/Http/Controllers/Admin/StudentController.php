@@ -71,14 +71,12 @@ class StudentController extends Controller
             }
 
             $data = [
-                'action_user' => Auth::id(),
                 'name' => Str::ucfirst($request->name),
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'password' => $request->password,
                 'photo' => $file,
                 'user_type' => 'student',
-                'action_user' => Auth::id()
             ];
 
             $user = User::create($data);

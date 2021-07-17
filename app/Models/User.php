@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,13 +24,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin',
         'photo',
         'user_type',
-        'action_user',
-        'is_suspended',
+        'isBanned',
         'role_id',
-        'has_info'
     ];
 
     /**
@@ -56,7 +53,17 @@ class User extends Authenticatable
     /**
      * Set Password Hasable
      */
-    public function setPasswordAttribute($value){
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst($value);
+    }
+
+
+    /**
+     * Set Password Hasable
+     */
+    public function setPasswordAttribute($value)
+    {
         $this->attributes['password'] = Hash::make($value);
     }
 
@@ -64,15 +71,17 @@ class User extends Authenticatable
     /**
      * Teacher
      */
-    public function teacher(){
+    public function teacher()
+    {
         return $this->hasOne(Teacher::class);
     }
 
-    
+
     /**
      * Student
      */
-    public function student(){
+    public function student()
+    {
         return $this->hasOne(Student::class);
     }
 
@@ -80,7 +89,16 @@ class User extends Authenticatable
     /**
      * Enrollments
      */
-    public function enrollments(){
+    public function enrollments()
+    {
         return $this->hasMany(Enrollment::class, 'action_user');
+    }
+
+    /**
+     * Check for admin
+     */
+    public function isAdmin()
+    {
+        return in_array($this->email, config('learnque.admins'));
     }
 }

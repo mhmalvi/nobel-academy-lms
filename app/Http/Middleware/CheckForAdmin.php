@@ -16,14 +16,15 @@ class CheckForAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        /**
-         * If Current user is Admin
-         * give access to all admin routes
-         */
-        if(auth()->user()->is_admin == 1){
-            return $next($request);
+        if (auth()->check()) {
+            if (auth()->user()->isAdmin()) {
+                return $next($request);
+            } else {
+                session()->flash('error', 'You are not authorized to perform this action.');
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
         }
-
-        abort(404);
     }
 }

@@ -13,8 +13,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $totalStd = DB::table('students')->count();
-        $totalTch = DB::table('teachers')->count();
+        $totalStd = 0;
+        $totalTch = 0;
         $totalCrs = DB::table('courses')->count();
         $totalUnits = DB::table('course_units')->count();
         return view('admin.index', compact('totalStd', 'totalTch', 'totalCrs', 'totalUnits'));

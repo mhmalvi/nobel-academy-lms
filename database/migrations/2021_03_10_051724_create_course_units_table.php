@@ -16,15 +16,11 @@ class CreateCourseUnitsTable extends Migration
         Schema::create('course_units', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique()->nullable();
-            $table->unsignedBigInteger('action_user')->nullable();
-            $table->foreign('action_user')
-                    ->references('id')->on('users')
-                    ->onDelete('set null');
             $table->unsignedBigInteger('course_id')->nullable();
             $table->foreign('course_id')
-                    ->references('id')->on('courses')
-                    ->onDelete('set null')
-                    ->onUpdate('cascade');
+                ->references('id')->on('courses')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
             $table->enum('unit_type', ['core', 'elective'])->nullable();
             $table->string('unit_code')->unique()->nullable();
             $table->string('unit_name');

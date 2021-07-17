@@ -80,6 +80,15 @@ Route::prefix('files')->group(function () {
 
 
 /**
+ * Users
+ */
+Route::prefix('users')->group(function () {
+    Route::view('/', 'admin.users.create')->name('user.create');
+    Route::post('/', 'UsersController@store');
+});
+
+
+/**
  * Student
  */
 Route::prefix('students')->group(function () {
