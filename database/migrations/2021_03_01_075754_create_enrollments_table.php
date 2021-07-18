@@ -35,6 +35,7 @@ class CreateEnrollmentsTable extends Migration
             $table->string('status')->nullable();
             $table->text('remark')->nullable();
             $table->timestamps();
+            $table->softDeletesTz($column = 'deleted_at', $precision = 0);
         });
     }
 

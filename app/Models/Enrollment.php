@@ -8,11 +8,11 @@ use App\Models\Student;
 use App\Models\Course;
 use App\Models\Teacher;
 use App\Models\User;
-use App\Support\AppCryption;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Enrollment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'action_user',
@@ -40,7 +40,8 @@ class Enrollment extends Model
     /**
      * Action User
      */
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'action_user');
     }
 
@@ -48,7 +49,8 @@ class Enrollment extends Model
     /**
      * 
      */
-    public function student(){
+    public function student()
+    {
         return $this->belongsTo(Student::class);
     }
 
@@ -56,7 +58,8 @@ class Enrollment extends Model
     /**
      * 
      */
-    public function course(){
+    public function course()
+    {
         return $this->belongsTo(Course::class);
     }
 
@@ -64,7 +67,8 @@ class Enrollment extends Model
     /**
      * 
      */
-    public function teacher(){
+    public function teacher()
+    {
         return $this->belongsTo(Teacher::class);
     }
 }

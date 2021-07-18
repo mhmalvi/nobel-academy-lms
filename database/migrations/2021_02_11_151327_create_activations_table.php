@@ -18,6 +18,7 @@ class CreateActivationsTable extends Migration
             $table->string('type');
             $table->enum('status', ['0', '1'])->default('0');
             $table->timestamps();
+            $table->softDeletesTz($column = 'deleted_at', $precision = 0);
         });
     }
 

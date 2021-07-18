@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->enum('isBanned', ['yes', 'no'])->default('no');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletesTz($column = 'deleted_at', $precision = 0);
         });
     }
 
