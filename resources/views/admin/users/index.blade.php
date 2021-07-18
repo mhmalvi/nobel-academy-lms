@@ -31,7 +31,11 @@
                             <div class="text-left mt-2 actions">
                                 <a href="">View</a>
                                 <a href="">Edit</a>
-                                <a href="">Trash</a>
+                                <a href="javascript:void(0)" onclick="if(confirm('Are you sure to delete?')){document.getElementById('user{{$item->id}}').submit();}">Trash</a>
+                                <form action="{{route('admin.user.remove', $item->id)}}" method="post" id="user{{$item->id}}">
+                                @csrf
+                                @method('delete')
+                                </form>
                             </div>
                         </td>
                         <td width="20%">{{$item->email}}</td>

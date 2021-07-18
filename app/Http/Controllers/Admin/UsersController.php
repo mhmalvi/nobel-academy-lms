@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-use App\Models\UserInfo;
 use App\Models\Enrollment;
 use App\Exceptions\AppExceptions;
 use App\Http\Requests\CreateUserRequest;
@@ -43,12 +41,31 @@ class UsersController extends Controller
 
                 return redirect()->route('admin.assign', $user->id);
             } else {
-                return back();
+                $notification = [
+                    'message'   =>  "successfully saved",
+                    'alert-type'    =>  'success'
+                ];
+                return back()->with($notification);
             }
         } catch (\Throwable $th) {
             /**
              * Return the exceptions
              */
+            return redirect()->back()->with(AppExceptions::throwback($th));
+        }
+    }
+
+
+    /**
+     * 
+     */
+    public function destroy($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return back();
+        } catch (\Throwable $th) {
             return redirect()->back()->with(AppExceptions::throwback($th));
         }
     }

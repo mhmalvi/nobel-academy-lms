@@ -102,8 +102,8 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="avater">User Image</label>
-                                <input type="file" name="avater" id="avater" class="form-control">
+                                <label for="avatar">User Image</label>
+                                <input type="file" name="avatar" id="avatar" class="form-control">
                             </div>
                         </div>
                     </div>
