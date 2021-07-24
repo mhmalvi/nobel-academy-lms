@@ -20,7 +20,7 @@ class CheckForUser
          * if current user is an admin
          * then restrict access to nornal user routes
          */
-        if(auth()->user()->is_admin == 1){
+        if (auth()->user()->isAdmin()) {
             abort(404);
         }
 
