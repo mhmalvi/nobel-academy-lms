@@ -23,10 +23,10 @@ Route::prefix('course')->group(function () {
 
     //courses
     Route::get('/', 'CourseController@index')->name('courses');
-    Route::get('create', 'CourseController@create')->name('course.add');
+    Route::view('create', 'admin.course.create')->name('course.add');
     Route::post('create', 'CourseController@store');
     Route::get('all-courses', 'CourseController@getData');
-    Route::get('/get-course', 'CourseController@edit');
+    Route::get('get-course', 'CourseController@edit');
     Route::put('update/{id}', 'CourseController@update')->name('course.update');
     Route::delete('remove', 'CourseController@destroy');
 

@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class CreateCourseRequest extends FormRequest
 {
@@ -32,5 +33,36 @@ class CreateCourseRequest extends FormRequest
             'files[]' => 'mimes:pdf,docx,xlxs,ppt|max:2048',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
+    }
+
+
+    public function save()
+    {
+        $course = Course::create([
+            'course_code' => Str::upper($this->course_code),
+            'course_name' => Str::title($this->course_name),
+            'course_category_id' => ($this->has('category')) ? $this->category : null,
+            'course_units' => ($this->has('units')) ? $this->units : null,
+            'descriptions' => ($this->has('descriptions')) ? $this->descriptions : null,
+            'course_thumbnail' => $this->hasFile('image') ?
+                $this->saveImage($this->file('image')) : null
+        ]);
+
+        return $course;
+    }
+
+
+    public function saveImage($imageFile)
+    {
+        $image = $imageFile->getClientOriginalName();
+
+        //check if directory exist or not
+        if (!Storage::exists("public/courses")) {
+            Storage::makeDirectory("public/courses");
+        }
+
+        Storage::putFileAs('public/courses', $imageFile, $image);
+
+        return $image;
     }
 }

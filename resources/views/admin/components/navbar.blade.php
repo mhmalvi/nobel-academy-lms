@@ -26,6 +26,20 @@
                 </a>
             </li>
 
+            {{-- Users --}}
+            <li class="{{ request()->segment(2) === 'users' ? 'active' : '' }}">
+                <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span
+                        class="nav-label">Users</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="{{ Route::currentRouteName() === 'admin.user.create' ? 'active' : '' }}">
+                        <a href="{{ route('admin.user.create') }}">Add New User</a>
+                    </li>
+                    <li
+                        class="{{ Route::currentRouteName() === 'admin.users' || Route::currentRouteName() === 'admin.assign' ? 'active' : '' }}">
+                        <a href="{{ route('admin.users') }}">Manage Users</a>
+                    </li>
+                </ul>
+            </li>
 
             {{-- Courses --}}
             <li class="{{ request()->segment(2) === 'course' ? 'active' : '' }}">
@@ -33,16 +47,16 @@
                         class="nav-label">Course</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li class="{{ Route::currentRouteName() === 'admin.course.category' ? 'active' : '' }}">
-                        <a href="{{ route('admin.course.category') }}">Manage Categories</a>
+                        <a href="{{ route('admin.course.category') }}">Categories</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'admin.courses' ? 'active' : '' }}">
-                        <a href="{{ route('admin.courses') }}">Manage Courses</a>
+                        <a href="{{ route('admin.courses') }}">Courses</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'admin.units' ? 'active' : '' }}">
-                        <a href="{{ route('admin.units') }}">Manage Units</a>
+                        <a href="{{ route('admin.units') }}">Units</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'admin.course.steps' ? 'active' : '' }}">
-                        <a href="{{ route('admin.course.steps') }}">Manage Steps</a>
+                        <a href="{{ route('admin.course.steps') }}">Steps</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'admin.share.resource' ? 'active' : '' }}">
                         <a href="{{ route('admin.share.resource') }}">Share Resources</a>
@@ -62,21 +76,6 @@
                         <span class="label label-info float-right">{{ $assesment }}</span>
                     @endif
                 </a>
-            </li>
-
-            {{-- Users --}}
-            <li class="{{ request()->segment(2) === 'users' ? 'active' : '' }}">
-                <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span
-                        class="nav-label">Users</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li class="{{ Route::currentRouteName() === 'admin.user.create' ? 'active' : '' }}">
-                        <a href="{{ route('admin.user.create') }}">Add New User</a>
-                    </li>
-                    <li
-                        class="{{ Route::currentRouteName() === 'admin.users' || Route::currentRouteName() === 'admin.assign' ? 'active' : '' }}">
-                        <a href="{{ route('admin.users') }}">Manage Users</a>
-                    </li>
-                </ul>
             </li>
 
 

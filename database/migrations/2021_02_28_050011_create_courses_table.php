@@ -29,9 +29,6 @@ class CreateCoursesTable extends Migration
             $table->integer('course_units')->nullable();
             $table->text('descriptions')->nullable();
             $table->enum('is_published', ['y', 'n'])->default('n');
-            $table->integer('total_enrolled')->default(0);
-            $table->integer('total_teachers')->default(0);
-            $table->integer('total_files')->default(0);
             $table->string('course_thumbnail')->nullable();
             $table->timestamps();
             $table->softDeletesTz($column = 'deleted_at', $precision = 0);
