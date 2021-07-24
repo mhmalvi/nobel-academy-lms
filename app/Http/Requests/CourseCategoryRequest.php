@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
+use App\Support\AppCryption;
+use App\Models\CourseCategory;
 
 class CourseCategoryRequest extends FormRequest
 {
@@ -28,5 +31,22 @@ class CourseCategoryRequest extends FormRequest
             'category_name' => 'required|string|unique:course_categories',
             'descriptions' => 'max:255'
         ];
+    }
+
+
+    public function createOrUpdate()
+    {
+        $id = [
+            'uuid' => ($this->id) ? AppCryption::encrypt($this->id) : null,
+        ];
+
+        $category = CourseCategory::updateOrCreate($id, [
+            'uuid' => Str::random(8),
+            'category_code' => ($this->code) ? Str::ucfirst($this->code) : null,
+            'category_name' => $this->category_name,
+            'descriptions' => $this->descriptions
+        ]);
+
+        return $category;
     }
 }

@@ -14,8 +14,7 @@ class CourseCategory extends Model
 
     protected $hidden = ['id'];
 
-    protected $fillable = ['uuid', 'action_user', 'category_code', 'category_name', 'descriptions'];
-
+    protected $guarded = [];
 
     /**
      * Encrypt uuid
@@ -23,6 +22,14 @@ class CourseCategory extends Model
     public function setUuidAttribute($value)
     {
         $this->attributes['uuid'] = AppCryption::encrypt($value);
+    }
+
+    /**
+     * Encrypt uuid
+     */
+    public function getUuidAttribute($value)
+    {
+        return AppCryption::decrypt($value);
     }
 
     /**

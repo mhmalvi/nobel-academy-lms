@@ -15,7 +15,7 @@ class CourseCategory extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection->map(function($res){
+            'data' => $this->collection->map(function ($res) {
                 $data = [
                     'Id' => $res->uuid,
                     'Code' => $res->category_code,
