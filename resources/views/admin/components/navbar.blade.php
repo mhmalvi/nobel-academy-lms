@@ -56,24 +56,24 @@
                 $assesment = \App\Models\Assesment::where('status', 'pending')->sum('status');
             @endphp
             <li class="{{ Route::currentRouteName() === 'admin.assesments' ? 'active' : '' }}">
-                <a href="{{route('admin.assesments')}}"><i class="fa fa-magic"></i> 
+                <a href="{{ route('admin.assesments') }}"><i class="fa fa-magic"></i>
                     <span class="nav-label">Assesment</span>&nbsp;
                     @if ($assesment > 0)
-                        <span class="label label-info float-right">{{$assesment}}</span>
+                        <span class="label label-info float-right">{{ $assesment }}</span>
                     @endif
                 </a>
             </li>
 
             {{-- Users --}}
-            <li class="{{ request()->segment(2) === 'students' ? 'active' : '' }}">
+            <li class="{{ request()->segment(2) === 'users' ? 'active' : '' }}">
                 <a href="javascript:void(0)"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span
                         class="nav-label">Users</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="{{ Route::currentRouteName() === 'admin.student.enrollment' ? 'active' : '' }}">
+                    <li class="{{ Route::currentRouteName() === 'admin.user.create' ? 'active' : '' }}">
                         <a href="{{ route('admin.user.create') }}">Add New User</a>
                     </li>
                     <li
-                        class="{{ Route::currentRouteName() === 'admin.students' || Route::currentRouteName() === 'admin.assign' ? 'active' : '' }}">
+                        class="{{ Route::currentRouteName() === 'admin.users' || Route::currentRouteName() === 'admin.assign' ? 'active' : '' }}">
                         <a href="{{ route('admin.users') }}">Manage Users</a>
                     </li>
                 </ul>

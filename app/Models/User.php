@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Teacher;
-use App\Models\Student;
 use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
@@ -77,33 +75,6 @@ class User extends Authenticatable
     }
 
     /**
-     * User Info
-     */
-    public function info()
-    {
-        return $this->hasOne(UserInfo::class);
-    }
-
-
-    /**
-     * Teacher
-     */
-    public function teacher()
-    {
-        return $this->hasOne(Teacher::class);
-    }
-
-
-    /**
-     * Student
-     */
-    public function student()
-    {
-        return $this->hasOne(Student::class);
-    }
-
-
-    /**
      * Enrollments
      */
     public function enrollments()
@@ -117,5 +88,13 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return in_array($this->email, config('learnque.admins'));
+    }
+
+    /**
+     * User Info
+     */
+    public function info()
+    {
+        return $this->hasOne(UserInfo::class);
     }
 }

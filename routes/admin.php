@@ -87,7 +87,9 @@ Route::prefix('users')->group(function () {
     Route::name('user.')->group(function () {
         Route::view('/create', 'admin.users.create')->name('create');
         Route::post('/create', 'UsersController@store');
+        Route::get('get', 'UsersController@show')->name('show');
         Route::delete('users/{id}', 'UsersController@destroy')->name('remove');
+        Route::get('trashed', 'UsersController@trashedRecords')->name('trashed');
     });
 });
 

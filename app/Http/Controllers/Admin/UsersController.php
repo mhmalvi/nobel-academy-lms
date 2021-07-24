@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Enrollment;
 use App\Exceptions\AppExceptions;
 use App\Http\Requests\CreateUserRequest;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -17,6 +18,16 @@ class UsersController extends Controller
     {
         $users = User::with('info')->paginate(10);
 
+        return view('admin.users.index', compact('users'));
+    }
+
+
+    /**
+     * 
+     */
+    public function show(Request $request)
+    {
+        $users = User::with('info')->where('user_type', $request->userType)->paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -45,7 +56,7 @@ class UsersController extends Controller
                     'message'   =>  "successfully saved",
                     'alert-type'    =>  'success'
                 ];
-                return back()->with($notification);
+                return redirect()->route('admin.users')->with($notification);
             }
         } catch (\Throwable $th) {
             /**
@@ -68,5 +79,16 @@ class UsersController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with(AppExceptions::throwback($th));
         }
+    }
+
+
+    /**
+     * 
+     */
+    public function trashedRecords()
+    {
+        $users = User::onlyTrashed()->paginate(10);
+
+        return view('admin.users.index', compact('users'));
     }
 }
