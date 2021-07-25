@@ -97,13 +97,13 @@
                                             <div class="table-responsive py-2">
                                                 <table class="table table-striped table-hover" id="core">
                                                     <tbody>
-                                                        @forelse (\App\Models\CourseUnit::where('course_id', $user->enrollments->course_id)->where('unit_type', 'core') as $item)
+                                                        @forelse (\App\Models\CourseUnit::where('course_id', $user->enrollments->course_id)->where('unit_type', 'core')->get() as $item)
                                                             <tr>
                                                                 <td width="10%">
                                                                     <input type="hidden" name="steps[]" value="1">
                                                                     <input type="checkbox" class="i-checks unit"
                                                                         name="units[]" value="{{ $item->unit_code }}"
-                                                                        {{ !is_null($student->enrollment->core_units) && in_array($item->unit_code, $student->enrollment->core_units) ? 'checked' : '' }} />
+                                                                        {{ !is_null($user->enrollments->core_units) && in_array($item->unit_code, $user->enrollments->core_units) ? 'checked' : '' }} />
                                                                 </td>
                                                                 <td width="90%">{{ $item->unit_code }} -
                                                                     {{ $item->unit_name }}
@@ -122,7 +122,7 @@
                                             <div class="table-responsive py-2">
                                                 <table class="table table-striped table-hover">
                                                     <tbody>
-                                                        @forelse (\App\Models\CourseUnit::where('course_id', $user->enrollments->course_id)->where('unit_type', 'elective') as $item)
+                                                        @forelse (\App\Models\CourseUnit::where('course_id', $user->enrollments->course_id)->where('unit_type', 'elective')->get() as $item)
                                                             <tr>
                                                                 <td width="10%">
                                                                     <input type="hidden" name="steps[]" value="1">
@@ -189,7 +189,7 @@
                 var code = $(this).val();
 
                 $.ajax({
-                    url: "{!! route('admin.remove.assign', Auth::user()->id) !!}",
+                    url: "{!! route('admin.remove.assign', $user->id) !!}",
                     method: "DELETE",
                     data: {
                         code: code
