@@ -49,6 +49,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('edit-profile', 'AppController@updateProfileInfo');
 
     Route::get('announcements/{id}', 'AppController@notice')->name('notice');
+
+    Route::view('class', 'pages.class')->name('class');
 });
 
 require __DIR__ . '/auth.php';

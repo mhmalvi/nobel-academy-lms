@@ -22,8 +22,8 @@
                         <i class="fa fa-book-open text-white icon-18pt"></i>
                     </span>
                 </div>
-                <a href="{{ route('unit', auth()->user()->progress->course_unit_id) }}" class="text-dark">
-                    <strong>Current Unit</strong>
+                <a href="{{ route('class') }}" class="text-dark">
+                    <strong>Class Works</strong>
                 </a>
             </div>
         </div>
