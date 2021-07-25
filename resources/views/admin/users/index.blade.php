@@ -38,10 +38,9 @@
                     <tr>
                         <td width="30%">
                             {{ $item->name }}
-
                             <div class="text-left mt-2 actions">
                                 @if (is_null($item->deleted_at))
-                                    <a href="">Edit</a>
+                                    <a href="{{ route('admin.user.profile', $item->id) }}">Edit</a>
                                     @if (!$item->isAdmin())
                                         <a href="javascript:void(0)"
                                             onclick="if(confirm('Are you sure to delete?')){document.getElementById('user{{ $item->id }}').submit();}">Trash</a>

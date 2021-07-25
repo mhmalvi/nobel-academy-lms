@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use App\Support\AppCryption;
 
 class User extends Authenticatable
 {
@@ -49,6 +50,23 @@ class User extends Authenticatable
 
 
     /**
+     * Encrypt uuid
+     */
+    public function setUuidAttribute($value)
+    {
+        $this->attributes['uuid'] = AppCryption::encrypt($value);
+    }
+
+    /**
+     * Encrypt uuid
+     */
+    public function getUuidAttribute($value)
+    {
+        return AppCryption::decrypt($value);
+    }
+
+
+    /**
      * 
      */
     public function setNameAttribute($value)
@@ -79,7 +97,7 @@ class User extends Authenticatable
      */
     public function enrollments()
     {
-        return $this->hasMany(Enrollment::class, 'action_user');
+        return $this->hasOne(Enrollment::class, 'student_id');
     }
 
     /**

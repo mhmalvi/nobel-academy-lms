@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('content')
+@section('title', 'Dashboard')
 
+@section('content')
     <div class="container-fluid page__heading-container">
         <div class="page__heading d-flex align-items-end">
             <div class="flex">
@@ -24,7 +25,8 @@
                     <div class="col-xl-6 col-md-6 card-group-row__col">
                         <div class="card card-group-row__card card-body flex-row align-items-center">
                             <div class="position-relative mr-2">
-                                <div class="text-center fullbleed d-flex align-items-center justify-content-center flex-column z-0">
+                                <div
+                                    class="text-center fullbleed d-flex align-items-center justify-content-center flex-column z-0">
                                     <h4 class="text-danger mb-0">
                                         @php
                                             $lastStep = $lastProgress->complete_step == 0 ? 1 : $lastProgress->complete_step;
@@ -60,7 +62,7 @@
                 </div>
             </div>
             <div class="col-xl-4">
-                                <div class="card">
+                <div class="card">
                     <div class="card-header bg-white">
                         <h4 class="card-header__title">
                             <span class="material-icons">announcement</span>&nbsp;
@@ -72,34 +74,36 @@
                             <div class="alert alert-soft-light d-flex align-items-center" role="alert">
                                 <i class="material-icons mr-3">info</i>
                                 <div class="text-body">
-                                    <a href="{{route('notice', $item->id)}}" class="text-dark" style="text-decoration: none;">
-                                        {{$item->subject}}
+                                    <a href="{{ route('notice', $item->id) }}" class="text-dark"
+                                        style="text-decoration: none;">
+                                        {{ $item->subject }}
                                     </a>
                                     <span class="badge badge-pill badge-primary">
                                         @php
-                                            function timeago($date) {
-                                                $timestamp = strtotime($date);	
-                                                
-                                                $strTime = array("second", "minute", "hour", "day", "month", "year");
-                                                $length = array("60","60","24","30","12","10");
-                                        
+                                            function timeago($date)
+                                            {
+                                                $timestamp = strtotime($date);
+                                            
+                                                $strTime = ['second', 'minute', 'hour', 'day', 'month', 'year'];
+                                                $length = ['60', '60', '24', '30', '12', '10'];
+                                            
                                                 $currentTime = time();
-                                                if($currentTime >= $timestamp) {
-                                                    $diff     = time()- $timestamp;
-                                                    for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
-                                                    $diff = $diff / $length[$i];
+                                                if ($currentTime >= $timestamp) {
+                                                    $diff = time() - $timestamp;
+                                                    for ($i = 0; $diff >= $length[$i] && $i < count($length) - 1; $i++) {
+                                                        $diff = $diff / $length[$i];
                                                     }
-
+                                            
                                                     $diff = round($diff);
-                                                    return $diff . " " . $strTime[$i] . "(s) ago ";
+                                                    return $diff . ' ' . $strTime[$i] . '(s) ago ';
                                                 }
                                             }
-
+                                            
                                             echo timeago($item->created_at);
                                         @endphp
                                     </span>
                                 </div>
-                            </div> 
+                            </div>
                         @empty
                             <p class="text-center py-3">No announcements posted</p>
                         @endforelse

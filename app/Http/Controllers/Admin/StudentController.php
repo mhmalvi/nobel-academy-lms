@@ -138,9 +138,9 @@ class StudentController extends Controller
      */
     public function profile(int $id)
     {
-        $student = Student::with('enrollment')->findOrFail($id);
-        $units = CourseUnit::where('course_id', $student->enrollment->course->id)->get();
-        return view('admin.students.profile', compact('student', 'units'));
+        $user = User::with(['enrollments', 'info'])->findOrFail($id);
+        $units = CourseUnit::where('course_id', $user->enrollments->course_id)->get();
+        return view('admin.users.profile', compact('user', 'units'));
     }
 
 

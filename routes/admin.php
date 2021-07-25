@@ -90,6 +90,7 @@ Route::prefix('users')->group(function () {
         Route::get('get', 'UsersController@show')->name('show');
         Route::delete('users/{id}', 'UsersController@destroy')->name('remove');
         Route::get('trashed', 'UsersController@trashedRecords')->name('trashed');
+        Route::get('{id}/profile', 'UsersController@profile')->name('profile');
     });
 });
 
@@ -109,7 +110,7 @@ Route::prefix('students')->group(function () {
     Route::get('enrollment', 'StudentController@create')->name('student.enrollment');
     Route::post('enrollment', 'StudentController@store');
 
-    Route::get('{id}/profile', 'StudentController@profile')->name('assign');
+
     Route::post('{id}/assign-unit', 'CourseUnitController@assign')->name('unit.assign');
     Route::delete('{id}/remove-assigned-unit', 'CourseUnitController@removeAssignedUnit')->name('remove.assign');
 });

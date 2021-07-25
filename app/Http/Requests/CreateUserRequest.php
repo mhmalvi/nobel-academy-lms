@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use App\Models\UserInfo;
+use Illuminate\Support\Str;
 
 class CreateUserRequest extends FormRequest
 {
@@ -52,6 +53,7 @@ class CreateUserRequest extends FormRequest
     {
         return
             User::create([
+                'uuid' => Str::random(8),
                 'name' => $this->name,
                 'email' => $this->email,
                 'password' => $this->password,

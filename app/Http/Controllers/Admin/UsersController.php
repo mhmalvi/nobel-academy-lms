@@ -8,6 +8,8 @@ use App\Models\Enrollment;
 use App\Exceptions\AppExceptions;
 use App\Http\Requests\CreateUserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\CourseUnit;
 
 class UsersController extends Controller
 {
@@ -44,13 +46,14 @@ class UsersController extends Controller
                 $request->saveInfo($user);
             }
 
-            if ($user->user_type == 'student' && $request->has('course_id')) {
+            if ($user->user_type == 'Student' && $request->has('course_id')) {
                 Enrollment::create([
+                    'uuid' => Str::random(8),
                     'student_id' => $user->id,
-                    'course_id' => $this->course_id,
+                    'course_id' => $request->course_id,
                 ]);
 
-                return redirect()->route('admin.assign', $user->id);
+                return redirect()->route('admin.user.profile', $user->id);
             } else {
                 $notification = [
                     'message'   =>  "successfully saved",
@@ -90,5 +93,15 @@ class UsersController extends Controller
         $users = User::onlyTrashed()->paginate(10);
 
         return view('admin.users.index', compact('users'));
+    }
+
+
+    /**
+     * Profile
+     */
+    public function profile($id)
+    {
+        $user = User::with(['enrollments', 'info'])->findOrFail($id);
+        return view('admin.users.profile', compact('user'));
     }
 }
