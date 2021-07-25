@@ -9,15 +9,7 @@ class UnitProgress extends Model
 {
     use HasFactory;
 
-    protected $fillable = 
-    [
-        'uuid', 
-        'action_user', 
-        'student_id', 
-        'course_id', 
-        'course_unit_id',
-        'steps', 
-    ];
+    protected $guarded = [];
 
     protected $cast = [
         'steps' => 'array'
@@ -26,7 +18,16 @@ class UnitProgress extends Model
     /**
      * 
      */
-    public function courseUnit(){
+    public function user()
+    {
+        $this->belongsTo(User::class, 'student_id');
+    }
+
+    /**
+     * 
+     */
+    public function courseUnit()
+    {
         return $this->belongsTo(CourseUnit::class);
     }
 }

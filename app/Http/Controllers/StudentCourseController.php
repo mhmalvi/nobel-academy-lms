@@ -38,7 +38,7 @@ class StudentCourseController extends Controller
         $steps = Step::all();
         $files = CourseUnitFiles::all();
         $unit = CourseUnit::where('id', $unique_id)->first();
-        $progress = UnitProgress::where('student_id', auth()->user()->student->id)->where('course_unit_id', $unit->id)->first();
+        $progress = UnitProgress::where('student_id', Auth::id())->where('course_unit_id', $unit->id)->first();
 
         return view('student.unit', compact('unit', 'files', 'steps', 'progress'));
     }
@@ -54,7 +54,7 @@ class StudentCourseController extends Controller
         $files = CourseUnitFiles::all();
         $getStep = Step::with('files')->findOrFail($stepId);
         $unit = CourseUnit::with('progress')->where('id', $unitId)->first();
-        $progress = UnitProgress::where('student_id', auth()->user()->student->id)->where('course_unit_id', $unit->id)->first();
+        $progress = UnitProgress::where('student_id', Auth::id())->where('course_unit_id', $unit->id)->first();
         return view('student.unit', compact('unit', 'files', 'steps', 'getStep', 'progress'));
     }
 
@@ -66,7 +66,7 @@ class StudentCourseController extends Controller
     public function completeStep(Request $request, $unitId, $id)
     {
         $steps = Step::all();
-        $progress = UnitProgress::where('student_id', Auth::user()->student->id)->where('course_unit_id', $unitId)->first();
+        $progress = UnitProgress::where('student_id', Auth::id())->where('course_unit_id', $unitId)->first();
 
         if ($request->has('link') && count($steps) == $id) {
             $rules = [
@@ -80,7 +80,7 @@ class StudentCourseController extends Controller
             Validator::make($request->all(), $rules, $message)->validate();
 
             Assesment::create([
-                'student_id' => Auth::user()->student->id,
+                'student_id' => Auth::id(),
                 'unit_id' => $unitId,
                 'links' => $request->link
             ]);

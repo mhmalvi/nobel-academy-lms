@@ -30,8 +30,8 @@ class CreateEnrollmentsTable extends Migration
 
             $table->text('core_units')->nullable();
             $table->text('elective_units')->nullable();
+            $table->string('current_unit')->nullable();
             $table->enum('is_passed', ['y', 'n'])->default('n');
-            $table->enum('is_suspended', ['y', 'n'])->default('n');
             $table->string('status')->nullable();
             $table->text('remark')->nullable();
             $table->timestamps();

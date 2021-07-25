@@ -11,15 +11,6 @@
                     </a>
                 </li>
 
-                {{-- Calendar --}}
-                <li class="sidebar-menu-item {{ Route::currentRouteName() == 'calendar' ? 'active' : '' }}">
-                    <a class="sidebar-menu-button" href="{{ route('calendar') }}">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">date_range</i>
-                        <span class="sidebar-menu-text">Calendar</span>
-                    </a>
-                </li>
-
-
                 {{-- Profile --}}
                 <li class="sidebar-menu-item {{ Route::currentRouteName() == 'edit.profile' ? 'active' : '' }}">
                     <a class="sidebar-menu-button" href="{{ route('edit.profile') }}">
@@ -28,9 +19,9 @@
                     </a>
                 </li>
 
-                @if (Auth::user()->user_type == 'student')
+                @if (Auth::user()->user_type == 'Student')
                     @include('student.nav')
-                @elseif(Auth::user()->user_type == 'teacher')
+                @elseif(Auth::user()->user_type == 'Teacher')
                     @include('teacher.nav')
                 @endif
             </ul>

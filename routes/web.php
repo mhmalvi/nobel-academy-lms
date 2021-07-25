@@ -44,7 +44,6 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('download/{file}', 'FileController@fileDownload')->name('download.unitFile');
 
-    Route::get('calendar', 'CalendarController@index')->name('calendar');
 
     Route::get('edit-profile', 'AppController@userProfile')->name('edit.profile');
     Route::post('edit-profile', 'AppController@updateProfileInfo');

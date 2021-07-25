@@ -115,4 +115,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserInfo::class);
     }
+
+
+    /**
+     * 
+     */
+    public function progress()
+    {
+        return $this->hasOne(UnitProgress::class, 'student_id');
+    }
 }

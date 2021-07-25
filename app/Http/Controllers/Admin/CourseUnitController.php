@@ -365,12 +365,14 @@ class CourseUnitController extends Controller
             if (!is_null($core) && $unit->unit_type == 'core') {
                 $new = array_diff($core, array($request->code));
                 $enrollment->core_units = $new;
+                $enrollment->current_unit = $request->code;
                 $enrollment->save();
             }
 
             if (!is_null($elective) && $unit->unit_type == 'elective') {
-                array_push($elective, $unit->unit_code);
-                $enrollment->elective_units = $elective;
+                $new = array_diff($core, array($request->code));
+                $enrollment->elective_units = $new;
+                $enrollment->current_unit = $request->code;
                 $enrollment->save();
             }
 
