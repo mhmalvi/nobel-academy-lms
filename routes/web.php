@@ -45,8 +45,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('download/{file}', 'FileController@fileDownload')->name('download.unitFile');
 
 
-    Route::get('edit-profile', 'AppController@userProfile')->name('edit.profile');
-    Route::post('edit-profile', 'AppController@updateProfileInfo');
+    Route::view('edit-profile', 'profile')->name('edit.profile');
+    Route::put('edit-basic-info', 'ProfileController@updateBasicInfo');
 
     Route::get('announcements/{id}', 'AppController@notice')->name('notice');
 

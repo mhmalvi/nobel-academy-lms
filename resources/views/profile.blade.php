@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-@push('css')
-    <!-- Dropzone -->
-    <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.rtl.css') }}" rel="stylesheet">
-@endpush
+@section('title', 'My Profile')
+
+    @push('css')
+        <!-- Dropzone -->
+        <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.rtl.css') }}" rel="stylesheet">
+    @endpush
 
 @section('content')
     <div class="container-fluid page__heading-container">
@@ -25,7 +27,10 @@
         <form action="{{ route('edit.profile') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card card-form">
-
+                <basic-info name="{{ auth()->user()->name }}" fname="{{ auth()->user()->info->firstname }}"
+                    lname="{{ auth()->user()->info->lastname }}" email="{{ auth()->user()->email }}"
+                    phone="{{ auth()->user()->info->phone }}" address="{{ auth()->user()->info->address }}">
+                </basic-info>
             </div>
 
             <div class="card card-form">
@@ -42,30 +47,8 @@
                     </div>
                     <div class="col-lg-8 card-form__body card-body">
                         <div class="form-group">
-                            <label for="user">User Name</label>
-                            <input style="width: 470px;" id="user" name="name" type="text" class="form-control"
-                                placeholder="User name" value="{{ Auth::user()->name }}">
-                        </div>
-                        <div class="form-group">
                             <label for="avatar">Image</label>
                             <input style="width: 470px;" type="file" class="form-control" name="avatar" id="avatar" />
-                            {{-- <label>Avatar</label>
-                            <div class="dz-clickable media align-items-center" 
-                            data-toggle="dropzone" 
-                            data-dropzone-url="api/upload-profile-picture" 
-                            data-dropzone-clickable=".dz-clickable" 
-                            data-dropzone-files='["{{(!is_null(auth()->user()->photo)) ? asset('storage/users/'.auth()->user()->photo) : 'assets/images/account-add-photo.svg'}}"]'>
-                                <div class="dz-preview dz-file-preview dz-clickable mr-3">
-                                    <div class="avatar" style="width: 80px; height: 80px;">
-                                        <img src="{{(!is_null(auth()->user()->photo)) ? asset('storage/users/'.auth()->user()->photo) : 'assets/images/account-add-photo.svg'}}" 
-                                        class="avatar-img rounded" alt="..." 
-                                        data-dz-thumbnail>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <button type="button" class="btn btn-sm btn-primary dz-clickable">Choose photo</button>
-                                </div>
-                            </div> --}}
                         </div>
 
                         <button type="submit" class="btn btn-success">Save</button>

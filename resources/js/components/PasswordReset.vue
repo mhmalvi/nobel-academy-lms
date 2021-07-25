@@ -23,7 +23,7 @@
                     <label for="cpass">Confirm Password</label>
                     <input style="width: 470px;" type="password" class="form-control" :class="!passwordMatched() && 'is-invalid'" v-model="password_confirmation" placeholder="Confirm password" />
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary" :class="isLoading && 'is-loading'" :disabled="!isValid">Update Password</button>
+                <button type="submit" class="btn btn-lg btn-primary" :class="isLoading && 'is-loading'" :disabled="!isValid">Save</button>
             </div>
         </div>
     </form>

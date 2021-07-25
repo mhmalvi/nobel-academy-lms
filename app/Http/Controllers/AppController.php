@@ -54,15 +54,6 @@ class AppController extends Controller
     /**
      * 
      */
-    public function userProfile()
-    {
-        return view('profile');
-    }
-
-
-    /**
-     * 
-     */
     public function updateProfileInfo(Request $request)
     {
         try {
