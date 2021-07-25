@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Exceptions\AppExceptions;
+use App\Models\Announcement;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\UnitProgress;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller
 {
@@ -25,15 +26,15 @@ class AppController extends Controller
         $course = null;
         $progress = null;
         $lastProgress = null;
-        $notices = DB::table('announcements')->orderBy('created_at', 'desc')->take(5)->get();
+        $notices = Announcement::paginate(5);
 
-        if (Auth::user()->user_type === 'student') {
-            $enroll = Enrollment::where('student_id', Auth::user()->student->id)->first();
-            $progress = UnitProgress::where('student_id', Auth::user()->student->id)
+        if (Auth::user()->user_type === 'Student') {
+            $enroll = Enrollment::where('student_id', Auth::id())->first();
+            $progress = UnitProgress::where('student_id', Auth::id())
                 ->orderBy('created_at', 'desc')
                 ->get();
 
-            $lastProgress = UnitProgress::where('student_id', Auth::user()->student->id)
+            $lastProgress = UnitProgress::where('student_id', Auth::id())
                 ->orderBy('created_at', 'desc')
                 ->first();
             $course = Course::findOrFail($enroll->course_id);
@@ -131,7 +132,8 @@ class AppController extends Controller
     }
 
 
-    public function notice($id){
+    public function notice($id)
+    {
         try {
             $notice = DB::table('announcements')->where('id', $id)->first();
 

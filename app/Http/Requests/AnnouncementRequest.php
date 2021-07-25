@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Announcement;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AnnouncementRequest extends FormRequest
 {
@@ -28,5 +31,36 @@ class AnnouncementRequest extends FormRequest
             'descriptions' => 'required',
             'file' => 'image|mimes:png,jpg,jpeg|max:1048'
         ];
+    }
+
+
+    public function save()
+    {
+        $notice = Announcement::create(
+            [
+                'subject' => $this->subject,
+                'text' => $this->descriptions,
+                'is_approved' => 'y',
+                'approved_by' => Auth::id(),
+                'thumbnail' => $this->hasFile('file') ? $this->saveFile() : null
+            ]
+        );
+
+        return $notice;
+    }
+
+
+    public function saveFile()
+    {
+        $file = $this->file('file');
+        $name = $file->getClientOriginalName();
+
+        if (!Storage::exists("public/announcements")) {
+            Storage::makeDirectory("public/announcements");
+        }
+
+        Storage::putFileAs('public/announcements', $file, $name);
+
+        return $name;
     }
 }

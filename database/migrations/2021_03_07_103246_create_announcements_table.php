@@ -24,6 +24,7 @@ class CreateAnnouncementsTable extends Migration
             $table->foreign('approved_by')
                 ->references('id')->on('users')
                 ->onDelete('set null');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }

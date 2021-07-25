@@ -18,9 +18,13 @@
 
     <div class="container-fluid page__container">
         <div class="card">
-            <img src="{{asset('assets/1.jpg')}}" class="card-img-top" alt="...">
+            @if (!is_null($notice->thumbnail))
+                <img src="{{ asset('storage/announcements/' . $notice->thumbnail) }}" class="card-img-top" alt="post img">
+            @else
+                <img src="{{ asset('assets/1.jpg') }}" class="card-img-top" alt="post img">
+            @endif
             <div class="card-body">
-                <h2>{{$notice->subject}}</h2>
+                <h2>{{ $notice->subject }}</h2>
                 <p class="card-text">
                     {!! $notice->text !!}
                 </p>
