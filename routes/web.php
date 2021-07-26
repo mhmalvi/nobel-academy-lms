@@ -15,8 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/', 'AppController@index')->name('index');
-
     Route::get('/dashboard', 'AppController@index')->name('dashboard');
+
+    /**
+     * Course
+     */
+    Route::prefix('course')->group(function () {
+        Route::get('{course}', 'CourseController@show')->name('courses');
+    });
 
 
     /**

@@ -13,7 +13,7 @@ class CreateCourseTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_teachers', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('course_id');

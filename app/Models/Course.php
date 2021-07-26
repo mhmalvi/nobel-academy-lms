@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\User;
 use App\Models\CourseCategory;
 use App\Models\Enrollment;
-use App\Models\CoursesTeacher;
 use App\Models\CourseUnit;
 use App\Support\AppCryption;
+use App\Models\User;
 
 class Course extends Model
 {
@@ -18,19 +17,7 @@ class Course extends Model
 
     protected $hidden = ['action_user'];
 
-    protected $fillable = [
-        'action_user',
-        'course_code',
-        'course_name',
-        'course_category_id',
-        'course_units',
-        'descriptions',
-        'is_published',
-        'total_enrolled',
-        'total_teachers',
-        'total_files',
-        'course_thumbnail'
-    ];
+    protected $guarded = [];
 
 
     /**
@@ -40,8 +27,9 @@ class Course extends Model
         'created_at' => 'datetime:d-M-Y',
     ];
 
-    public function getCourseCategoryIdAttribute($value){
-        if(is_null($value)){
+    public function getCourseCategoryIdAttribute($value)
+    {
+        if (is_null($value)) {
             return 'Uncategorized';
         }
 
@@ -49,23 +37,22 @@ class Course extends Model
     }
 
 
-    public function getCreatedAtAttribute($value){
+    public function getCreatedAtAttribute($value)
+    {
         return date("M d, Y", strtotime($value));
     }
 
 
-    /**
-     * Each course is cretaed by one user
-     */
-    public function user(){
-        return $this->belongsTo(User::class, 'action_user');
+    public function course()
+    {
+        return "{$this->course_code} - {$this->course_name}";
     }
-
 
     /**
      * Each course belongs to atleast one category
      */
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(CourseCategory::class, 'course_category_id');
     }
 
@@ -73,7 +60,8 @@ class Course extends Model
     /**
      * A course have many units
      */
-    public function units(){
+    public function units()
+    {
         return $this->hasMany(CourseUnit::class);
     }
 
@@ -81,7 +69,8 @@ class Course extends Model
     /**
      * A course may have many enrollment
      */
-    public function enrollments(){
+    public function enrollments()
+    {
         return $this->hasMany(Enrollment::class);
     }
 
@@ -89,7 +78,19 @@ class Course extends Model
     /**
      * A course may have many teachers
      */
-    public function teachers(){
-        return $this->hasMany(CoursesTeacher::class);
+    public function courseTeacher()
+    {
+        return $this->belongsToMany(User::class, 'teachers', 'user_id', 'course_id');
+    }
+
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'course_code';
     }
 }

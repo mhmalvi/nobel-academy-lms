@@ -124,4 +124,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(UnitProgress::class, 'student_id');
     }
+
+
+    /**
+     * 
+     */
+    public function teacher()
+    {
+        return $this->belongsToMany(Course::class, 'teachers', 'user_id', 'course_id');
+    }
 }

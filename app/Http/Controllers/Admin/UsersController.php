@@ -7,9 +7,9 @@ use App\Models\User;
 use App\Models\Enrollment;
 use App\Exceptions\AppExceptions;
 use App\Http\Requests\CreateUserRequest;
+use App\Models\Teachers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\CourseUnit;
 
 class UsersController extends Controller
 {
@@ -52,19 +52,18 @@ class UsersController extends Controller
                     'student_id' => $user->id,
                     'course_id' => $request->course_id,
                 ]);
-
-                return redirect()->route('admin.user.profile', $user->id);
-            } else {
-                $notification = [
-                    'message'   =>  "successfully saved",
-                    'alert-type'    =>  'success'
-                ];
-                return redirect()->route('admin.users')->with($notification);
+            } elseif ($user->user_type == 'Teacher' && $request->has('course_id')) {
+                Teachers::create([
+                    'user_id' => $user->id,
+                    'course_id' => $request->course_id
+                ]);
             }
+            $notification = [
+                'message'   =>  "successfully saved",
+                'alert-type'    =>  'success'
+            ];
+            return redirect()->route('admin.user.profile', $user->id)->with($notification);
         } catch (\Throwable $th) {
-            /**
-             * Return the exceptions
-             */
             return redirect()->back()->with(AppExceptions::throwback($th));
         }
     }
