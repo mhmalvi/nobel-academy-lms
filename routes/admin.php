@@ -11,6 +11,31 @@ use Illuminate\Support\Facades\Route;
 Route::get('dashboard', 'HomeController@index')->name('dashboard');
 
 /**
+ * Users
+ */
+Route::prefix('users')->group(function () {
+    Route::get('/', 'UsersController@index')->name('users');
+    Route::name('user.')->group(function () {
+        Route::view('/create', 'admin.users.create')->name('create');
+        Route::post('/create', 'UsersController@store');
+        Route::get('get', 'UsersController@show')->name('show');
+        Route::delete('users/{id}', 'UsersController@destroy')->name('remove');
+        Route::get('trashed', 'UsersController@trashedRecords')->name('trashed');
+        Route::get('{id}/profile', 'UsersController@profile')->name('profile');
+    });
+});
+
+/**
+ * ClassRooms
+ */
+Route::prefix('class-rooms')->group(function () {
+    Route::get('/', 'ClassroomsController@index')->name('classrooms');
+    Route::name('classroom.')->group(function () {
+        Route::view('create', 'admin.classrooms.create')->name('create');
+    });
+});
+
+/**
  * Course
  */
 Route::prefix('course')->group(function () {
@@ -76,22 +101,6 @@ Route::post('get-unit', 'CourseUnitController@getUnits')->name('get.unit');
 Route::prefix('files')->group(function () {
     Route::get('units', 'CourseUnitController@files')->name('unit.files');
     Route::post('units', 'CourseUnitController@storeFile');
-});
-
-
-/**
- * Users
- */
-Route::prefix('users')->group(function () {
-    Route::get('/', 'UsersController@index')->name('users');
-    Route::name('user.')->group(function () {
-        Route::view('/create', 'admin.users.create')->name('create');
-        Route::post('/create', 'UsersController@store');
-        Route::get('get', 'UsersController@show')->name('show');
-        Route::delete('users/{id}', 'UsersController@destroy')->name('remove');
-        Route::get('trashed', 'UsersController@trashedRecords')->name('trashed');
-        Route::get('{id}/profile', 'UsersController@profile')->name('profile');
-    });
 });
 
 
