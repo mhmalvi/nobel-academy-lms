@@ -42,7 +42,7 @@
             </li>
 
             {{-- Classrooms --}}
-            <li class="{{ Route::currentRouteName() === 'admin.classrooms' ? 'active' : '' }}">
+            <li class="{{ request()->segment(2) === 'class-rooms' ? 'active' : '' }}">
                 <a href="{{ route('admin.classrooms') }}"><i class="fa fa-id-badge" aria-hidden="true"></i>
                     <span class="nav-label">Classrooms</span>
                 </a>

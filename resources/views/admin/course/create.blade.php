@@ -53,20 +53,6 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="instructor">Instructor(s)</label>
-                                    <select name="tutor_id[]" class="form-control" id="tutors" multiple>
-                                        @forelse (\App\Models\User::where('user_type', 'teacher')->get() as $item)
-                                            <option value={{ $item->id }}>
-                                                {{ $item->first_name }}&nbsp;{{ $item->last_name }}</option>
-                                        @empty
-
-                                        @endforelse
-                                    </select>
-                                    @error('tutor_id')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
                                     <label for="type">Total Units <small class="text-danger">*</small></label>
                                     <input type="text" name="units" class="form-control" placeholder="Total course units..."
                                         value="{{ old('units') }}" />

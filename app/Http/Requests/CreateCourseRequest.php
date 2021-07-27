@@ -39,6 +39,7 @@ class CreateCourseRequest extends FormRequest
     public function save()
     {
         $course = Course::create([
+            'uuid' => Str::random(8),
             'course_code' => Str::upper($this->course_code),
             'course_name' => Str::title($this->course_name),
             'course_category_id' => ($this->has('category')) ? $this->category : null,

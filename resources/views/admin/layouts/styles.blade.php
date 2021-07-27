@@ -9,6 +9,7 @@
 
 <link href="{{asset('assets/admin/css/animate.css')}}" rel="stylesheet">
 <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet">
+<link href="{{asset('assets/admin/css/custom.css')}}" rel="stylesheet">
 <style>
     .tox-statusbar__branding{
         display: none!important;

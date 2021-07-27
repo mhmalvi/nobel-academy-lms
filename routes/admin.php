@@ -32,6 +32,7 @@ Route::prefix('class-rooms')->group(function () {
     Route::get('/', 'ClassroomsController@index')->name('classrooms');
     Route::name('classroom.')->group(function () {
         Route::view('create', 'admin.classrooms.create')->name('create');
+        Route::post('create', 'ClassroomsController@store');
     });
 });
 

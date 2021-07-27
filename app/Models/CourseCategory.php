@@ -32,9 +32,7 @@ class CourseCategory extends Model
         return AppCryption::decrypt($value);
     }
 
-    /**
-     * Encrypt uuid
-     */
+
     public function setCategoryNameAttribute($value)
     {
         $this->attributes['category_name'] = ucfirst($value);

@@ -10,8 +10,6 @@ class Classroom extends Model
 {
     use HasFactory;
 
-    protected $hidden = ['id'];
-
     protected $guarded = [];
 
     /**
@@ -28,5 +26,26 @@ class Classroom extends Model
     public function getUuidAttribute($value)
     {
         return AppCryption::decrypt($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst($value);
+    }
+
+    public function setSectionAttribute($value)
+    {
+        $this->attributes['section'] = ucfirst($value);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date("M d, Y", strtotime($value));
+    }
+
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }

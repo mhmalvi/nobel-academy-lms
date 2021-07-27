@@ -19,6 +19,7 @@ class CreateClassroomsTable extends Migration
             $table->string('name');
             $table->string('section');
             $table->bigInteger('course_id');
+            $table->bigInteger('user_id');
             $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
