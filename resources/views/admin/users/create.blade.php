@@ -68,6 +68,20 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+                            <div class="form-group d-none" id="cls">
+                                <label for="class_id">Class</label>
+                                <select name="class_id" class="form-control">
+                                    <option value selected disabled>Select a class room</option>
+                                    @forelse (\App\Models\Classroom::all() as $item)
+                                        <option value={{ $item->id }}>{{ $item->name }} - {{$item->section}}</option>
+                                    @empty
+
+                                    @endforelse
+                                </select>
+                                @error('course_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,9 +143,24 @@
         $(document).ready(function() {
             $("#user_type").on("change", function() {
                 var val = $(this).val();
+                switch (val) {
+                    case "staff":
+                        $("#crs").addClass('d-none');
+                        $("#cls").addClass('d-none');
+                        break;
 
-                if (val == 'student' || val == 'teacher') {
-                    $("#crs").removeClass('d-none').hide().slideDown('slow');
+                    case "teacher":
+                        $("#crs").removeClass('d-none').hide().slideDown('slow');
+                        break;
+
+                    case "student":
+                        $("#crs").removeClass('d-none').hide().slideDown('slow');
+                        $("#cls").removeClass('d-none').hide().slideDown('slow');
+                        break;
+                    default:
+                        $("#crs").addClass('d-none');
+                        $("#cls").addClass('d-none');
+                        break;
                 }
             });
         });

@@ -42,6 +42,7 @@ class CreateUserRequest extends FormRequest
                 Rule::dimensions()->maxWidth(300)->maxHeight(300)->ratio(1 / 1),
                 'max:1048'
             ],
+            'class_id' => 'exclude_unless:user_type,student|required'
         ];
     }
 
@@ -59,6 +60,7 @@ class CreateUserRequest extends FormRequest
                 'password' => $this->password,
                 'photo' => ($this->hasFile('avatar')) ? $this->avater($this->file('avatar')) : null,
                 'user_type' => $this->user_type,
+                'classroom_id' => $this->class_id
             ]);
     }
 

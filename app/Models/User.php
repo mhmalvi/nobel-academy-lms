@@ -28,6 +28,7 @@ class User extends Authenticatable
         'user_type',
         'isBanned',
         'role_id',
+        'classroom_id'
     ];
 
     /**
