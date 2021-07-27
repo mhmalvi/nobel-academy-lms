@@ -9,6 +9,7 @@
 
 return [
     'admins' => [
-        'admin@learnque.com'
+        'admin@learnque.com',
+        'admin@gmail.com'
     ]
 ];
