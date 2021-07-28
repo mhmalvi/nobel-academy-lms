@@ -24,6 +24,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
         ]);
 
+        DB::table('user_infos')->insert([
+            'user_id' => 1
+        ]);
+
 
         foreach ($steps as $step) {
             DB::table('steps')->insert([
