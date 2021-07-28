@@ -24,16 +24,17 @@
                         <div class="ibox">
                             <div class="ibox-content product-box">
                                 <div class="product-imitation p-0">
-                                    <img src="{{asset('assets/admin/placeholder-image.png')}}" alt="thumbnail" class="img-fluid">
+                                    <img src="{{ asset('assets/admin/placeholder-image.png') }}" alt="thumbnail"
+                                        class="img-fluid">
                                 </div>
                                 <div class="product-desc">
                                     <span class="product-price">
-                                        {{$item->section}}
+                                        {{ $item->section }}
                                     </span>
-                                    <small class="text-muted">{{$item->created_at}}</small>
-                                    <a href="#" class="product-name">{{$item->name}}</a>
+                                    <small class="text-muted">{{ $item->created_at }}</small>
+                                    <a href="#" class="product-name">{{ $item->name }}</a>
                                     <div class="small m-t-xs">
-                                        {{$item->course->course()}}
+                                        {{ $item->course->course() }}
                                     </div>
                                     <div class="m-t text-righ">
 
@@ -47,7 +48,10 @@
                 @endforeach
             </div>
         @empty
-            
+            <div class="no-record">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <h4>No classroom created yet!</h4>
+            </div>
         @endforelse
     </div>
 @endsection
