@@ -16,3 +16,12 @@
         </li>
     @endforelse
 @endif
+
+@if (auth()->user()->classroomOfTeacher)
+    <li class="sidebar-menu-item {{ request()->segment(1) == 'classroom' ? 'active' : '' }}">
+        <a class="sidebar-menu-button" href="{{ route('classrooms') }}">
+            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">class</i>
+            <span class="sidebar-menu-text">Classrooms</span>
+        </a>
+    </li>
+@endif

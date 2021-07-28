@@ -26,7 +26,7 @@ class CreateClassroomRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:classrooms',
+            'name' => 'required|string|max:255',
             'section' => 'required|string|max:255',
             'course' => 'required',
             'teacher' => 'required'
@@ -41,7 +41,7 @@ class CreateClassroomRequest extends FormRequest
             'name' => $this->name,
             'section' => $this->section,
             'course_id' => $this->course,
-            'user_id' => $this->teacher
+            'teacher_id' => $this->teacher
         ]);
 
         return $class;

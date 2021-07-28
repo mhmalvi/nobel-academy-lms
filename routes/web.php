@@ -56,7 +56,10 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('announcements/{id}', 'AppController@notice')->name('notice');
 
-    Route::view('class', 'pages.class')->name('class');
+    Route::prefix('classroom')->group(function () {
+        Route::view('/', 'pages.allClassRooms')->name('classrooms');
+        Route::get('{uuid}', 'ClassroomsController@classroom')->name('class');
+    });
 });
 
 require __DIR__ . '/auth.php';

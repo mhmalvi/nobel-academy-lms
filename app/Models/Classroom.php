@@ -48,4 +48,14 @@ class Classroom extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function students()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
 }
