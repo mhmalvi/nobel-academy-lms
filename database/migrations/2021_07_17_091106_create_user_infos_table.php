@@ -16,10 +16,10 @@ class CreateUserInfosTable extends Migration
         Schema::create('user_infos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('phone');
-            $table->longText('address');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('phone')->nullable();
+            $table->longText('address')->nullable();
             $table->timestamps();
         });
     }
