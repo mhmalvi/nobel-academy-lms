@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $steps = ['step-01', 'step-02', 'step-03', 'step-04', 'step-05'];
+        $steps = ['Unit Assessment summary', 'Resources', 'Powerpoint Presentation', 'Workbook', 'Assessment'];
+        $stepsThumb = ['wisdom.png', 'homework.png', 'presentation.png', 'workbook.png', 'compliance.png'];
 
         DB::table('users')->insert([
             'name' => 'Quadque Tech',
@@ -29,9 +30,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        foreach ($steps as $step) {
+        for ($i = 0; $i < count($steps); $i++) {
             DB::table('steps')->insert([
-                'step_name' => $step
+                'step_name' => $steps[$i],
+                'thumbnail' => $stepsThumb[$i]
             ]);
         }
 
