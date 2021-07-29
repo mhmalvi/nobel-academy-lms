@@ -149,4 +149,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Classroom::class, 'teacher_id');
     }
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

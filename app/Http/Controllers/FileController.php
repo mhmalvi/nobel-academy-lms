@@ -110,8 +110,8 @@ class FileController extends Controller
     /**
      * File Download
      */
-    public function fileDownload($file)
+    public function fileDownload($directory, $file)
     {
-        return response()->download(public_path("storage/" . $file));
+        return response()->download(public_path("storage/{$directory}/{$file}"));
     }
 }

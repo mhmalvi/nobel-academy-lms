@@ -48,7 +48,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('share/resources', 'FileController@index')->name('share.resource');
     Route::post('share/resources', 'FileController@store');
 
-    Route::get('download/{file}', 'FileController@fileDownload')->name('download.unitFile');
+    Route::get('download/{directory}/{file}', 'FileController@fileDownload')->name('download.file');
 
 
     Route::view('edit-profile', 'profile')->name('edit.profile');
@@ -59,7 +59,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::prefix('classroom')->group(function () {
         Route::view('/', 'pages.allClassRooms')->name('classrooms');
         Route::get('{uuid}', 'ClassroomsController@classroom')->name('class');
+        Route::get('{uuid}/{type}', 'PostsController@index')->name('post.type');
+        Route::post('{uuid}/post', 'PostsController@store')->name('post');
     });
+    Route::get('post/{uuid}', 'PostsController@destroy')->name('delete.post');
 });
 
 require __DIR__ . '/auth.php';

@@ -119,8 +119,7 @@
                                                     <ul class="list-group list-lessons">
                                                         @forelse ($getStep->files as $item)
                                                             <li class="list-group-item d-flex">
-                                                                <a
-                                                                    href="{{ route('download.unitFile', $item->file_name) }}">
+                                                                <a href="{{ route('download.file', $item->file_name) }}">
                                                                     @if ($item->file_ext == 'pdf')
                                                                         <i class="fa fa-file-pdf pr-2"></i>
                                                                     @elseif($item->file_ext == 'docx' ||
