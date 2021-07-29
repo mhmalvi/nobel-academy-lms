@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
                 ->references('id')->on('roles')
                 ->onDelete('set null')
                 ->onUpdate('cascade');
+            $table->unsignedBigInteger('classroom_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

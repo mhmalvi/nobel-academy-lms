@@ -73,7 +73,8 @@
                                 <select name="class_id" class="form-control">
                                     <option value selected disabled>Select a class room</option>
                                     @forelse (\App\Models\Classroom::all() as $item)
-                                        <option value={{ $item->id }}>{{ $item->name }} - {{$item->section}}</option>
+                                        <option value={{ $item->id }}>{{ $item->name }} - {{ $item->section }}
+                                        </option>
                                     @empty
 
                                     @endforelse
@@ -128,6 +129,9 @@
                             <div class="form-group">
                                 <label for="avatar">User Image</label>
                                 <input type="file" name="avatar" id="avatar" class="form-control">
+                                @error('avatar')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -151,6 +155,7 @@
 
                     case "teacher":
                         $("#crs").removeClass('d-none').hide().slideDown('slow');
+                        $("#cls").addClass('d-none');
                         break;
 
                     case "student":
