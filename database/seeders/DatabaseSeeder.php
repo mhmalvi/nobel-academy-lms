@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $steps = ['Unit Assessment summary', 'Resources', 'Powerpoint Presentation', 'Workbook', 'Assessment'];
         $stepsThumb = ['wisdom.png', 'homework.png', 'presentation.png', 'workbook.png', 'compliance.png'];
+        $category = ['diploma', 'certificate iii', 'certificate iv'];
 
         DB::table('users')->insert([
             'name' => 'Quadque Tech',
@@ -34,6 +35,10 @@ class DatabaseSeeder extends Seeder
             DB::table('steps')->insert([
                 'step_name' => $steps[$i],
                 'thumbnail' => $stepsThumb[$i]
+            ]);
+
+            DB::table('course_categories')->insert([
+                'category_name' => $category[$i]
             ]);
         }
 
