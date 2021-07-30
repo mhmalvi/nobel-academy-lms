@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Course;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
-class CreateCourseRequest extends FormRequest
+class CourseCreateRequest extends CourseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -50,20 +48,5 @@ class CreateCourseRequest extends FormRequest
         ]);
 
         return $course;
-    }
-
-
-    public function saveImage($imageFile)
-    {
-        $image = $imageFile->getClientOriginalName();
-
-        //check if directory exist or not
-        if (!Storage::exists("public/courses")) {
-            Storage::makeDirectory("public/courses");
-        }
-
-        Storage::putFileAs('public/courses', $imageFile, $image);
-
-        return $image;
     }
 }

@@ -91,8 +91,7 @@
                                 <div class="avatar-upload">
                                     <div class="avatar-edit" data-toggle="tooltip" data-placement="top"
                                         title="Upload Image">
-                                        <input type='file' id="imageUpload" name="image" accept=".png, .jpg, .jpeg"
-                                            required />
+                                        <input type='file' id="imageUpload" name="image" accept=".png, .jpg, .jpeg" />
                                         <label for="imageUpload"></label>
                                     </div>
                                     <div class="avatar-preview">
