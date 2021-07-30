@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Classroom;
 
 class HomeController extends Controller
 {
@@ -17,6 +17,7 @@ class HomeController extends Controller
         $totalTch = 0;
         $totalCrs = DB::table('courses')->count();
         $totalUnits = DB::table('course_units')->count();
-        return view('admin.index', compact('totalStd', 'totalTch', 'totalCrs', 'totalUnits'));
+        $classes = Classroom::with('course')->orderBy('created_at', 'asc')->paginate(12);
+        return view('admin.index', compact('totalStd', 'totalTch', 'totalCrs', 'totalUnits', 'classes'));
     }
 }

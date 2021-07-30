@@ -11,8 +11,8 @@ class ClassroomsController extends Controller
 {
     public function index()
     {
-        $classes = Classroom::with('course')->orderBy('created_at', 'asc')->paginate(12);
-        return view('admin.classrooms.index', compact('classes'));
+        // $classes = Classroom::with('course')->orderBy('created_at', 'asc')->paginate(12);
+        // return view('admin.classrooms.index', compact('classes'));
     }
 
     public function store(CreateClassroomRequest $request)
