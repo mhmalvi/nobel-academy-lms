@@ -87,11 +87,11 @@
 
 
             {{-- Announcements --}}
-            <li class="{{ request()->segment(2) === 'announcement' ? 'active' : '' }}">
+            <li class="{{ request()->segment(2) === 'announcements' ? 'active' : '' }}">
                 <a href="javascript:void(0)"><i class="fa fa-bullhorn" aria-hidden="true"></i> <span
                         class="nav-label">Announcement</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="">
+                    <li class="{{ Route::currentRouteName() === 'admin.events' ? 'active' : '' }}">
                         <a href="{{ route('admin.events') }}">Event Calendar</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'admin.announcement.post' ? 'active' : '' }}">

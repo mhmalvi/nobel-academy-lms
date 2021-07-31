@@ -140,10 +140,12 @@ Route::prefix('instructors')->group(function () {
 /**
  * Announcement
  */
-Route::get('events', 'AdminController@events')->name('events');
-Route::get('/announcements', 'AdminController@notice')->name('announcement');
-Route::get('/post-new/announcement', 'AdminController@noticeCreate')->name('announcement.post');
-Route::post('/post-new/announcement', 'AdminController@noticeStore');
+Route::prefix('announcements')->group(function () {
+    Route::get('events', 'AdminController@events')->name('events');
+    Route::get('/', 'AdminController@notice')->name('announcement');
+    Route::get('/post', 'AdminController@noticeCreate')->name('announcement.post');
+    Route::post('/post', 'AdminController@noticeStore');
+});
 
 
 /**
