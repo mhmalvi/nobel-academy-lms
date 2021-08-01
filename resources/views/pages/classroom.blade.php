@@ -192,38 +192,69 @@
                             </div>
                         </div>
                         @empty
-                            <div class="card createPostCard">
-                                <div class="d-flex align-items-center flex-wrap">
-                                    <div class="m-4">
-                                        <a href="#" class="d-flex align-items-center text-muted">
-                                            <!-- LOGO -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48">
-                                                <g stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path
-                                                        d="M26.09 37.272l-7.424 1.06 1.06-7.424 19.092-19.092c1.758-1.758 4.606-1.758 6.364 0s1.758 4.606 0 6.364L26.09 37.272zM12 1.498h12c.828 0 1.5.672 1.5 1.5v3c0 .828-.672 1.5-1.5 1.5H12c-.828 0-1.5-.672-1.5-1.5v-3c0-.828.672-1.5 1.5-1.5zM25.5 4.498h6c1.656 0 3 1.344 3 3"
-                                                        stroke-width="3"></path>
-                                                    <path
-                                                        d="M34.5 37.498v6c0 1.656-1.344 3-3 3h-27c-1.656 0-3-1.344-3-3v-36c0-1.656 1.344-3 3-3h6M10.5 16.498h15M10.5 25.498h6"
-                                                        stroke-width="3"></path>
-                                                </g>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    <div class="stories-card__title flex">
-                                        <h5 class="card-title m-0">
-                                            Communicate with your class here
-                                        </h5>
-                                        <small class="text-muted">
-                                            <a id="toggleCollapesBar" class="text-primary" role="button" aria-expanded="false"
-                                                aria-controls="createPost">
-                                                <strong>Create Announcement</strong>
+                            @if (auth()->user()->user_type == 'Teacher')
+                                <div class="card createPostCard">
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <div class="m-4">
+                                            <a href="#" class="d-flex align-items-center text-muted">
+                                                <!-- LOGO -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+                                                    <g stroke="currentColor" fill="none" stroke-width="1.5"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                        <path
+                                                            d="M26.09 37.272l-7.424 1.06 1.06-7.424 19.092-19.092c1.758-1.758 4.606-1.758 6.364 0s1.758 4.606 0 6.364L26.09 37.272zM12 1.498h12c.828 0 1.5.672 1.5 1.5v3c0 .828-.672 1.5-1.5 1.5H12c-.828 0-1.5-.672-1.5-1.5v-3c0-.828.672-1.5 1.5-1.5zM25.5 4.498h6c1.656 0 3 1.344 3 3"
+                                                            stroke-width="3"></path>
+                                                        <path
+                                                            d="M34.5 37.498v6c0 1.656-1.344 3-3 3h-27c-1.656 0-3-1.344-3-3v-36c0-1.656 1.344-3 3-3h6M10.5 16.498h15M10.5 25.498h6"
+                                                            stroke-width="3"></path>
+                                                    </g>
+                                                </svg>
                                             </a>
-                                            <strong>, give assignment and share study materials</strong>
-                                        </small>
+                                        </div>
+                                        <div class="stories-card__title flex">
+                                            <h5 class="card-title m-0">
+                                                Communicate with your class here
+                                            </h5>
+                                            <small class="text-muted">
+                                                <a id="toggleCollapesBar" class="text-primary" role="button"
+                                                    aria-expanded="false" aria-controls="createPost">
+                                                    <strong>Create Announcement</strong>
+                                                </a>
+                                                <strong>, give assignment and share study materials</strong>
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="card createPostCard">
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <div class="m-4">
+                                            <a href="#" class="d-flex align-items-center text-muted">
+                                                <!-- LOGO -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+                                                    <g stroke="currentColor" fill="none" stroke-width="1.5"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                        <path
+                                                            d="M26.09 37.272l-7.424 1.06 1.06-7.424 19.092-19.092c1.758-1.758 4.606-1.758 6.364 0s1.758 4.606 0 6.364L26.09 37.272zM12 1.498h12c.828 0 1.5.672 1.5 1.5v3c0 .828-.672 1.5-1.5 1.5H12c-.828 0-1.5-.672-1.5-1.5v-3c0-.828.672-1.5 1.5-1.5zM25.5 4.498h6c1.656 0 3 1.344 3 3"
+                                                            stroke-width="3"></path>
+                                                        <path
+                                                            d="M34.5 37.498v6c0 1.656-1.344 3-3 3h-27c-1.656 0-3-1.344-3-3v-36c0-1.656 1.344-3 3-3h6M10.5 16.498h15M10.5 25.498h6"
+                                                            stroke-width="3"></path>
+                                                    </g>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="stories-card__title flex">
+                                            <h5 class="card-title m-0">
+                                                Your class announcements, materials and assignments
+                                            </h5>
+                                            <small class="text-muted">
+                                                No announcements posted yet!
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         @endforelse
 
                         {{ $posts->links() }}
