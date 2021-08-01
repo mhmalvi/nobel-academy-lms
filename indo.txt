@@ -1,0 +1,22 @@
+http://new.nta.nsw.edu.au/login
+
+
+admin:
+
+admin@nta.nsw.edu.au
+admin@nta
+
+
+student:
+
+std@gmail.com
+123123123
+
+
+teacher:
+
+tech@gmail.com
+123123123
+
+note: only a teacher can post announcement, class materials and assignment
+in classroom
