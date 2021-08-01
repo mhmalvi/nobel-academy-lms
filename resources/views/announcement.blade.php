@@ -19,7 +19,7 @@
     <div class="container-fluid page__container">
         <div class="card">
             @if (!is_null($notice->thumbnail))
-                <img src="{{ asset('storage/announcements/' . $notice->thumbnail) }}" class="card-img-top" alt="post img">
+                <img src="{{ asset('storage/notices/' . $notice->thumbnail) }}" class="card-img-top" alt="post img">
             @else
                 <img src="{{ asset('assets/1.jpg') }}" class="card-img-top" alt="post img">
             @endif

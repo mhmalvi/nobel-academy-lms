@@ -46,8 +46,7 @@
                                         class="d-flex flex-column flex-xl-row align-items-center text-center text-xl-left align-items-xl-start">
                                         <a href="{{ route('notice', $item->id) }}">
                                             <img class="img-fluid img-lg-150 rounded mr-xl-3 mb-3 mb-xl-0"
-                                                src="{{ asset('storage/announcements/' . $item->thumbnail) }}"
-                                                alt="post image">
+                                                src="{{ asset('storage/notices/' . $item->thumbnail) }}" alt="post image">
                                         </a>
                                         <div class="flex">
                                             <p class="mb-0 text-justify">

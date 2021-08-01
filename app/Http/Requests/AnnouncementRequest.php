@@ -55,11 +55,11 @@ class AnnouncementRequest extends FormRequest
         $file = $this->file('file');
         $name = $file->getClientOriginalName();
 
-        if (!Storage::exists("public/announcements")) {
-            Storage::makeDirectory("public/announcements");
+        if (!Storage::exists("public/notices")) {
+            Storage::makeDirectory("public/notices");
         }
 
-        Storage::putFileAs('public/announcements', $file, $name);
+        Storage::putFileAs('public/notices', $file, $name);
 
         return $name;
     }
