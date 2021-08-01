@@ -128,7 +128,7 @@
                                                                     <input type="hidden" name="steps[]" value="1">
                                                                     <input type="checkbox" class="i-checks unit"
                                                                         name="units[]" value="{{ $item->unit_code }}"
-                                                                        {{ !is_null($student->enrollment->elective_units) && in_array($item->unit_code, $student->enrollment->elective_units) ? 'checked' : '' }} />
+                                                                        {{ !is_null($user->enrollments->elective_units) && in_array($item->unit_code, $user->enrollments->elective_units) ? 'checked' : '' }} />
                                                                 </td>
                                                                 <td width="90%">{{ $item->unit_code }} -
                                                                     {{ $item->unit_name }}

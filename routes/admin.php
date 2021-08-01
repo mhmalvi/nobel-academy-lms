@@ -22,6 +22,8 @@ Route::prefix('users')->group(function () {
         Route::delete('users/{id}', 'UsersController@destroy')->name('remove');
         Route::get('trashed', 'UsersController@trashedRecords')->name('trashed');
         Route::get('{id}/profile', 'UsersController@profile')->name('profile');
+        Route::put('restore/{id}', 'UsersController@restoreSoftDelete')->name('restore');
+        Route::delete('remove/{id}', 'UsersController@permanentDestroy')->name('destroy');
     });
 });
 

@@ -153,8 +153,7 @@
                                                     <span class="text-primary">
                                                         <i class="material-icons icon-16pt icon-dark">file_download</i>
                                                     </span>&nbsp;
-                                                    <a
-                                                        href="{{ route('download.file', ['courses', $item->file_name]) }}">
+                                                    <a href="{{ route('download.file', ['posts', $item->file_name]) }}">
                                                         {{ $item->file_name }}
                                                     </a>
                                                 </li>

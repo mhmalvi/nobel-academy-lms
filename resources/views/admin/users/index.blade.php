@@ -43,16 +43,28 @@
                                     <a href="{{ route('admin.user.profile', $item->id) }}">Edit</a>
                                     @if (!$item->isAdmin())
                                         <a href="javascript:void(0)"
-                                            onclick="if(confirm('Are you sure to delete?')){document.getElementById('user{{ $item->id }}').submit();}">Trash</a>
+                                            onclick="if(confirm('Are you sure to delete?')){document.getElementById('user{{ $item->uuid }}').submit();}">Trash</a>
                                         <form action="{{ route('admin.user.remove', $item->id) }}" method="post"
-                                            id="user{{ $item->id }}">
+                                            id="user{{ $item->uuid }}">
                                             @csrf
                                             @method('delete')
                                         </form>
                                     @endif
                                 @else
-                                    <a href="">Restore</a>
-                                    <a href="">Delete</a>
+                                    <form action="{{ route('admin.user.restore', $item->id) }}" method="post"
+                                        id="restore{{ $item->uuid }}" class="d-none">
+                                        @csrf
+                                        @method('put')
+                                    </form>
+                                    <form action="{{ route('admin.user.destroy', $item->id) }}" method="post"
+                                        id="destroy{{ $item->uuid }}" class="d-none">
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                    <a href="javascript:void(0)"
+                                        onclick="document.getElementById('restore{{ $item->uuid }}').submit()">Restore</a>
+                                    <a href="javascript:void(0)"
+                                        onclick="document.getElementById('destroy{{ $item->uuid }}').submit()">Delete</a>
                                 @endif
                             </div>
                         </td>

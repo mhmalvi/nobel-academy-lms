@@ -10,6 +10,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Models\Teachers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -85,7 +86,7 @@ class UsersController extends Controller
 
 
     /**
-     * 
+     * view trashed recordeds
      */
     public function trashedRecords()
     {
@@ -102,5 +103,37 @@ class UsersController extends Controller
     {
         $user = User::with(['enrollments', 'info'])->findOrFail($id);
         return view('admin.users.profile', compact('user'));
+    }
+
+
+    /**
+     * restore a softdeleted model
+     */
+    public function restoreSoftDelete($id)
+    {
+        try {
+            User::withTrashed()->findOrFail($id)->restore();
+            return redirect()->route('admin.users');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(AppExceptions::throwback($th));
+        }
+    }
+
+
+    /**
+     * Permanently delete a softdeleted model
+     */
+    public function permanentDestroy($id)
+    {
+        try {
+            $user = User::withTrashed()->findOrFail($id);
+            Storage::delete('public/users/' . $user->photo);
+
+            $user->forceDelete();
+
+            return redirect()->route('admin.users');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(AppExceptions::throwback($th));
+        }
     }
 }

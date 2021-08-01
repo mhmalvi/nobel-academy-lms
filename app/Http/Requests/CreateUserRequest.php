@@ -3,11 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use App\Models\UserInfo;
 use Illuminate\Support\Str;
+use Image;
 
 class CreateUserRequest extends FormRequest
 {
@@ -37,11 +37,7 @@ class CreateUserRequest extends FormRequest
             'phone' => 'required',
             'address' => 'required',
             'user_type' => 'required',
-            'avatar' => [
-                'image',
-                Rule::dimensions()->maxWidth(300)->maxHeight(300)->ratio(1 / 1),
-                'max:1048'
-            ],
+            'avatar' => 'image',
             'class_id' => 'exclude_unless:user_type,student|required'
         ];
     }
@@ -58,7 +54,7 @@ class CreateUserRequest extends FormRequest
                 'name' => $this->name,
                 'email' => $this->email,
                 'password' => $this->password,
-                'photo' => ($this->hasFile('avatar')) ? $this->avater($this->file('avatar')) : null,
+                'photo' => ($this->hasFile('avatar')) ? $this->avatar($this->file('avatar')) : null,
                 'user_type' => $this->user_type,
                 'classroom_id' => $this->class_id
             ]);
@@ -68,7 +64,7 @@ class CreateUserRequest extends FormRequest
     /**
      * Store Avater
      */
-    public function avater($avater)
+    public function avatar($avatar)
     {
         /**
          * Check if derectory exist or not
@@ -78,15 +74,13 @@ class CreateUserRequest extends FormRequest
             Storage::makeDirectory("public/users");
         }
 
-        $image = $avater;
-        $imgExtension = $image->getClientOriginalExtension();
+        $resize = Image::make($avatar)->fit(300)->encode('jpg');
+        $hash = md5($resize->__toString());
+        $name = "{$hash}.jpg";
 
-        $file = date('dmy-hms') . '.' . $imgExtension;
+        Storage::put('public/users/' . $name, $resize->__toString());
 
-        //Store the file after saving it to the databse
-        Storage::putFileAs('public/users', $image, $file);
-
-        return $file;
+        return $name;
     }
 
 
