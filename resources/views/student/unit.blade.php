@@ -44,13 +44,8 @@
                     </div>
                 </div>
                 <!-- END -->
-                <div class="my-4">
-                    <p class="text-justify">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis,
-                        necessitatibus consequatur asperiores consectetur, ea corrupti sapiente dolorum quibusdam accusamus
-                        eveniet ad maxime temporibus?
-                        Magni laudantium quod repudiandae et consequuntur exercitationem.
-                    </p>
+                <div class="my-4 description">
+                    {!! $unit->descriptions !!}
                 </div>
             </div>
 
@@ -100,20 +95,12 @@
                                     </div>
                                     <!-- END -->
                                     <div class="row">
-                                        <div class="col-md-7">
+                                        <div class="col-md-12">
                                             <img src="{{ asset('assets/images/steps/' . $getStep->thumbnail) }}" alt=""
                                                 class="img-fluid py-5" style="max-width: 150px;">
-                                            <div class="my-4">
-                                                <p class="text-justify">
-                                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis,
-                                                    necessitatibus consequatur asperiores consectetur, ea corrupti sapiente
-                                                    dolorum
-                                                    quibusdam accusamus eveniet ad maxime temporibus?
-                                                    Magni laudantium quod repudiandae et consequuntur exercitationem.
-                                                </p>
+                                            <div class="my-4 description">
+                                                {!! $getStep->descriptions !!}
                                             </div>
-                                        </div>
-                                        <div class="col-md-5 mt-5">
                                             @if (count($getStep->files) > 0)
                                                 <div class="card">
                                                     <ul class="list-group list-lessons">

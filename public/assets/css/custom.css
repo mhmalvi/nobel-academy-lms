@@ -1,0 +1,8 @@
+.description p {
+    color: #112b4a !important;
+    font-size: 0.9375rem !important;
+    background-color: transparent !important;
+    font-family: "Roboto", sans-serif !important;
+    text-align: justify !important;
+    font-weight: 400 !important;
+}
