@@ -19,6 +19,8 @@ Route::prefix('users')->group(function () {
         Route::view('/create', 'admin.users.create')->name('create');
         Route::post('/create', 'UsersController@store');
         Route::get('get', 'UsersController@show')->name('show');
+        Route::get('edit/{id}', 'UsersController@edit')->name('edit');
+        Route::put('edit/{id}', 'UsersController@update')->name('update');
         Route::delete('users/{id}', 'UsersController@destroy')->name('remove');
         Route::get('trashed', 'UsersController@trashedRecords')->name('trashed');
         Route::get('{id}/profile', 'UsersController@profile')->name('profile');

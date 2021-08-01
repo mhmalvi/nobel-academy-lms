@@ -39,13 +39,14 @@
                             <i class="material-icons text-white icon-18pt">assignment</i>
                         </span>
                     </div>
-                    <a href="#" class="text-dark">
+                    <a href="{{ route('post.type', [auth()->user()->classroomOfStudent->uuid, 'assignment']) }}"
+                        class="text-dark">
                         <strong>Assignments</strong>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-4 card-group-row__col">
+        {{-- <div class="col-lg-3 col-md-4 card-group-row__col">
             <div class="card card-group-row__card">
                 <div class="p-2 d-flex flex-row align-items-center">
                     <div class="avatar avatar-xs mr-2">
@@ -58,6 +59,6 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endif
