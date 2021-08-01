@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/', 'AppController@index')->name('index');
     Route::get('/dashboard', 'AppController@index')->name('dashboard');
+    Route::view('edit-profile', 'pages.profile')->name('edit.profile');
+    Route::put('edit-basic-info', 'ProfileController@updateBasicInfo');
+    Route::post('edit-profile-picture', 'ProfileController@updateProfilePicture');
 
     /**
      * Course
@@ -49,10 +52,6 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('share/resources', 'FileController@store');
 
     Route::get('download/{directory}/{file}', 'FileController@fileDownload')->name('download.file');
-
-
-    Route::view('edit-profile', 'profile')->name('edit.profile');
-    Route::put('edit-basic-info', 'ProfileController@updateBasicInfo');
 
     Route::get('announcements/{id}', 'AppController@notice')->name('notice');
 

@@ -2,12 +2,6 @@
 
 @section('title', 'My Profile')
 
-    @push('css')
-        <!-- Dropzone -->
-        <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.css') }}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/css/vendor-dropzone.rtl.css') }}" rel="stylesheet">
-    @endpush
-
 @section('content')
     <div class="container-fluid page__heading-container">
         <div class="page__heading d-flex align-items-end">
@@ -38,29 +32,7 @@
             </div>
 
 
-            <div class="card card-form">
-                <input type="hidden" name="image" id="image">
-                <div class="row no-gutters">
-                    <div class="col-lg-4 card-body">
-                        <p><strong class="headings-color">Profile Settings</strong></p>
-                        <p class="text-muted">Update your public profile with relevant and meaningful information.</p>
-                    </div>
-                    <div class="col-lg-8 card-form__body card-body">
-                        <div class="form-group">
-                            <label for="avatar">Image</label>
-                            <input style="width: 470px;" type="file" class="form-control" name="avatar" id="avatar" />
-                        </div>
-
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </div>
-                </div>
-            </div>
+            <profile-picture></profile-picture>
         </form>
     </div>
 @endsection
-
-@push('js')
-    <!-- Dropzone -->
-    <script src="{{ asset('assets/vendor/dropzone.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dropzone.js') }}"></script>
-@endpush

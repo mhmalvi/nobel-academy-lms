@@ -7,7 +7,7 @@
     </li>
 @endif
 
-@if (count(auth()->user()->teacher) > 0)
+{{-- @if (count(auth()->user()->teacher) > 0)
     <div class="sidebar-heading pt-3">
         Courses
     </div>
@@ -24,4 +24,4 @@
             </a>
         </li>
     @endforelse
-@endif
+@endif --}}
