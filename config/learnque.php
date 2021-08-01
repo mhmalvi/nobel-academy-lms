@@ -10,6 +10,6 @@
 return [
     'admins' => [
         'admin@learnque.com',
-        'admin@gmail.com'
+        'admin@nta.nsw.edu.au'
     ]
 ];
