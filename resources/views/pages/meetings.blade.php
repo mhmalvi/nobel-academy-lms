@@ -62,9 +62,11 @@
                             <h5 class="card-title m-0">{{ $item->topic }}</h5>
                         </div>
 
-                        <p class="text-muted my-3">
-                            <strong>Join Link: </strong>{{ $item->join_url }}
-                        </p>
+                        <div class="my-3">
+                            <p class="text-muted">
+                                <strong>Join Link: </strong>{{ $item->join_url }}
+                            </p>
+                        </div>
 
                         <div class="mt-3">
                             <a href="" target="_blank" class="btn btn-outline-dark mx-2">Start The Meeting</a>

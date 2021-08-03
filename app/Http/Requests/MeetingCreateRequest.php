@@ -43,7 +43,8 @@ class MeetingCreateRequest extends FormRequest
             'host_id' => Auth::id(),
             'meeting_id' => $meeting->id,
             'start_url' => $meeting->start_url,
-            'schedule' => $zoom->getDbTimeStamp($this->datetime)
+            'schedule' => $zoom->getDbTimeStamp($this->datetime),
+            'password' => $meeting->password
         ]);
     }
 }
