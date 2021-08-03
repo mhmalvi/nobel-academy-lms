@@ -19,6 +19,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::view('edit-profile', 'pages.profile')->name('edit.profile');
     Route::put('edit-basic-info', 'ProfileController@updateBasicInfo');
     Route::post('edit-profile-picture', 'ProfileController@updateProfilePicture');
+    Route::get('meetings', 'ZoomAppController@index')->name('meeting');
+    Route::post('create-meeting', 'ZoomAppController@createMeeting')->name('create.meeting');
 
     /**
      * Course
