@@ -35,4 +35,18 @@ class ZoomAppController extends Controller
             //throw $th;
         }
     }
+
+
+    public function destroy($id)
+    {
+        try {
+            $response = $this->zoom->destroy($id);
+
+            if ($response->getStatusCode() == 204) {
+                return back();
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

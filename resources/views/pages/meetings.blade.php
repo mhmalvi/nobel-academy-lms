@@ -66,7 +66,16 @@
                             <strong>Join Link: </strong>{{ $item->join_url }}
                         </p>
 
-                        <a class="btn btn-outline-dark mt-3" href="" target="_blank">Start The Meeting</a>
+                        <div class="mt-3">
+                            <a href="" target="_blank" class="btn btn-outline-dark mx-2">Start The Meeting</a>
+                            <button type="button" class="btn btn-danger mx-2"
+                                onclick="document.getElementById('delete_{{ $item->id }}').submit()">Delete</button>
+                            <form action="{{ route('remove.meeting', $item->id) }}" method="post"
+                                id="delete_{{ $item->id }}">
+                                @csrf
+                                @method('delete')
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

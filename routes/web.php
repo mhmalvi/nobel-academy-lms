@@ -20,7 +20,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::put('edit-basic-info', 'ProfileController@updateBasicInfo');
     Route::post('edit-profile-picture', 'ProfileController@updateProfilePicture');
     Route::get('meetings', 'ZoomAppController@index')->name('meeting');
-    Route::post('create-meeting', 'ZoomAppController@createMeeting')->name('create.meeting');
+    Route::post('create/meeting', 'ZoomAppController@createMeeting')->name('create.meeting');
+    Route::delete('remove/meeting/{id}', 'ZoomAppController@destroy')->name('remove.meeting');
 
     /**
      * Course
