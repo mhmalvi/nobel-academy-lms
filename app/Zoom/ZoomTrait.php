@@ -11,6 +11,7 @@ trait ZoomTrait
     protected $base_url;
     protected $email;
     protected $date;
+    public $meetingListByHost;
 
 
     public function __construct()
@@ -19,6 +20,7 @@ trait ZoomTrait
         $this->secret = config('zoom.secret');
         $this->base_url = config('zoom.base_url');
         $this->email = config('zoom.email');
+        $this->meetingListByHost = [];
     }
 
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MeetingCreateRequest;
+use App\Models\ZoomMeeting;
 use Illuminate\Http\Request;
 use App\Zoom\Zoom;
+use Illuminate\Support\Facades\Auth;
 
 class ZoomAppController extends Controller
 {
@@ -17,7 +19,7 @@ class ZoomAppController extends Controller
 
     public function index()
     {
-        $list = $this->zoom->meetings()->meetings;
+        $list = $this->zoom->meetingsListByHost(ZoomMeeting::where('host_id', Auth::id())->get());
         return view('pages.meetings', compact('list'));
     }
 
@@ -41,6 +43,8 @@ class ZoomAppController extends Controller
     {
         try {
             $response = $this->zoom->destroy($id);
+
+            ZoomMeeting::where('meeting_id', $id)->delete();
 
             if ($response->getStatusCode() == 204) {
                 return back();

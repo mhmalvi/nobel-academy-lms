@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class Zoom implements ZoomInterface
 {
     use ZoomTrait;
+
     /**
      * Get the list of created meeting
      * 
@@ -23,6 +24,32 @@ class Zoom implements ZoomInterface
         ]);
 
         return json_decode($response->getBody());
+    }
+
+
+    /**
+     * Get the meetings by our appication users
+     * 
+     * @param object $meetings
+     */
+    public function meetingsListByHost(object $meetings)
+    {
+        $meetings->map(function ($data) {
+            foreach ($this->meetings()->meetings as $item) {
+                if ($item->id == $data->meeting_id) {
+                    array_push($this->meetingListByHost, [
+                        'meeting_id' => $data->meeting_id,
+                        'topic' => $item->topic,
+                        'password' => $data->password,
+                        'start_url' => $data->start_url,
+                        'join_url' => $item->join_url,
+                        'schedule' => $data->schedule
+                    ]);
+                }
+            }
+        });
+
+        return $this->meetingListByHost;
     }
 
 

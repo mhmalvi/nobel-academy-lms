@@ -12,6 +12,12 @@ interface ZoomInterface
 
 
     /**
+     * Get meetings by host from application
+     */
+    public function meetingsListByHost(object $meetings);
+
+
+    /**
      * Get meeting participants
      * 
      */

@@ -10,4 +10,10 @@ class ZoomMeeting extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+    public function getScheduleAttribute($value)
+    {
+        return date("M d, Y H:i:s", strtotime($value));
+    }
 }
