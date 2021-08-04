@@ -43,7 +43,8 @@ class Zoom implements ZoomInterface
                         'password' => $data->password,
                         'start_url' => $data->start_url,
                         'join_url' => $item->join_url,
-                        'schedule' => $data->schedule
+                        'date' => $data->getUserDate(),
+                        'time' => $data->getUserTime()
                     ]);
                 }
             }

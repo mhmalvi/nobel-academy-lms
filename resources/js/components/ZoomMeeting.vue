@@ -23,18 +23,19 @@
         </div>
         <div class="col-md-10">
           <div class="stories-card__title flex">
-            <h5 class="card-title m-0">{{ item.topic }}</h5>
+            <h5 class="card-title m-0">{{ item.date }}</h5>
           </div>
 
           <div class="my-3">
-            <p class="text-muted">
-              <strong>Join Link: </strong>{{ item.join_url }}
-            </p>
+            <p class="text-muted"><strong>Topic: </strong>{{ item.topic }}</p>
             <p class="text-muted">
               <strong>Password: </strong>{{ item.password }}
             </p>
             <p class="text-muted">
-              <strong>Scheduled At: </strong>{{ item.schedule }}
+              <strong>Scheduled At: </strong>{{ item.time }}
+            </p>
+            <p class="text-muted">
+              <strong>Join Link: </strong>{{ item.join_url }}
             </p>
           </div>
 

@@ -12,8 +12,14 @@ class ZoomMeeting extends Model
     protected $guarded = [];
 
 
-    public function getScheduleAttribute($value)
+    public function getUserDate()
     {
-        return date("M d, Y H:i:s", strtotime($value));
+        return date("M d, Y", strtotime($this->created_at));
+    }
+
+
+    public function getUserTime()
+    {
+        return date("H:i", strtotime($this->created_at));
     }
 }
