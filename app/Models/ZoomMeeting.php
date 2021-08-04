@@ -14,12 +14,12 @@ class ZoomMeeting extends Model
 
     public function getUserDate()
     {
-        return date("M d, Y", strtotime($this->created_at));
+        return date("M d, Y", strtotime($this->schedule));
     }
 
 
     public function getUserTime()
     {
-        return date("H:i", strtotime($this->created_at));
+        return date("H:i", strtotime($this->schedule));
     }
 }
