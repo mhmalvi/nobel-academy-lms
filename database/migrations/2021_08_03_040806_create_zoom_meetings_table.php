@@ -16,7 +16,7 @@ class CreateZoomMeetingsTable extends Migration
         Schema::create('zoom_meetings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('host_id');
-            $table->string('meeting_id');
+            $table->longText('meeting_id');
             $table->longText('start_url');
             $table->string('schedule');
             $table->timestamps();

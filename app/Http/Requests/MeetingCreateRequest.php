@@ -39,9 +39,11 @@ class MeetingCreateRequest extends FormRequest
     {
         $meeting = $zoom->create($this);
 
+        $meeting_id = "{$meeting->id}";
+
         ZoomMeeting::create([
             'host_id' => Auth::id(),
-            'meeting_id' => $meeting->id,
+            'meeting_id' => $meeting_id,
             'start_url' => $meeting->start_url,
             'schedule' => $zoom->getDbTimeStamp($this->datetime),
             'password' => $meeting->password

@@ -20066,6 +20066,137 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ZoomMeeting.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ZoomMeeting.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _childs_CreateMeeting_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./childs/CreateMeeting.vue */ "./resources/js/components/childs/CreateMeeting.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    CreateMeeting: _childs_CreateMeeting_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      isLoading: false,
+      list: []
+    }, _defineProperty(_ref, "isLoading", false), _defineProperty(_ref, "isDeleting", false), _defineProperty(_ref, "method", "delete"), _ref;
+  },
+  methods: {
+    /**
+     * Fetch the meeting list
+     */
+    getMeetingList: function getMeetingList() {
+      var _this = this;
+
+      this.isLoading = !this.isLoading;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("meeting-list-by-host").then(function (res) {
+        _this.isLoading = !_this.isLoading;
+        _this.list = res.data;
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+
+    /**
+     * This will Start the meeting in new window
+     */
+    meetingStartHandler: function meetingStartHandler(getlink) {
+      window.open(getlink, "_blank");
+    },
+
+    /**
+     * Delete a meeting
+     */
+    deleteMeetingHandler: function deleteMeetingHandler(id) {
+      var _this2 = this;
+
+      this.isDeleting = !this.isDeleting;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("remove/meeting/".concat(id)).then(function (res) {
+        _this2.isDeleting = !_this2.isDeleting;
+
+        _this2.getMeetingList();
+      })["catch"](function (err) {});
+    }
+  },
+  created: function created() {
+    /**
+     * get the meeting list on page load
+     */
+    this.getMeetingList();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/childs/CreateMeeting.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/childs/CreateMeeting.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      topic: "",
+      schedule: "",
+      isCreating: false
+    };
+  },
+  methods: {
+    getValue: function getValue(event) {
+      var val = event.target.value;
+      this.schedule = val;
+    },
+    onSubmitHandler: function onSubmitHandler() {
+      var _this = this;
+
+      this.isCreating = !this.isCreating;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("create/meeting", {
+        topic: this.topic,
+        datetime: this.schedule
+      }).then(function (res) {
+        _this.$emit("newMeeting", res.data);
+
+        _this.topic = "";
+        _this.schedule = "";
+        _this.isCreating = !_this.isCreating;
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    }
+  },
+  computed: {
+    isValid: function isValid() {
+      return this.topic && this.schedule && !this.isCreating;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/BasicInfo.vue?vue&type=template&id=40099bbe&lang=true":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/BasicInfo.vue?vue&type=template&id=40099bbe&lang=true ***!
@@ -20453,6 +20584,232 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ZoomMeeting.vue?vue&type=template&id=e6e8bc66":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ZoomMeeting.vue?vue&type=template&id=e6e8bc66 ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "my-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
+  "class": "text-dark-gray"
+}, "Upcoming Events")], -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "row"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "\r\n            col-md-2\r\n            d-flex\r\n            flex-column\r\n            justify-content-center\r\n            align-items-center\r\n          "
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "text-primary"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" LOGO "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "material-icons",
+  style: {
+    "font-size": "5rem"
+  }
+}, "voice_chat")])], -1
+/* HOISTED */
+);
+
+var _hoisted_4 = {
+  "class": "col-md-10"
+};
+var _hoisted_5 = {
+  "class": "stories-card__title flex"
+};
+var _hoisted_6 = {
+  "class": "card-title m-0"
+};
+var _hoisted_7 = {
+  "class": "my-3"
+};
+var _hoisted_8 = {
+  "class": "text-muted"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", null, "Join Link: ", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
+  "class": "text-muted"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", null, "Password: ", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = {
+  "class": "text-muted"
+};
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", null, "Scheduled At: ", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  "class": "mt-3"
+};
+var _hoisted_15 = {
+  key: 0
+};
+var _hoisted_16 = {
+  key: 1
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_create_meeting = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("create-meeting");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_create_meeting, {
+    onNewMeeting: $options.getMeetingList
+  }, null, 8
+  /* PROPS */
+  , ["onNewMeeting"]), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+    "class": $data.isLoading && ['is-loading', 'is-loading-lg']
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.list, function (item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      "class": "card p-4",
+      key: item.meeting_id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.topic), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.join_url), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.password), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.schedule), 1
+    /* TEXT */
+    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      "class": "btn btn-outline-dark mr-2",
+      onClick: function onClick($event) {
+        return $options.meetingStartHandler(item.start_url);
+      }
+    }, " Start Meeting ", 8
+    /* PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      type: "button",
+      "class": "btn btn-danger mr-2",
+      onClick: function onClick($event) {
+        return $options.deleteMeetingHandler(item.meeting_id);
+      },
+      disabled: $data.isDeleting
+    }, [$data.isDeleting ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_15, "Deleting..")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_16, "Delete"))], 8
+    /* PROPS */
+    , ["onClick", "disabled"])])])])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))], 2
+  /* CLASS */
+  )], 64
+  /* STABLE_FRAGMENT */
+  );
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/childs/CreateMeeting.vue?vue&type=template&id=307844dc":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/childs/CreateMeeting.vue?vue&type=template&id=307844dc ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "card card-form"
+};
+var _hoisted_2 = {
+  "class": "row no-gutters"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-lg-4 card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
+  "class": "headings-color"
+}, "Create a meeting")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "text-muted"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_4 = {
+  "class": "col-lg-8 card-form__body card-body"
+};
+var _hoisted_5 = {
+  "class": "form-group"
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "topic"
+}, "Meeting Topic", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = {
+  "class": "form-group"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "datetime"
+}, "Date", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $options.onSubmitHandler();
+    }, ["prevent"])),
+    id: "createNewMeeting"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "text",
+    "class": "form-control",
+    placeholder: "Type you meeting topic here ..",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.topic = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.topic]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    id: "dateTime",
+    type: "text",
+    "class": "form-control",
+    placeholder: "Schedule your meeting date, time ..",
+    "data-toggle": "flatpickr",
+    value: "today",
+    onChange: _cache[2] || (_cache[2] = function () {
+      return $options.getValue && $options.getValue.apply($options, arguments);
+    })
+  }, null, 32
+  /* HYDRATE_EVENTS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    type: "submit",
+    "class": ["btn btn-primary", $data.isCreating && 'is-loading'],
+    disabled: !$options.isValid
+  }, " Create Meeting ", 10
+  /* CLASS, PROPS */
+  , ["disabled"])], 32
+  /* HYDRATE_EVENTS */
+  )])])]);
+}
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -20465,6 +20822,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PasswordReset_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/PasswordReset.vue */ "./resources/js/components/PasswordReset.vue");
 /* harmony import */ var _components_BasicInfo_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/BasicInfo.vue */ "./resources/js/components/BasicInfo.vue");
 /* harmony import */ var _components_ProfilePicture_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ProfilePicture.vue */ "./resources/js/components/ProfilePicture.vue");
+/* harmony import */ var _components_ZoomMeeting_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ZoomMeeting.vue */ "./resources/js/components/ZoomMeeting.vue");
+
 
 
 
@@ -20472,7 +20831,8 @@ __webpack_require__.r(__webpack_exports__);
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 app.component("password-reset", _components_PasswordReset_vue__WEBPACK_IMPORTED_MODULE_1__.default);
 app.component("basic-info", _components_BasicInfo_vue__WEBPACK_IMPORTED_MODULE_2__.default);
-app.component("profile-picture", _components_ProfilePicture_vue__WEBPACK_IMPORTED_MODULE_3__.default); // mount the app to the DOM
+app.component("profile-picture", _components_ProfilePicture_vue__WEBPACK_IMPORTED_MODULE_3__.default);
+app.component("zoom-meeting", _components_ZoomMeeting_vue__WEBPACK_IMPORTED_MODULE_4__.default); // mount the app to the DOM
 
 app.mount("#app");
 
@@ -38010,6 +38370,58 @@ _ProfilePicture_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default
 
 /***/ }),
 
+/***/ "./resources/js/components/ZoomMeeting.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/ZoomMeeting.vue ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ZoomMeeting_vue_vue_type_template_id_e6e8bc66__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ZoomMeeting.vue?vue&type=template&id=e6e8bc66 */ "./resources/js/components/ZoomMeeting.vue?vue&type=template&id=e6e8bc66");
+/* harmony import */ var _ZoomMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ZoomMeeting.vue?vue&type=script&lang=js */ "./resources/js/components/ZoomMeeting.vue?vue&type=script&lang=js");
+
+
+
+_ZoomMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _ZoomMeeting_vue_vue_type_template_id_e6e8bc66__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_ZoomMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/components/ZoomMeeting.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_ZoomMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
+/***/ "./resources/js/components/childs/CreateMeeting.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/childs/CreateMeeting.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CreateMeeting_vue_vue_type_template_id_307844dc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateMeeting.vue?vue&type=template&id=307844dc */ "./resources/js/components/childs/CreateMeeting.vue?vue&type=template&id=307844dc");
+/* harmony import */ var _CreateMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateMeeting.vue?vue&type=script&lang=js */ "./resources/js/components/childs/CreateMeeting.vue?vue&type=script&lang=js");
+
+
+
+_CreateMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _CreateMeeting_vue_vue_type_template_id_307844dc__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_CreateMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/components/childs/CreateMeeting.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_CreateMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
 /***/ "./resources/js/components/BasicInfo.vue?vue&type=script&lang=js":
 /*!***********************************************************************!*\
   !*** ./resources/js/components/BasicInfo.vue?vue&type=script&lang=js ***!
@@ -38058,6 +38470,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ZoomMeeting.vue?vue&type=script&lang=js":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/ZoomMeeting.vue?vue&type=script&lang=js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ZoomMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ZoomMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ZoomMeeting.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ZoomMeeting.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/components/childs/CreateMeeting.vue?vue&type=script&lang=js":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/childs/CreateMeeting.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateMeeting_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CreateMeeting.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/childs/CreateMeeting.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/BasicInfo.vue?vue&type=template&id=40099bbe&lang=true":
 /*!***************************************************************************************!*\
   !*** ./resources/js/components/BasicInfo.vue?vue&type=template&id=40099bbe&lang=true ***!
@@ -38102,6 +38546,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ProfilePicture_vue_vue_type_template_id_11a7c3c0_lang_true__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ProfilePicture_vue_vue_type_template_id_11a7c3c0_lang_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ProfilePicture.vue?vue&type=template&id=11a7c3c0&lang=true */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ProfilePicture.vue?vue&type=template&id=11a7c3c0&lang=true");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ZoomMeeting.vue?vue&type=template&id=e6e8bc66":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/ZoomMeeting.vue?vue&type=template&id=e6e8bc66 ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ZoomMeeting_vue_vue_type_template_id_e6e8bc66__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ZoomMeeting_vue_vue_type_template_id_e6e8bc66__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ZoomMeeting.vue?vue&type=template&id=e6e8bc66 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/ZoomMeeting.vue?vue&type=template&id=e6e8bc66");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/childs/CreateMeeting.vue?vue&type=template&id=307844dc":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/childs/CreateMeeting.vue?vue&type=template&id=307844dc ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateMeeting_vue_vue_type_template_id_307844dc__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CreateMeeting_vue_vue_type_template_id_307844dc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CreateMeeting.vue?vue&type=template&id=307844dc */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/childs/CreateMeeting.vue?vue&type=template&id=307844dc");
 
 
 /***/ }),
