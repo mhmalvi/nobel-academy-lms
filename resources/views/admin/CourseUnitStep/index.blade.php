@@ -71,5 +71,5 @@
 @push('js')
     <script src="{{asset('assets/admin/js/plugins/dataTables/datatables.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
-    @include('admin.CourseUnitStep.scripts')
+    @include('admin.courseUnitStep.scripts')
 @endpush

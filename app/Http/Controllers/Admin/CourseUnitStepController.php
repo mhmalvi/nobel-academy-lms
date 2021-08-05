@@ -16,8 +16,9 @@ class CourseUnitStepController extends Controller
     /**
      *GET['steps']
      */
-    public function index(){
-        return view('admin.CourseUnitStep.index');
+    public function index()
+    {
+        return view('admin.courseUnitStep.index');
     }
 
 
@@ -25,7 +26,8 @@ class CourseUnitStepController extends Controller
     /**
      * GET['get-steps']
      */
-    public function getAllSteps(){
+    public function getAllSteps()
+    {
         return new CourseUnitStepsCollection(Step::all());
     }
 
@@ -38,16 +40,16 @@ class CourseUnitStepController extends Controller
     {
         try {
             $id = [
-                'id' => ($request->id)? $request->id : null,
+                'id' => ($request->id) ? $request->id : null,
             ];
 
             $step = Step::updateOrCreate($id, [
                 'action_user' => Auth::id(),
-                'step_name'=>$request->step_name,
-                'descriptions'=>$request->description
+                'step_name' => $request->step_name,
+                'descriptions' => $request->description
             ]);
-    
-            if($step->id){
+
+            if ($step->id) {
                 /**
                  * retun successfull notification
                  */
@@ -55,7 +57,7 @@ class CourseUnitStepController extends Controller
                     'message'   =>  "{$request->stepName} successfully saved",
                     'alert-type'    =>  'success'
                 ];
-    
+
                 return redirect()->back()->with($notification);
             }
         } catch (\Throwable $th) {
@@ -71,7 +73,8 @@ class CourseUnitStepController extends Controller
     /**
      * GET['get-step']
      */
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         try {
             if ($request->expectsJson()) {
                 $id = $request->id;
@@ -103,9 +106,10 @@ class CourseUnitStepController extends Controller
     /**
      * Delete['remove/steps']
      */
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $arr = $request->id;
-        $csv = implode(", ", array_map(function($arr){
+        $csv = implode(", ", array_map(function ($arr) {
             return $arr;
         }, $arr));
 
@@ -113,7 +117,7 @@ class CourseUnitStepController extends Controller
             return response()->json([
                 'data' => DB::delete("DELETE FROM steps WHERE id IN ($csv)"),
                 'status' => 200
-                ]);
+            ]);
         } catch (\Throwable $th) {
             /**
              * Return exception
