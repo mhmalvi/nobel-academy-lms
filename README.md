@@ -1,6 +1,8 @@
 <!-- repo-card -->
 ![nobel-academy-lms](docs/assets/social-card.png)
 
+![nobel-academy-lms — architecture](docs/assets/architecture.png)
+
 # Nobel Academy LMS
 
 A feature-rich Learning Management System developed for **Nobel Training Academy (NTA)**, delivering a complete online education platform with course management, virtual classrooms, and integrated video conferencing.
